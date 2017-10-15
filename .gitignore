@@ -1,4 +1,4 @@
 .env
-node_modules
+node_moduless
 .DS_Store
 src/terminal-cmd.txt
