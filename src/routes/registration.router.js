@@ -24,7 +24,7 @@ router.post('/', (req,res,next) => {
             let values = [saveUser.username, saveUser.password];
             client.query(queryString, values, (queryErr, result) => {
                 if (queryErr) {
-                    console.log('Query POST Error ->', queryErr);
+                    console.log('Query POST connection Error ->', queryErr);
                     res.sendStatus(500);
                 } else {
                     res.sendStatus(201);

@@ -4,7 +4,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const passport = require('./strategies/sql.localstrategy');
+const passport = require('./strategies/sql.local.strategy');
 const sessionConfig = require('./modules/session.config');
 
 const port = process.env.PORT || 6660;
