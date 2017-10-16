@@ -1,5 +1,7 @@
 /*jshint esversion: 6 */
 
+// requires
+const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 const encryptLib = require('../modules/encryption');
