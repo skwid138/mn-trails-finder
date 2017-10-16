@@ -21,10 +21,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // route requires
-
+const registrationRouter = require('./routes/registration.router');
 
 // use routes
-
+app.use('/register', registrationRouter);
 
 // server listening
 app.listen(port, () => {
