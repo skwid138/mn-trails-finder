@@ -2,3 +2,4 @@
 node_modules
 .DS_Store
 src/terminal-cmd.txt
+.vscode/settings.json

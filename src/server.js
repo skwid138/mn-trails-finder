@@ -13,6 +13,9 @@ const port = process.env.PORT || 6660;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// use static directory
+app.use(express.static('public'));
+
 // Passport Session Configuration
 app.use(sessionConfig);
 
