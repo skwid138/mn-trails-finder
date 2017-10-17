@@ -11,8 +11,5 @@ const config = {
     cookie: { maxage: 60000, secure: false }
 }; // end session
 
-// construct session
+// construct and export
 module.exports = session(config);
-
-//export
-module.exports = session;

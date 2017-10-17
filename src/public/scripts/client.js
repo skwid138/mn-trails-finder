@@ -6,9 +6,10 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 myApp.config(($routeProvider) => {
 
-/// Client Side Routes ///
-$routeProvider.when('/', {
-    templateUrl: '/views/', // not a thing
-    controller: '' // not a thing
-}).otherwise('/'); // end routeProvider
+    // Client Side Routes
+    $routeProvider.when('/', {
+        templateUrl: '/views/home.html',
+        controller: 'HomeController as hc'
+    }).otherwise('/'); 
+
 }); // end config

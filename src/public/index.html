@@ -24,13 +24,14 @@
 <!-- ********* Client Side ********* -->
 <script src="scripts/client.js" charset="utf-8"></script>
 <!-- Controllers -->
-
+<script src="scripts/controllers/nav.controller.js" charset="utf-8"></script>
+<script src="scripts/controllers/home.controller.js" charset="utf-8"></script>
 <!-- Services -->
-
+<script src="scripts/services/user.service.js" charset="utf-8"></script>
 
 </head>
 <body ng-app="myApp">
-    <header>
+    <header ng-controller="NavController as nc">
         <h1>Hello World</h1>
     </header>
     <main>

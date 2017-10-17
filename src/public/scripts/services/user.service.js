@@ -18,8 +18,6 @@ myApp.service('UserService', ($http, $location) => {
                 console.log('response.data.username', response.data.username);
             } else {
                 console.log('getUser failed', response);
-                // user has no session, bounce them back to the login page
-                $location.path("/home");
             } // end else
         }); // end GET
     }; // end getUser
@@ -28,7 +26,6 @@ myApp.service('UserService', ($http, $location) => {
         console.log('in UserService.logout');
         $http.get('/user/logout').then((response) => {
             console.log('logged out');
-            $location.path("/home");
         }); // end GET
     }; // end logout
 
