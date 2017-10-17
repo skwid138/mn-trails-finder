@@ -22,7 +22,7 @@ router.post('/', (req,res,next) => {
             res.sendStatus(500);
             done();
         } else {
-            let queryString = "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id";
+            let queryString = "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id";
             let values = [saveUser.username, saveUser.password];
             client.query(queryString, values, (queryErr, result) => {
                 if (queryErr) {

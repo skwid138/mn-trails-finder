@@ -36,8 +36,5 @@ if (process.env.DATABASE_URL) {
     };
 }
 
-// construct pool
-const pool = new Pool(config);
-
-//export
-module.exports = pool;
+// construct and export
+module.exports = Pool(config);

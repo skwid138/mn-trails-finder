@@ -21,7 +21,7 @@ passport.deserializeUser( (id, done) => {
         } // end if error
 
         let user = {};
-        let queryString = "SELECT * FROM users WHERE id = $1";
+        let queryString = "SELECT * FROM users WHERE user_id = $1";
         let values = [id];
 
         client.query(queryString, values, (queryErr, result) => {
