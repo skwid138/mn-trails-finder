@@ -43,11 +43,10 @@
                 <input type="text" placeholder="username" ng-model="nc.user.username">
                 <input type="text" placeholder="password" ng-model="nc.user.password">
                 <button type="button" ng-click="nc.login()">Login</button>
-                <!-- this anchor needs to to redirect to a new page with a new controller -->
-                <a href="/#!/register" ng-click="nc.register">Register</a>
+                <button type="button" ng-click="nc.register()">Register</button>
             </md-nav-bar>
+            <h1>{{nc.message}}</h1>
         </div>
-        <h1>{{nc.message}}</h1>
     </header>
     <main>
         <ng-view></ng-view>

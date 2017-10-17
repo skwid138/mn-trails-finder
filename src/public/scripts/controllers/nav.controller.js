@@ -6,7 +6,7 @@ This controller is for the nav bar and user login
 - displays username
 - displays My Trails button
 */
-myApp.controller('NavController', function (UserService, $http) {
+myApp.controller('NavController', function(UserService, $http) {
     console.log('in NavController');
     const vm = this;
 
@@ -40,6 +40,21 @@ myApp.controller('NavController', function (UserService, $http) {
             }); // end catch
         } // end else
     }; // end login
+
+    vm.register = () => {
+        console.log('in register');
+        if (vm.user.username === '' || vm.user.password === '') {
+            vm.message = "Choose a username and password!";
+        } else {
+            console.log('Register sending to server ->', vm.user);
+            $http.post('/register', vm.user).then((response) => {
+                console.log('LoginController -- registerUser -- success');
+            }).catch((response) => {
+                console.log('Registration error: ', response);
+                vm.message = "Please try again."
+            }); // end catch
+        } // end else
+    }; // end register
 
 
 }); // end NavController

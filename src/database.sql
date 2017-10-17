@@ -6,8 +6,8 @@
 -- houses users credentials
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-	username VARCHAR(50),
-    password VARCHAR(50)
+	username VARCHAR(50) not null UNIQUE,
+    password VARCHAR(50) not null
 );
 
 -- houses trails of interest flagged by users will be removed if user is deleted

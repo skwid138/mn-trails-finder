@@ -10,6 +10,9 @@ myApp.config( function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: '/views/home.html',
         controller: 'HomeController as hc'
+    }).when('/register',{
+        templateUrl: '/views/register.html',
+        controller: 'RegisterController as rc'
     }).otherwise('/'); 
 
 }); // end config
