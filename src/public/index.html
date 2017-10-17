@@ -35,11 +35,15 @@
         <div ng-controller="NavController as nc" ng-cloak>
             <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
                 <md-nav-item md-nav-href="/#!/" name="home">Home</md-nav-item>
-                <!-- add input fields for username and password -->
-                <!-- add Login button -->
-                <!-- add Register button -->
+                <!-- these fields will need to be hidden by ng-if after a user is logged in -->
+                <input type="text" placeholder="username" ng-model="nc.user.username">
+                <input type="text" placeholder="password" ng-model="nc.user.password">
+                <button type="button" ng-click="nc.login">Login</button>
+                <!-- this anchor needs to to redirect to a new page with a new controller -->
+                <a href="/#!/register" ng-click="nc.register">Register</a>
             </md-nav-bar>
-        </div>>
+        </div>
+        <h1>{{nc.message}}</h1>
     </header>
     <main>
 
