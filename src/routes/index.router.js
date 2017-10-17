@@ -17,7 +17,7 @@ router.post('/',
 // GET index.html
 router.get('/', (req, res) => {
     console.log('In base route.');
-    const indexRoute = (path.resolve('public/index.html'));
+    const indexRoute = (path.resolve('src/public/index.html'));
     res.sendFile(indexRoute);
 }); // end GET
 

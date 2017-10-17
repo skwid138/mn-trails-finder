@@ -4,7 +4,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const passport = require('./strategies/sql.local.strategy');
+const passport = require('./strategies/local.strategy');
 const sessionConfig = require('./modules/session.config');
 
 const port = process.env.PORT || 6660;
@@ -14,7 +14,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // use static directory
-app.use(express.static('public'));
+//app.use(express.static('public'));
+//app.use(express.static('./public'));
+//app.use(express.static('../public'));
+//app.use(express.static('src/public'));
+app.use(express.static('./src/public'));
 
 // Passport Session Configuration
 app.use(sessionConfig);
