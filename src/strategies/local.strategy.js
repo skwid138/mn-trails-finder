@@ -1,19 +1,19 @@
 /*jshint esversion: 6 */
 
 // requires
-const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
-const encryptLib = require('../modules/encryption');
-const pool = require('../modules/pool');
+var passport = require('passport');
+var localStrategy = require('passport-local').Strategy;
+var encryptLib = require('../modules/encryption');
+var pool = require('../modules/pool');
 
-passport.serializeUser( (user, done) => {
+passport.serializeUser( function(user, done) {
     done(null, user.id);
 }); // end serializeUser
 
-passport.deserializeUser( (id, done) => {
+passport.deserializeUser( function(id, done) {
     console.log('in deserializeUser');
     
-    pool.connect((err, client, release) => {
+    pool.connect( function(err, client, release) {
         if (err) {
             console.log('connection err ', err);
             release();
@@ -24,7 +24,7 @@ passport.deserializeUser( (id, done) => {
         let queryString = "SELECT * FROM users WHERE user_id = $1";
         let values = [id];
 
-        client.query(queryString, values, (queryErr, result) => {
+        client.query(queryString, values, function(queryErr, result) {
             // Handle Errors
             if (queryErr) {
                 console.log('Query connection error ->', queryErr);
@@ -51,8 +51,8 @@ passport.deserializeUser( (id, done) => {
 passport.use('local', new localStrategy({
     passReqToCallback: true,
     usernameField: 'username'
-    }, (req, username, password, done) => {
-        pool.connect((err, client, release) => {
+    }, function(req, username, password, done) {
+        pool.connect( function(err, client, release) {
             console.log('in local passport use');
             
             // assumes the username will be unique, thus returning 1 or 0 results

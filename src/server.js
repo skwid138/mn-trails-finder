@@ -14,10 +14,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // use static directory
-//app.use(express.static('public'));
-//app.use(express.static('./public'));
-//app.use(express.static('../public'));
-//app.use(express.static('src/public'));
 app.use(express.static('./src/public'));
 
 // Passport Session Configuration

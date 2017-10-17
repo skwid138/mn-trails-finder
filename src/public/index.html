@@ -7,27 +7,31 @@
     <title>mn-trails-finder</title>
 <!-- CSS -->
 <link rel="stylesheet" href="styles/styles.css">
+
+<!-- favicon -->
+<link rel="icon" href="favicon-32x32.png" type="image/x-icon" />
+
 <!-- Angular Material -->
 <link href="vendors/angular-material/angular-material.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 
 <!-- Angular and Angular-Route -->
-<script type="text/javascript" src="vendors/angular/angular.js" charset="utf-8"></script>
-<script type="text/javascript" src="vendors/angular-route/angular-route.js" charset="utf-8"></script>
+<script src="vendors/angular/angular.js" charset="utf-8" type="text/javascript"></script>
+<script src="vendors/angular-route/angular-route.js" charset="utf-8" type="text/javascript"></script>
 
 <!-- Angular Material -->
-<script type="text/javascript" src="vendors/angular-material/angular-animate.min.js" charset="utf-8" type="text/javascript"></script>
-<script type="text/javascript" src="vendors/angular-material/angular-aria.min.js" charset="utf-8" type="text/javascript"></script>
-<script type="text/javascript" src="vendors/angular-material/angular-messages.min.js" charset="utf-8" type="text/javascript"></script>
-<script type="text/javascript" src="vendors/angular-material/angular-material.js" charset="utf-8" type="text/javascript"></script>
+<script src="vendors/angular-material/angular-animate.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="vendors/angular-material/angular-aria.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="vendors/angular-material/angular-messages.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="vendors/angular-material/angular-material.js" charset="utf-8" type="text/javascript"></script>
 
 <!-- ********* Client Side ********* -->
-<script type="text/javascript" src="scripts/client.js" charset="utf-8"></script>
+<script src="scripts/client.js" charset="utf-8" type="text/javascript"></script>
 <!-- Controllers -->
-<script type="text/javascript" src="scripts/controllers/nav.controller.js" charset="utf-8"></script>
-<script type="text/javascript" src="scripts/controllers/home.controller.js" charset="utf-8"></script>
+<script src="scripts/controllers/nav.controller.js" charset="utf-8" type="text/javascript"></script>
+<script src="scripts/controllers/home.controller.js" charset="utf-8" type="text/javascript"></script>
 <!-- Services -->
-<script type="text/javascript" src="scripts/services/user.service.js" charset="utf-8"></script>
+<script src="scripts/services/user.service.js" charset="utf-8" type="text/javascript"></script>
 
 </head>
 <body ng-app="myApp">
@@ -38,7 +42,7 @@
                 <!-- these fields will need to be hidden by ng-if after a user is logged in -->
                 <input type="text" placeholder="username" ng-model="nc.user.username">
                 <input type="text" placeholder="password" ng-model="nc.user.password">
-                <button type="button" ng-click="nc.login">Login</button>
+                <button type="button" ng-click="nc.login()">Login</button>
                 <!-- this anchor needs to to redirect to a new page with a new controller -->
                 <a href="/#!/register" ng-click="nc.register">Register</a>
             </md-nav-bar>
@@ -46,7 +50,7 @@
         <h1>{{nc.message}}</h1>
     </header>
     <main>
-
+        <ng-view></ng-view>
     </main>
     <footer>
         <!-- add copyright Hunter Rancourt with links to contact me -->

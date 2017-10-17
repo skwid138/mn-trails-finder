@@ -6,7 +6,7 @@ This controller is for the nav bar and user login
 - displays username
 - displays My Trails button
 */
-myApp.controller('NavController', (UserService) => {
+myApp.controller('NavController', function (UserService, $http) {
     console.log('in NavController');
     const vm = this;
 

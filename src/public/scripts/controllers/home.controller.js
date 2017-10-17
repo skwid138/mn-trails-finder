@@ -4,7 +4,7 @@
 This controller is for the home view.
 - displays trails
 */
-myApp.controller('HomeController', () => {
+myApp.controller('HomeController', function () {
     console.log('in HomeController');
     const vm = this;
 

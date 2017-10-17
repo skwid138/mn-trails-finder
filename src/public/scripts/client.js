@@ -2,9 +2,9 @@
 
 console.log('client.js sourced');
 // Setup Angular and source in modules
-const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
-myApp.config(($routeProvider) => {
+myApp.config( function ($routeProvider) {
 
     // Client Side Routes
     $routeProvider.when('/', {
