@@ -26,9 +26,12 @@ app.use(passport.session());
 // route requires
 const registrationRouter = require('./routes/registration.router');
 const indexRouter = require('./routes/index.router');
+const userRouter = require('./routes/user.router');
 
 // use routes
 app.use('/register', registrationRouter);
+app.use('/user', userRouter);
+
 app.use('/', indexRouter);
 
 // server listening
