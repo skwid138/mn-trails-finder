@@ -31,14 +31,21 @@
 
 </head>
 <body ng-app="myApp">
-    <header ng-controller="NavController as nc">
-        <h1>Hello World</h1>
+    <header>
+        <div ng-controller="NavController as nc" ng-cloak>
+            <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+                <md-nav-item md-nav-href="/#!/" name="home">Home</md-nav-item>
+                <!-- add input fields for username and password -->
+                <!-- add Login button -->
+                <!-- add Register button -->
+            </md-nav-bar>
+        </div>>
     </header>
     <main>
 
     </main>
     <footer>
-
+        <!-- add copyright Hunter Rancourt with links to contact me -->
     </footer>
 </body>
 </html>
