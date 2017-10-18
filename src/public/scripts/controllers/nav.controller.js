@@ -7,7 +7,7 @@ This controller is for the nav bar and user login
 - displays username after successful login
 - displays My Trails button
 */
-myApp.controller('NavController', function(UserService, $http) {
+myApp.controller('NavController', function(UserService, $http, $location) {
     console.log('in NavController');
     const vm = this;
 
@@ -31,6 +31,10 @@ myApp.controller('NavController', function(UserService, $http) {
             $http.post('/', vm.user).then((response) => {
                 if (response.data.username) {
                     console.log('login success: ', response.data);
+                    // if the user is an admin redirect to admin view
+                    if (response.data.admin) {
+                        $location.path('/admin');
+                    }
                 } else {
                     console.log('login post failure: ', response);
                     vm.message = "Incorrect Credentials, please try again";
