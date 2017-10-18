@@ -1,10 +1,10 @@
 /*jshint esversion: 6 */
 
 // requires
-var passport = require('passport');
-var localStrategy = require('passport-local').Strategy;
-var encryptLib = require('../modules/encryption');
-var pool = require('../modules/pool');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const encryptLib = require('../modules/encryption');
+const pool = require('../modules/pool');
 
 passport.serializeUser( function(user, done) {
     done(null, user.id);
@@ -55,14 +55,14 @@ passport.use('local', new localStrategy({
         pool.connect( function(err, client, release) {
             console.log('in local passport use');
             
-            // assumes the username will be unique, thus returning 1 or 0 results
+            // username will be unique, thus returning 1 or 0 results
             let queryString = "SELECT * FROM users WHERE username = $1";
             let values = [username];
 
             client.query(queryString, values, (queryErr, result) => {
                 let user = {};
 
-                // Handle Errors
+                // handle errors
                 if (queryErr) {
                     console.log('Query connection error ->', queryErr);
                     done(null, user);
