@@ -3,7 +3,8 @@
 /*
 This controller is for the nav bar and user login
 - collects username and password
-- displays username
+- allows user registration
+- displays username after successful login
 - displays My Trails button
 */
 myApp.controller('NavController', function(UserService, $http) {
@@ -19,7 +20,7 @@ myApp.controller('NavController', function(UserService, $http) {
     // message string for user login
     vm.message = '';
 
-    // handles user login
+    // handles user login and authentication
     vm.login = () => {
         console.log('in login');
         
@@ -41,6 +42,8 @@ myApp.controller('NavController', function(UserService, $http) {
         } // end else
     }; // end login
 
+    // this handles user registration
+    // gathers data from input fields and sends it the server to be added to the DB
     vm.register = () => {
         console.log('in register');
         if (vm.user.username === '' || vm.user.password === '') {

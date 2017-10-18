@@ -26,8 +26,8 @@ CREATE TABLE ratings (
 );
 
 -- houses trails data
-CREATE TABLE ratings (
+CREATE TABLE trails (
     trails_id SERIAL PRIMARY KEY,
-    trail_name VARCHAR(50),
+    trail_name VARCHAR(50) not null UNIQUE,
     trail_description TEXT,
 );
