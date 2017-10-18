@@ -14,7 +14,8 @@ router.get('/', (req, res) => {
         console.log('logged in req.user ->', req.user);
 
         let userInfo = {
-            username : req.user.username
+            username : req.user.username,
+            admin : req.user.admin
         }; // end userInfo
         res.send(userInfo);
     } else {

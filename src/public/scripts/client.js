@@ -10,7 +10,7 @@ myApp.config( function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: '/views/home.html',
         controller: 'HomeController as hc'
-    }).when('/admin',{
+    }).when('/admin', {
         templateUrl: '/views/admin.html',
         controller: 'AdminController as ac'
     }).when('/add-trail', {

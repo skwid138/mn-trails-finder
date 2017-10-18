@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-myApp.service('UserService', function($http) {
+myApp.service('UserService', function($http, $location) {
     console.log('in UserService');
     const self = this;
 

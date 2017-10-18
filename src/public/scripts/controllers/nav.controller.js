@@ -34,7 +34,9 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                     // if the user is an admin redirect to admin view
                     if (response.data.admin) {
                         $location.path('/admin');
-                    }
+                    } else {
+                        $location.path('/home');
+                    } // end else
                 } else {
                     console.log('login post failure: ', response);
                     vm.message = "Incorrect Credentials, please try again";
