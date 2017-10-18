@@ -17,6 +17,9 @@ myApp.controller('NavController', function(UserService, $http, $location) {
         password: ''
     };
 
+    // boolean for ng-if
+    vm.isAdmin = false;
+
     // message string for user login
     vm.message = '';
 
@@ -34,6 +37,7 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                     // if the user is an admin redirect to admin view
                     if (response.data.admin) {
                         $location.path('/admin');
+                        vm.isAdmin = true;
                     } else {
                         $location.path('/home');
                     } // end else
@@ -60,7 +64,7 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                 console.log('LoginController -- registerUser -- success');
             }).catch((response) => {
                 console.log('Registration error: ', response);
-                vm.message = "Please try again."
+                vm.message = "Please try again.";
             }); // end catch
         } // end else
     }; // end register

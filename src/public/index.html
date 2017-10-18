@@ -43,6 +43,7 @@
             <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
                 <md-nav-item md-nav-href="/#!/" name="home">Home</md-nav-item>
                 <md-nav-item md-nav-href="/#!/add-trail" name="add-trail">Add Trail</md-nav-item>
+                <md-nav-item ng-if="nc.isAdmin" md-nav-href="/#!/admin" name="admin-tools">Admin Tools</md-nav-item>
                 <!-- these fields will need to be hidden by ng-if after a user is logged in -->
                 <div flex layout="row" layout-align="end start">
                     <md-input-container>

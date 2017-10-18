@@ -11,7 +11,7 @@ describe('test for server file server.js', function () {
                 // have to parse the body from JSON to a JS Obj
                 expect(JSON.parse(body).result).to.eqaul([what module return should be]);
             // both expects need to be true for the test to pass
-            expect(response.stsatusCode.to.be.equal(200));
+            expect(response.statusCode.to.be.equal(200));
             done();
         }) // end request
     }) // end it

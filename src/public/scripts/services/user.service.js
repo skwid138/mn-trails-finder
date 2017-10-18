@@ -5,17 +5,21 @@ myApp.service('UserService', function($http, $location) {
     const self = this;
 
     self.userObject = {
-        userName: ''
+        userName: '',
+        admin: false
     }; // end userObject
 
     self.getUser = () => {
         console.log('in UserService.getUser');
         
         $http.get('/user').then((response) => {
+            console.log('/user response.data ', response.data);
+            
             if (response.data.username) {
                 // user has a current session on the server
                 self.userObject.userName = response.data.username;
-                console.log('response.data.username', response.data.username);
+                self.userObject.admin = response.data.admin;
+                // console.log('response.data.username', response.data.username);
             } else {
                 console.log('getUser failed', response);
             } // end else
