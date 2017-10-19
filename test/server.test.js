@@ -13,8 +13,8 @@ describe('test for server file server.js', function () {
             // both expects need to be true for the test to pass
             expect(response.statusCode.to.be.equal(200));
             done();
-        }) // end request
-    }) // end it
-}) // end 2nd describe
+        }); // end request
+    }); // end it
+}); // end 2nd describe
 
 }); // end describe

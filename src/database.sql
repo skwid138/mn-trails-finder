@@ -47,7 +47,7 @@ CREATE TABLE trails (
     type_atv BOOLEAN,
     type_snowmobile BOOLEAN,
     type_horse BOOLEAN,
-    approved BOOLEAN
+    approved BOOLEAN DEFAULT false
 );
 
 -- reviews of trails or comments on trails? hmm
