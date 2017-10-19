@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
                     console.log('Query POST connection Error ->', queryErr);
                     res.sendStatus(500);
                 } else {
-                    res.sendStatus(201);
+                    res.status(201).send(result);
                 } // end else
                 done();
             }); // end query

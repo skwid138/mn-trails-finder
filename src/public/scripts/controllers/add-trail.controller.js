@@ -10,31 +10,7 @@ myApp.controller('AddTrailController', function(TrailService, $http) {
 
     // object for POST
     vm.trail = {
-        // park_name: '',
-        // trail_name: '',
-        // address1: '',
-        // address2: '',
-        // city: '',
         state: 'MN',
-        // zip: '',
-        // length: '',
-        // dog: '',
-        // child: '',
-        // paved: '',
-        // water: '',
-        // parking: '',
-        // parking_free: '',
-        // park_pass: '',
-        // hiking: '',
-        // biking: '',
-        // skiing: '',
-        // horse: '',
-        // atv: '',
-        // snowmobile: '',
-        // trail_description: '',
-        // photo: '', // not being used
-        // ll: 0, // not being used
-        // gain: 0 // not being used
     }; // end trail
 
     // list of states to display on DOM in drop down menu
@@ -61,7 +37,13 @@ myApp.controller('AddTrailController', function(TrailService, $http) {
         
 
         $http.post('/trail', vm.trail).then((response) => {
-
+            //console.log('response', response);
+            // if server responds with 'Created'
+            if (response.status === 201) {
+                // trail_id of newly created trail
+                console.log(response.data.rows[0].trails_id);
+                // can use id to route to the trail's page
+            }
         }); // end POST
     }; // end addTrail
 
