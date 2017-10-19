@@ -1,3 +1,86 @@
 <section>
-    <p>add controller</p>
+    <h1>Add a Trail!</h1>
+    <md-content layout-padding>
+        <div>
+            <form name="trailForm">
+                <!-- name inputs are side by side across the container -->
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-xs>
+                        <label>Park Name</label>
+                        <input ng-model="trail.park_name">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-xs>
+                        <label>Trail Name</label>
+                        <input ng-model="trail.trail_name">
+                    </md-input-container>
+                </div>
+                <!-- adress inputs span the entire container -->
+                <md-input-container class="md-block">
+                    <label>Address</label>
+                    <input ng-model="trail.address">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="trail.address2" placeholder="Address 2">
+                </md-input-container>
+                <!-- City State Zip span the container in a row -->
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>City</label>
+                        <input required ng-model="trail.city">
+                        <div ng-messages="trailForm.postalCode.$error" role="alert">
+                            <div ng-message="required" class="my-message">You must input a city name!</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>State</label>
+                        <md-select ng-model="trail.state">
+                            <md-option ng-repeat="state in atc.states" value="{{state.abbrev}}">
+                                {{state.abbrev}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Postal Code</label>
+                        <input name="postalCode" ng-model="trail.postalCode" placeholder="12345" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                        <div ng-messages="trailForm.postalCode.$error" role="alert">
+                            <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <!-- toggle switches span entire container -->
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-switch ng-model="trail.parking">Parking Available</md-switch>
+                        <md-switch ng-model="trail.parking_free">Free Parking</md-switch>
+                        <md-switch ng-model="trail.dog">Dogs Allowed</md-switch>
+                        <md-switch ng-model="trail.child">Child Accessible</md-switch>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-switch ng-model="trail.paved">Paved Trails</md-switch>
+                        <md-switch ng-model="trail.water">Lakes, Ponds, Rivers, or Creeks</md-switch>
+                        <md-switch ng-model="trail.park_pass">Park Pass Required</md-switch>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-switch ng-model="trail.hiking">Hiking</md-switch>
+                        <md-switch ng-model="trail.skiing">Skiing </md-switch>
+                        <md-switch ng-model="trail.biking">Biking</md-switch>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-switch ng-model="trail.horse">Horseback Riding</md-switch>
+                        <md-switch ng-model="trail.atv">ATV</md-switch>
+                        <md-switch ng-model="trail.snowmobile">Snowmobile</md-switch>
+                    </md-input-container>
+                </div>
+                <!-- description spans entire container -->
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <textarea name="description" ng-model="trail.description" md-maxlength="250" rows="5" md-select-on-focus></textarea>
+                    <div ng-messages="trailForm.description.$error" role="alert">
+                        <div ng-message="md-maxlength" class="my-message">Descriptions should be brief!</div>
+                    </div>
+                </md-input-container>
+    
+            </form>
+        </div>
+    </md-content>
 </section>

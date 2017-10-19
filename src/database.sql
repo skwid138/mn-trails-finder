@@ -29,7 +29,8 @@ CREATE TABLE ratings (
 -- houses trails data
 CREATE TABLE trails (
     trails_id SERIAL PRIMARY KEY,
-    trail_name VARCHAR(100) not null UNIQUE,
+    trail_name VARCHAR(100),
+    park_name VARCHAR(100),
     trail_description TEXT,
     photo VARCHAR(100),
     city VARCHAR(50),
@@ -45,7 +46,8 @@ CREATE TABLE trails (
     type_biking BOOLEAN,
     type_atv BOOLEAN,
     type_snowmobile BOOLEAN,
-    type_horse BOOLEAN
+    type_horse BOOLEAN,
+    approved BOOLEAN
 );
 
 -- reviews of trails or comments on trails? hmm
