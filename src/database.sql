@@ -29,24 +29,31 @@ CREATE TABLE ratings (
 -- houses trails data
 CREATE TABLE trails (
     trails_id SERIAL PRIMARY KEY,
-    trail_name VARCHAR(100),
     park_name VARCHAR(100),
-    trail_description TEXT,
-    photo VARCHAR(100),
+    trail_name VARCHAR(100),
+    address1 VARCHAR(100),
+    address2 VARCHAR(100),
     city VARCHAR(50),
     state VARCHAR(2) DEFAULT 'MN',
-    ll INT, --for trail head
-    parking_lot BOOLEAN,
-    length INT,
-    gain INT,
-    dog BOOLEAN,
-    child BOOLEAN,
-    type_hiking BOOLEAN,
-    type_skiing BOOLEAN,
-    type_biking BOOLEAN,
-    type_atv BOOLEAN,
-    type_snowmobile BOOLEAN,
-    type_horse BOOLEAN,
+    zip NUMERIC(5, 0),
+    length VARCHAR(50),
+    dog BOOLEAN DEFAULT false,
+    child BOOLEAN DEFAULT false,
+    paved BOOLEAN DEFAULT false,
+    water BOOLEAN DEFAULT false,
+    parking BOOLEAN DEFAULT false,
+    parking_free BOOLEAN DEFAULT false,
+    park_pass BOOLEAN DEFAULT false,
+    hiking BOOLEAN DEFAULT false,
+    biking BOOLEAN DEFAULT false,
+    skiing BOOLEAN DEFAULT false,
+    horse BOOLEAN DEFAULT false,
+    atv BOOLEAN DEFAULT false,
+    snowmobile BOOLEAN DEFAULT false,
+    trail_description TEXT,
+    photo VARCHAR(100), -- not being used
+    ll INT, --for trail head not used
+    gain INT, -- not being used 
     approved BOOLEAN DEFAULT false
 );
 

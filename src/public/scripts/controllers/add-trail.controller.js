@@ -10,29 +10,7 @@ myApp.controller('AddTrailController', function(TrailService, $http) {
 
     // object for POST
     vm.trail = {
-        trail_name : '',
-        park_name : '',
-        length : '',
         ll : '', // if location services to get trail head lat and lon
-        address1 : '',
-        address2 : '',
-        city : '',
-        state : '',
-        zip : '',
-        parking : false,
-        parking_free : false,
-        dogs : false,
-        child : false,
-        paved : false,
-        water : false,
-        park_pass : false,
-        hiking : false,
-        biking : false,
-        skiing : false,
-        horse : false,
-        atv : false,
-        snowmobile : false,
-        description : '',
         image : '' // if image upload
     }; // end trail
 
@@ -47,7 +25,7 @@ myApp.controller('AddTrailController', function(TrailService, $http) {
     // list of trail lengths to display on dom in drop down menu
     vm.lengths = ("0 - 1, 1 - 3, 3 - 5, 5 - 7, 8 - 10, 10 - 15, 15 - 20, > 20")
         .split(', ').map((length) => {
-            return { dist : length };
+            return { dist : length + ' miles' };
         } // end map
     ); // end lengths
 
@@ -56,7 +34,10 @@ myApp.controller('AddTrailController', function(TrailService, $http) {
     vm.addTrail = () => {
         console.log('in addTrail');
 
-        $http.post('/trail').then((response) => {
+        console.log('trail object to post ', vm.trail);
+        
+
+        $http.post('/trail', vm.trail).then((response) => {
 
         }); // end POST
     }; // end addTrail
