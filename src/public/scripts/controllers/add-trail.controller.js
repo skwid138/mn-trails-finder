@@ -10,8 +10,31 @@ myApp.controller('AddTrailController', function(TrailService, $http) {
 
     // object for POST
     vm.trail = {
-        ll : '', // if location services to get trail head lat and lon
-        image : '' // if image upload
+        // park_name: '',
+        // trail_name: '',
+        // address1: '',
+        // address2: '',
+        // city: '',
+        state: 'MN',
+        // zip: '',
+        // length: '',
+        // dog: '',
+        // child: '',
+        // paved: '',
+        // water: '',
+        // parking: '',
+        // parking_free: '',
+        // park_pass: '',
+        // hiking: '',
+        // biking: '',
+        // skiing: '',
+        // horse: '',
+        // atv: '',
+        // snowmobile: '',
+        // trail_description: '',
+        // photo: '', // not being used
+        // ll: 0, // not being used
+        // gain: 0 // not being used
     }; // end trail
 
     // list of states to display on DOM in drop down menu

@@ -6,8 +6,8 @@
 -- houses users credentials
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-	username VARCHAR(100) not null UNIQUE,
-    password VARCHAR(200) not null,
+	username VARCHAR(100)  NOT NULL UNIQUE,
+    password VARCHAR(200)  NOT NULL,
     admin BOOLEAN DEFAULT false
 );
 
@@ -37,24 +37,24 @@ CREATE TABLE trails (
     state VARCHAR(2) DEFAULT 'MN',
     zip NUMERIC(5, 0),
     length VARCHAR(50),
-    dog BOOLEAN DEFAULT false,
-    child BOOLEAN DEFAULT false,
-    paved BOOLEAN DEFAULT false,
-    water BOOLEAN DEFAULT false,
-    parking BOOLEAN DEFAULT false,
-    parking_free BOOLEAN DEFAULT false,
-    park_pass BOOLEAN DEFAULT false,
-    hiking BOOLEAN DEFAULT false,
-    biking BOOLEAN DEFAULT false,
-    skiing BOOLEAN DEFAULT false,
-    horse BOOLEAN DEFAULT false,
-    atv BOOLEAN DEFAULT false,
-    snowmobile BOOLEAN DEFAULT false,
+    dog BOOLEAN NOT NULL DEFAULT false,
+    child BOOLEAN NOT NULL DEFAULT false,
+    paved BOOLEAN NOT NULL DEFAULT false,
+    water BOOLEAN NOT NULL DEFAULT false,
+    parking BOOLEAN NOT NULL DEFAULT false,
+    parking_free BOOLEAN NOT NULL DEFAULT false,
+    park_pass BOOLEAN NOT NULL DEFAULT false,
+    hiking BOOLEAN NOT NULL DEFAULT false,
+    biking BOOLEAN NOT NULL DEFAULT false,
+    skiing BOOLEAN NOT NULL DEFAULT false,
+    horse BOOLEAN NOT NULL DEFAULT false,
+    atv BOOLEAN NOT NULL DEFAULT false,
+    snowmobile BOOLEAN NOT NULL DEFAULT false,
     trail_description TEXT,
     photo VARCHAR(100), -- not being used
     ll INT, --for trail head not used
     gain INT, -- not being used 
-    approved BOOLEAN DEFAULT false
+    approved BOOLEAN NOT NULL DEFAULT false
 );
 
 -- reviews of trails or comments on trails? hmm
