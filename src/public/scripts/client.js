@@ -16,6 +16,9 @@ myApp.config( function ($routeProvider) {
     }).when('/add-trail', {
             templateUrl: '/views/add.html',
             controller: 'AddTrailController as atc'
+    }).when('/my-trails', {
+            templateUrl: '/views/my-trails.html',
+            controller: 'MyTrailController as mtc'
     }).otherwise('/'); 
 
 }); // end config

@@ -1,4 +1,5 @@
 <section >
     <p>admin controller</p>
-    <p ng-if="ac.isAdmin.admin">hidden thing</p>
+    <p ng-if="ac.user.admin">hidden thing</p>
+    <div ng-repeat="trail in ac.flaggedTrails">{{trail}}</div>
 </section>

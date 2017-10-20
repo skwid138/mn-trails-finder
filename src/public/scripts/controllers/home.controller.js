@@ -25,5 +25,4 @@ myApp.controller('HomeController', function (TrailService) {
     vm.getAllTrails();
     
 
-
 }); // end HomeController

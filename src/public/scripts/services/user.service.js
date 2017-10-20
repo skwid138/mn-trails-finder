@@ -6,11 +6,10 @@ myApp.service('UserService', function($http, $location) {
 
     self.userObject = {
         userName: '',
+        // boolean for ng-if
         admin: false
     }; // end userObject
 
-    // boolean for ng-if
-    self.isAdmin = false;
 
     self.getUser = () => {
         console.log('in UserService.getUser');

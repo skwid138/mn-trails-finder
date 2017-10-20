@@ -86,5 +86,7 @@ myApp.controller('NavController', function(UserService, $http, $location) {
         } // end else
     }; // end register
 
+    // create logout func and tie to ng-click
+
 
 }); // end NavController
