@@ -30,6 +30,8 @@ myApp.controller('AdminController', function (UserService, TrailService) {
     vm.approveTrails = () => {
         console.log('in approveTrails');
 
+        // use splice 
+        // https://www.w3schools.com/js/js_array_methods.asp
         for (var i = 0; i < vm.trails.list.length; i++) {
             // if trail has NOT been has been flagged for approval
             if(!vm.trails.list[i].approved) {

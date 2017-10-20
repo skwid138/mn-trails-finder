@@ -20,6 +20,7 @@ myApp.controller('NavController', function(UserService, $http, $location) {
     // boolean for ng-show: true displays inputs
     vm.showInputs = true;
 
+    // boolean for ng-if ?
     vm.isAdmin = false;
 
     // message string for user login
@@ -37,8 +38,7 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                     console.log('login success: ', response.data);
                     // hide login inputs and buttons
                     vm.showInputs = false;
-                    // clear inputs
-                    // vm.user.username = null;
+                    // clear input
                     vm.user.password = null;
                     // if the user is an admin redirect to admin view
                     if (response.data.admin) {
@@ -87,6 +87,11 @@ myApp.controller('NavController', function(UserService, $http, $location) {
     }; // end register
 
     // create logout func and tie to ng-click
-
+    vm.logout = () => {
+        UserService.logout();
+        vm.showInputs = true;
+        // clear input
+        vm.user.username = null;
+    }; // end logout
 
 }); // end NavController
