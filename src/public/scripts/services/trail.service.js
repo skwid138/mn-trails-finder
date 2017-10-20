@@ -13,8 +13,11 @@ myApp.service('TrailService', function($http) {
     self.getAllTrails = () => {
         console.log('in getAllTrails');
         
-        $http.get('/trails').then((response) => {
-            self.trails.list = response.data;
+        return $http.get('/trail').then((response) => {
+            console.log('/trail response.data.rows ', response.data.rows);
+            self.trails.list = response.data.rows;
+            console.log('self.trails.list ', self.trails.list);
+            
         }); // end GET
     }; // end getAllTrails
     

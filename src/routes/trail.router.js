@@ -63,9 +63,26 @@ router.post('/', (req, res) => {
 // GETs all Trails
 router.get('/', (req, res) => {
     console.log('In trail GET route.');
-    let trailToSend = {list: []};
-    
-    res.send(trailToSend);
+
+    pool.connect((err, client, done) => {
+        if (err) {
+            console.log('GET connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            let queryString = "SELECT * FROM trails";
+            let values = [];
+            client.query(queryString, values, (queryErr, result) => {
+                if (queryErr) {
+                    console.log('Query GET connection Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.status(200).send(result);
+                } // end else
+                done();
+            }); // end query
+        } // end else
+    }); // end pool connect
 }); // end GET
 
 // export

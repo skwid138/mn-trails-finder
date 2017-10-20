@@ -28,12 +28,15 @@ myApp.controller('NavController', function(UserService, $http, $location) {
         console.log('in login');
         
         if (vm.user.username === '' || vm.user.password === '') {
-            vm.message = "Enter your username and password!";
+            vm.message = swal("Enter your username and password to Login.");
         } else {
             console.log('login - sending to server ', vm.user);
             $http.post('/', vm.user).then((response) => {
                 if (response.data.username) {
                     console.log('login success: ', response.data);
+                    // clear inputs
+                    vm.user.username = null;
+                    vm.user.password = null;
                     // if the user is an admin redirect to admin view
                     if (response.data.admin) {
                         $location.path('/admin');
@@ -43,11 +46,11 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                     } // end else
                 } else {
                     console.log('login post failure: ', response);
-                    vm.message = "Incorrect Credentials, please try again";
+                    vm.message = swal("Incorrect Credentials, please try again.");
                 } // end else
             }).catch((response) => {
                 console.log('login catch - failure: ', response);
-                vm.message = "Incorrect Credentials, please try again";
+                vm.message = swal("Incorrect Credentials, please try again.");
             }); // end catch
         } // end else
     }; // end login
@@ -57,14 +60,18 @@ myApp.controller('NavController', function(UserService, $http, $location) {
     vm.register = () => {
         console.log('in register');
         if (vm.user.username === '' || vm.user.password === '') {
-            vm.message = "Choose a username and password!";
+            vm.message = 'Choose a username and password!';
         } else {
             console.log('Register sending to server ->', vm.user);
             $http.post('/register', vm.user).then((response) => {
                 console.log('LoginController -- registerUser -- success');
+                vm.message = vm.user.username + 'Registered Succesfully!';
+                // clear inputs
+                vm.user.username = null;
+                vm.user.password = null;
             }).catch((response) => {
                 console.log('Registration error: ', response);
-                vm.message = "Please try again.";
+                vm.message = 'Please try again.';
             }); // end catch
         } // end else
     }; // end register
