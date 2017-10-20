@@ -53,7 +53,7 @@
                 <md-nav-item md-nav-href="/#!/add-trail" name="add-trail">Add Trail</md-nav-item>
                 <md-nav-item ng-if="nc.isAdmin" md-nav-href="/#!/admin" name="admin-tools">Admin Tools</md-nav-item>
                 <!-- these fields will need to be hidden by ng-if after a user is logged in -->
-                <div flex layout="row" layout-align="end start">
+                <div flex layout="row" layout-align="end start" ng-show="nc.showInputs">
                     <md-input-container>
                         <input type="text" placeholder="username" ng-model="nc.user.username">
                     </md-input-container>
@@ -63,6 +63,15 @@
                     <div layout="column">
                         <md-button class="md-raised md-primary" ng-click="nc.login()">Login</md-button>
                         <md-button class="md-raised md-primary" ng-click="nc.register()">Register</md-button>
+                    </div>
+                </div>
+                <div flex layout="row" layout-align="end start" ng-hide="nc.showInputs">
+                    <div flex="15">
+                        <h3>Hello, {{nc.user.username}} !</h3>
+                    </div>
+                    <div flex="15">
+                        <md-button class="md-raised md-warn" md-nav-href="/#!/my-trails">My Trails!</md-button>
+                        <md-button ng-click="nc.logout()">Logout</md-button>
                     </div>
                 </div>
             </md-nav-bar>

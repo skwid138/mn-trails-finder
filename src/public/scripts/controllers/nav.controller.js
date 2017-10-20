@@ -17,7 +17,9 @@ myApp.controller('NavController', function(UserService, $http, $location) {
         password: ''
     };
 
-    // boolean for ng-if
+    // boolean for ng-show: true displays inputs
+    vm.showInputs = true;
+
     vm.isAdmin = false;
 
     // message string for user login
@@ -28,29 +30,31 @@ myApp.controller('NavController', function(UserService, $http, $location) {
         console.log('in login');
         
         if (vm.user.username === '' || vm.user.password === '') {
-            vm.message = swal("Enter your username and password to Login.");
+            vm.message = swal('Missing Credentials!', 'please enter your username and password to login', 'error');
         } else {
-            console.log('login - sending to server ', vm.user);
             $http.post('/', vm.user).then((response) => {
                 if (response.data.username) {
                     console.log('login success: ', response.data);
+                    // hide login inputs and buttons
+                    vm.showInputs = false;
                     // clear inputs
-                    vm.user.username = null;
+                    // vm.user.username = null;
                     vm.user.password = null;
                     // if the user is an admin redirect to admin view
                     if (response.data.admin) {
-                        $location.path('/admin');
                         vm.isAdmin = true;
+                        UserService.isAdmin = true;
+                        $location.path('/admin');
                     } else {
                         $location.path('/home');
                     } // end else
                 } else {
                     console.log('login post failure: ', response);
-                    vm.message = swal("Incorrect Credentials, please try again.");
+                    vm.message = swal('Incorrect Credentials!', 'please try again', 'error');
                 } // end else
             }).catch((response) => {
                 console.log('login catch - failure: ', response);
-                vm.message = swal("Incorrect Credentials, please try again.");
+                vm.message = swal('Incorrect Credentials!', 'please try again', 'error');
             }); // end catch
         } // end else
     }; // end login
@@ -65,10 +69,16 @@ myApp.controller('NavController', function(UserService, $http, $location) {
             console.log('Register sending to server ->', vm.user);
             $http.post('/register', vm.user).then((response) => {
                 console.log('LoginController -- registerUser -- success');
-                vm.message = vm.user.username + 'Registered Succesfully!';
-                // clear inputs
-                vm.user.username = null;
-                vm.user.password = null;
+                vm.message = swal({
+                    title: 'Registered Succesfully! Want to Login?',
+                    text: 'Welcome, ' + vm.user.username + '!',
+                    type: 'success',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Login'
+                }).then(() => {
+                    vm.login();
+                }); // end vm.message
             }).catch((response) => {
                 console.log('Registration error: ', response);
                 vm.message = 'Please try again.';

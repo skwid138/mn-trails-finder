@@ -9,22 +9,17 @@ myApp.controller('HomeController', function (TrailService) {
     const vm = this;
 
     // object to hold list of trails
-    vm.trails = {
-        list: []
-    }; // end trails
+    vm.trails = TrailService.trails;
+
+    //vm.trails.list = TrailService.trails.list;
 
     // gets all trails from service and populates trails array
     vm.getAllTrails = () => {
         console.log('in hc getAllTrails');
         TrailService.getAllTrails();
-        vm.buildList();
+        console.log('hc service list', TrailService.trails.list);
     }; // end getAllTrails
 
-    // makes trails list
-    vm.buildList = () => {
-        vm.trails.list = TrailService.trails.list;
-        console.log('vm.trails.list', vm.trails.list);
-    }; // end buildList
 
     // on page load get all trails
     vm.getAllTrails();
