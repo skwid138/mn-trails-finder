@@ -21,7 +21,9 @@ myApp.controller('HomeController', function (TrailService) {
     }; // end getAllTrails
 
 
-    // on page load get all trails
+    /************** on page load **************/
+    
+    // get all trails
     vm.getAllTrails();
     
 

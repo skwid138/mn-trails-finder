@@ -64,11 +64,11 @@ myApp.controller('NavController', function(UserService, $http, $location) {
     vm.register = () => {
         console.log('in register');
         if (vm.user.username === '' || vm.user.password === '') {
-            vm.message = 'Choose a username and password!';
+            vm.message = swal('Missing Fields', 'Enter a username and a password.', 'error');
         } else {
             console.log('Register sending to server ->', vm.user);
             $http.post('/register', vm.user).then((response) => {
-                console.log('LoginController -- registerUser -- success');
+                console.log('user registration successful');
                 vm.message = swal({
                     title: 'Registered Succesfully! Want to Login?',
                     text: 'Welcome, ' + vm.user.username + '!',
@@ -81,7 +81,7 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                 }); // end vm.message
             }).catch((response) => {
                 console.log('Registration error: ', response);
-                vm.message = 'Please try again.';
+                vm.message = swal('Registration Error', 'Please try again.', 'error');
             }); // end catch
         } // end else
     }; // end register

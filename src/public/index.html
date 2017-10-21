@@ -40,6 +40,7 @@
 <script src="scripts/controllers/home.controller.js" charset="utf-8" type="text/javascript"></script>
 <script src="scripts/controllers/admin.controller.js" charset="utf-8" type="text/javascript"></script>
 <script src="scripts/controllers/add-trail.controller.js" charset="utf-8" type="text/javascript"></script>
+<script src="scripts/controllers/my-trail.controller.js" charset="utf-8" type="text/javascript"></script>
 <!-- Services -->
 <script src="scripts/services/user.service.js" charset="utf-8" type="text/javascript"></script>
 <script src="scripts/services/trail.service.js" charset="utf-8" type="text/javascript"></script>
@@ -71,7 +72,8 @@
                         <h3>Hello, {{nc.user.username}} !</h3>
                     </div>
                     <div flex="15">
-                        <md-button class="md-raised md-warn" md-nav-href="/#!/my-trails">My Trails!</md-button>
+                        <!-- not routing - maybe removed md-nav-href and use href? -->
+                        <md-button class="md-raised md-warn" name="my-trails" md-nav-href="/#!/my-trails">My Trails!</md-button>
                         <md-button ng-click="nc.logout()">Logout</md-button>
                     </div>
                 </div>
