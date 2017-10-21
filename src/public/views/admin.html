@@ -1,5 +1,8 @@
 <section >
     <p>admin controller</p>
     <p ng-if="ac.user.admin">hidden thing, eventually have trails in here</p>
-    <div ng-repeat="trail in ac.trails.flagged">{{trail}}</div>
+    <div ng-repeat="trail in ac.trails.flagged">
+        <p>{{trail}}</p>
+        <img src="{{trail.photo}}"/>
+    </div>
 </section>

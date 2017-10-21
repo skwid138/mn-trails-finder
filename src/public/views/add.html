@@ -54,6 +54,7 @@
                         </div>
                     </md-input-container>
                 </div>
+                <!-- length and image upload span entire container in a row -->
                 <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Length</label>
@@ -62,6 +63,9 @@
                                 {{length.dist}}
                             </md-option>
                         </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-button class="md-raised md-primary" ng-click="atc.addPhoto()">Upload a Photo</md-button>
                     </md-input-container>
                 </div>
                 <!-- toggle switches span entire container -->

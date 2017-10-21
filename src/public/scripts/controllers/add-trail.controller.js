@@ -17,6 +17,21 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
     // must be a user to add a trail
     vm.user = UserService.userObject;
 
+    // Filestack API
+    vm.filestackAPI = 'AcP0YKzMkT9GzhibQbZytz';
+    vm.filestackClient = filestack.init(vm.filestackAPI);
+
+    // image uploader
+    vm.addPhoto = () => {
+        vm.filestackClient.pick({
+            accept: 'image/*',
+        }).then((result) => {
+            vm.trail.photo = result.filesUploaded[0].url;
+            console.log(JSON.stringify(result.filesUploaded));
+        }); // end filestackClient.pick
+    }; // end addPhoto
+    
+
     // list of states to display on DOM in drop down menu
     vm.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
         'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY')
