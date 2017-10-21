@@ -4,14 +4,18 @@
 This controller allows users to add trails to the DB
 - it will allow users to create trail records and write them to the DB
 */
-myApp.controller('AddTrailController', function(TrailService, $http) {
+myApp.controller('AddTrailController', function (TrailService, UserService, $http) {
     console.log('in AddTrailController');
     const vm = this;
 
     // object for POST
     vm.trail = {
-        state: 'MN',
+        state: 'MN', // default MN
     }; // end trail
+
+    // sets ng-if based on user being logged in
+    // must be a user to add a trail
+    vm.user = UserService.userObject;
 
     // list of states to display on DOM in drop down menu
     vm.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +

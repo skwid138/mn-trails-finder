@@ -9,6 +9,7 @@ myApp.controller('AdminController', function (UserService, TrailService) {
     const vm = this;
 
     // sets ng-if based on user permissions
+    // user must be an admin to approve trails
     vm.user = UserService.userObject;
 
     // object to hold list of trails
@@ -24,7 +25,6 @@ myApp.controller('AdminController', function (UserService, TrailService) {
     vm.getAllTrails = () => {
         console.log('in hc getAllTrails');
         TrailService.getAllTrails();
-        vm.approveTrails();
     }; // end getAllTrails
 
 
