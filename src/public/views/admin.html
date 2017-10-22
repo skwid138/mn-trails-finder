@@ -31,22 +31,15 @@
                             <md-chip ng-show="trail.atv">atv</md-chip>
                             <md-chip ng-show="trail.snowmobile">snowmobile</md-chip>
                         </md-chips>
-                        <!-- <md-card-actions layout="column"> -->
-                            <!-- <md-button class="md-icon-button" aria-label="Favorite">
-                                <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-                            </md-button>
-                            <md-button class="md-icon-button" aria-label="Settings">
-                                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-                            </md-button>
-                            <md-button class="md-icon-button" aria-label="Share">
-                                <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
-                            </md-button> -->
-                        <!-- </md-card-actions> -->
+                        <md-card-actions layout="column">
+                            <!-- Need to make sure this is the way to pass trail id to func -->
+                            <md-button ng-click="ac.approveTrail(trail.trail_id)" class="md-raised" style="background: rgb(58, 221, 142);">Approve</md-button>
+                        </md-card-actions>
                     </md-card-content>
                 </div>
                 <div flex="20" layout-margin>
                     <div flex class="md-media-xl card-media">
-                        <img class="md-card-image" ng-src="{{trail.photo}}" />
+                        <img class="md-card-image" ng-src="{{trail.photo}}"/>
                     </div>
                 </div>
             </md-card>

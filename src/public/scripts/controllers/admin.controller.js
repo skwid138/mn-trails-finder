@@ -27,6 +27,11 @@ myApp.controller('AdminController', function (UserService, TrailService) {
         TrailService.getAllTrails();
     }; // end getAllTrails
 
+    // updates trail.approved as true
+    vm.approveTrail = () => {
+        console.log('in approveTrail');
+        
+    }; // end approveTrail
 
 
     /************** on page load **************/ 

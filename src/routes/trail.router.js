@@ -77,7 +77,33 @@ router.get('/', (req, res) => {
                     console.log('Query GET connection Error ->', queryErr);
                     res.sendStatus(500);
                 } else {
-                    res.status(200).send(result);
+                    res.status(201).send(result);
+                } // end else
+                done();
+            }); // end query
+        } // end else
+    }); // end pool connect
+}); // end GET
+
+// update trail approval status
+router.put('/approve/:id', (req, res) => {
+    console.log('In trail GET route.');
+    let trail_id = req.params.trail_id;
+
+    pool.connect((err, client, done) => {
+        if (err) {
+            console.log('PUT connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            let queryString = "UPDATE trails SET approved='true' WHERE trail_id=$1";
+            let values = [trail_id];
+            client.query(queryString, values, (queryErr, result) => {
+                if (queryErr) {
+                    console.log('Query PUT connection Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(201);
                 } // end else
                 done();
             }); // end query
