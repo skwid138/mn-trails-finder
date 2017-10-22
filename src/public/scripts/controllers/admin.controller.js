@@ -31,12 +31,26 @@ myApp.controller('AdminController', function (UserService, TrailService) {
     vm.approveTrail = (trails_id) => {
         console.log('in approveTrail');
         TrailService.approveTrail(trails_id);
+        vm.message = swal({
+            title: 'Trail Approved!',
+            text: 'trail will now be accessible to all users',
+            type: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        }); // end vm.message
     }; // end approveTrail
 
     // removes a trail from the DB
     vm.deleteTrail = (trails_id) => {
         console.log('in deleteTrail');
         TrailService.deleteTrail(trails_id);
+        vm.message = swal({
+            title: 'Trail Deleted!',
+            text: 'trail will be removed from the database',
+            type: 'error',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        }); // end vm.message
     }; // end deleteTrail
 
 

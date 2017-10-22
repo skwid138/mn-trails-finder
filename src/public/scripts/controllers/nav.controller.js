@@ -70,11 +70,10 @@ myApp.controller('NavController', function(UserService, $http, $location) {
             $http.post('/register', vm.user).then((response) => {
                 console.log('user registration successful');
                 vm.message = swal({
-                    title: 'Registered Succesfully! Want to Login?',
+                    title: 'Registered Successfully!',
                     text: 'Welcome, ' + vm.user.username + '!',
                     type: 'success',
                     confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
                     confirmButtonText: 'Login'
                 }).then(() => {
                     vm.login();
