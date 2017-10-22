@@ -1,4 +1,74 @@
 <section>
     <p>home controller</p>
-    <div ng-repeat="trail in hc.trails.approved">{{trail}}</div>
+
+    <div class="md-padding">
+        <md-content layout="column">
+            <md-card ng-repeat="trail in hc.trails.approved" layout="row" ng-value="trail.trails_id">
+                <div flex="80" layout="row">
+                    <md-card-title flex="30">
+                        <md-card-title-text layout="column" layout-align="start start">
+                            <span class="md-headline">{{trail.trail_name}}</span>
+                            <span class="md-subhead">{{trail.park_name}}</span>
+                            <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
+                            <span class="md-subhead">{{trail.length}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>
+                        <p>{{trail.trail_description}}</p>
+                        <md-chips>
+                            <md-chip ng-show="trail.dog">dogs</md-chip>
+                            <md-chip ng-show="trail.child">kids</md-chip>
+                            <md-chip ng-show="trail.paved">paved</md-chip>
+                            <md-chip ng-show="trail.water">water</md-chip>
+                            <md-chip ng-show="trail.parking">parking available</md-chip>
+                            <md-chip ng-show="trail.parking_free">free parking</md-chip>
+                            <md-chip ng-show="trail.park_pass">park pass</md-chip>
+                            <md-chip ng-show="trail.hiking">hiking</md-chip>
+                            <md-chip ng-show="trail.skiing">skiing</md-chip>
+                            <md-chip ng-show="trail.biking">biking</md-chip>
+                            <md-chip ng-show="trail.horse">horseback</md-chip>
+                            <md-chip ng-show="trail.atv">atv</md-chip>
+                            <md-chip ng-show="trail.snowmobile">snowmobile</md-chip>
+                        </md-chips>
+                        <md-card-actions layout="row">
+                            <!-- button to add trail to current users my-trail -->
+                            <md-button ng-click="hc.addMyTrail(trail.trails_id)" class="md-icon-button" aria-label="My-Trails">
+                                <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
+                            </md-button>
+                            <!-- FAB for trail rating -->
+                            <div layout="row" layout-align="center center">
+                                <md-button aria-label="One" class="md-fab md-raised md-mini" ng-value="1" ng-mouseenter="hc.toggleOne=true" ng-mouseleave="hc.toggleOne=false">
+                                    <md-icon ng-hide="hc.toggleOne" md-svg-src="images/svg/star-empty.svg" aria-label="One"></md-icon>
+                                    <md-icon ng-show="hc.toggleOne" md-svg-src="images/svg/star.svg" aria-label="One"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Two" class="md-fab md-raised md-mini" ng-value="2" ng-mouseenter="hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleTwo=false; hc.toggleOne=false">
+                                    <md-icon ng-hide="hc.toggleTwo" md-svg-src="images/svg/star-empty.svg" aria-label="Two"></md-icon>
+                                    <md-icon ng-show="hc.toggleTwo" md-svg-src="images/svg/star.svg" aria-label="Two"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Three" class="md-fab md-raised md-mini" ng-value="3" ng-mouseenter="hc.toggleThree=true; hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleThree=false; hc.toggleTwo=false; hc.toggleOne=false">
+                                    <md-icon ng-hide="hc.toggleThree" md-svg-src="images/svg/star-empty.svg" aria-label="Three"></md-icon>
+                                    <md-icon ng-show="hc.toggleThree" md-svg-src="images/svg/star.svg" aria-label="Three"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Four" class="md-fab md-raised md-mini" ng-value="4" ng-mouseenter="hc.toggleFour=true; hc.toggleThree=true; hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleFour=false; hc.toggleThree=false; hc.toggleTwo=false; hc.toggleOne=false">
+                                    <md-icon ng-hide="hc.toggleFour" md-svg-src="images/svg/star-empty.svg" aria-label="Four"></md-icon>
+                                    <md-icon ng-show="hc.toggleFour" md-svg-src="images/svg/star.svg" aria-label="Four"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Five" class="md-fab md-raised md-mini" ng-value="5" ng-mouseenter="hc.toggleFive=true; hc.toggleFour=true; hc.toggleThree=true; hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleFive=false; hc.toggleFour=false;
+                                hc.toggleThree=false; hc.toggleTwo=false; hc.toggleOne=false">
+                                    <md-icon ng-hide="hc.toggleFive" md-svg-src="images/svg/star-empty.svg" aria-label="Five"></md-icon>
+                                    <md-icon ng-show="hc.toggleFive" md-svg-src="images/svg/star.svg" aria-label="Five"></md-icon>
+                                </md-button>
+                            </div>
+                        </md-card-actions>
+                    </md-card-content>
+                </div>
+                <div flex="20" layout-margin>
+                    <div flex class="md-media-xl card-media">
+                        <img class="md-card-image" ng-src="{{trail.photo}}" />
+                    </div>
+                </div>
+            </md-card>
+        </md-content>
+    </div>
+
 </section>

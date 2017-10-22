@@ -11,7 +11,14 @@ myApp.controller('HomeController', function (TrailService) {
     // object to hold list of trails
     vm.trails = TrailService.trails;
 
-    //vm.trails.list = TrailService.trails.list;
+    // toggles for rating svg
+    vm.toggleOne = false;
+    if (vm.toggleTwo) {vm.toggleOne = true;}
+    vm.toggleTwo = false;
+    if (vm.toggleThree) { vm.toggleTwo = true;}
+    vm.toggleThree = false;
+    vm.toggleFour = false;
+    vm.toggleFive = false;
 
     // gets all trails from service and populates trails array
     vm.getAllTrails = () => {
@@ -22,7 +29,7 @@ myApp.controller('HomeController', function (TrailService) {
 
 
     /************** on page load **************/
-    
+
     // get all trails
     vm.getAllTrails();
     

@@ -14,7 +14,6 @@ myApp.service('TrailService', function($http) {
     // get all trails from DB
     self.getAllTrails = () => {
         console.log('in getAllTrails');
-
         $http.get('/trail').then((response) => {
             console.log('self.trails.list', self.trails.list);
             self.trailsToApprove(response.data.rows);
@@ -38,8 +37,6 @@ myApp.service('TrailService', function($http) {
                 self.trails.flagged.push(trailsArray[i]); 
             } // end else
         } // end for 
-        console.log('self.trails ', self.trails);
-        
     }; // end trailsToApprove
 
     // after admin has approved a trail update it's status in the DB
