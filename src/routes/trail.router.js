@@ -109,7 +109,33 @@ router.put('/approve/:trails_id', (req, res) => {
             }); // end query
         } // end else
     }); // end pool connect
-}); // end GET
+}); // end PUT
+
+// delete trail from DB
+router.delete('/:trails_id', (req, res) => {
+    console.log('In trail DELETE route.');
+    let trails_id = req.params.trails_id;
+
+    pool.connect((err, client, done) => {
+        if (err) {
+            console.log('DELETE connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            let queryString = "DELETE FROM trails WHERE trails_id=$1";
+            let values = [trails_id];
+            client.query(queryString, values, (queryErr, result) => {
+                if (queryErr) {
+                    console.log('Query DELETE connection Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(201);
+                } // end else
+                done();
+            }); // end query
+        } // end else
+    }); // end pool connect
+}); // end DELETE
 
 // export
 module.exports = router;

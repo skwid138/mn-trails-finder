@@ -17,6 +17,7 @@
     "path": "^0.12.7",
     "pg": "^7.3.0",
     "request": "^2.83.0",
+    "svg-icon": "^0.8.2",
     "sweetalert2": "^6.11.0"
   },
   "devDependencies": {

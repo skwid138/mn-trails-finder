@@ -30,9 +30,14 @@ myApp.controller('AdminController', function (UserService, TrailService) {
     // updates trail.approved as true
     vm.approveTrail = (trails_id) => {
         console.log('in approveTrail');
-        console.log('trails_id to approve ', trails_id);
         TrailService.approveTrail(trails_id);
     }; // end approveTrail
+
+    // removes a trail from the DB
+    vm.deleteTrail = (trails_id) => {
+        console.log('in deleteTrail');
+        TrailService.deleteTrail(trails_id);
+    }; // end deleteTrail
 
 
     /************** on page load **************/ 

@@ -41,13 +41,20 @@ myApp.service('TrailService', function($http) {
     // after admin has approved a trail update it's status in the DB
     self.approveTrail = (trails_id) => {
         console.log('in approveTrail');
-        console.log('service trails_id to approve ', trails_id);
-        
         $http.put('/trail/approve/' + trails_id).then((response) => {
             // get and sort trails
             self.getAllTrails();
         }); // end PUT
     }; // end approveTrail
+
+    // admin users can remove a trail from the DB
+    self.deleteTrail = (trails_id) => {
+        console.log('in deleteTrail');
+        $http.delete('/trail/' + trails_id).then((response) => {
+            // get and sort trails
+            self.getAllTrails();
+        }); // end PUT
+    }; // end deleteTrail
     
     
 }); // end TrailService
