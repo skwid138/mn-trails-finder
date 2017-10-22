@@ -4,7 +4,7 @@
 
     <div class="md-padding">
         <md-content layout="column">
-            <md-card ng-repeat="trail in ac.trails.flagged" layout="row" ng-value="{{trail.trails_id}}">
+            <md-card ng-repeat="trail in ac.trails.flagged" layout="row" ng-value="trail.trails_id">
                 <div flex="80" layout="row">
                     <md-card-title flex="30">
                         <md-card-title-text layout="column" layout-align="start start">
@@ -33,7 +33,7 @@
                         </md-chips>
                         <md-card-actions layout="column">
                             <!-- Need to make sure this is the way to pass trail id to func -->
-                            <md-button ng-click="ac.approveTrail(trail.trail_id)" class="md-raised" style="background: rgb(58, 221, 142);">Approve</md-button>
+                            <md-button ng-click="ac.approveTrail(trail.trails_id)" class="md-raised" style="background: rgb(58, 221, 142);">Approve</md-button>
                         </md-card-actions>
                     </md-card-content>
                 </div>

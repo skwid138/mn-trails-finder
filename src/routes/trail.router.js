@@ -86,9 +86,9 @@ router.get('/', (req, res) => {
 }); // end GET
 
 // update trail approval status
-router.put('/approve/:id', (req, res) => {
-    console.log('In trail GET route.');
-    let trail_id = req.params.trail_id;
+router.put('/approve/:trails_id', (req, res) => {
+    console.log('In trail PUT route.');
+    let trails_id = req.params.trails_id;
 
     pool.connect((err, client, done) => {
         if (err) {
@@ -96,8 +96,8 @@ router.put('/approve/:id', (req, res) => {
             res.sendStatus(500);
             done();
         } else {
-            let queryString = "UPDATE trails SET approved='true' WHERE trail_id=$1";
-            let values = [trail_id];
+            let queryString = "UPDATE trails SET approved='true' WHERE trails_id=$1";
+            let values = [trails_id];
             client.query(queryString, values, (queryErr, result) => {
                 if (queryErr) {
                     console.log('Query PUT connection Error ->', queryErr);

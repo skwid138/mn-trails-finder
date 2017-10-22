@@ -39,9 +39,11 @@ myApp.service('TrailService', function($http) {
     }; // end trailsToApprove
 
     // after admin has approved a trail update it's status in the DB
-    self.approveTrail = (trail_id) => {
+    self.approveTrail = (trails_id) => {
         console.log('in approveTrail');
-        $http.put('/trail/approve/' + trail_id).then((response) => {
+        console.log('service trails_id to approve ', trails_id);
+        
+        $http.put('/trail/approve/' + trails_id).then((response) => {
             // get and sort trails
             self.getAllTrails();
         }); // end PUT
