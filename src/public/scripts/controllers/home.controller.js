@@ -13,9 +13,7 @@ myApp.controller('HomeController', function (TrailService) {
 
     // toggles for rating svg
     vm.toggleOne = false;
-    if (vm.toggleTwo) {vm.toggleOne = true;}
     vm.toggleTwo = false;
-    if (vm.toggleThree) { vm.toggleTwo = true;}
     vm.toggleThree = false;
     vm.toggleFour = false;
     vm.toggleFive = false;
