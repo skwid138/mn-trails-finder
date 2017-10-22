@@ -1,8 +1,55 @@
-<section >
+<section>
     <p>admin controller</p>
     <p ng-if="ac.user.admin">hidden thing, eventually have trails in here</p>
-    <div ng-repeat="trail in ac.trails.flagged">
-        <p>{{trail}}</p>
-        <img src="{{trail.photo}}"/>
-    </div>
+
+    <div class="md-padding">
+        <md-content layout="column">
+            <md-card ng-repeat="trail in ac.trails.flagged" layout="row" ng-value="{{trail.trails_id}}">
+                <div flex="80" layout="row">
+                    <md-card-title flex="30">
+                        <md-card-title-text layout="column" layout-align="start start">
+                            <span class="md-headline">{{trail.trail_name}}</span>
+                            <span class="md-subhead">{{trail.park_name}}</span>
+                            <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
+                            <span class="md-subhead">{{trail.length}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>
+                        <p>{{trail.trail_description}}</p>
+                        <md-chips>
+                            <md-chip ng-show="trail.dog">dogs</md-chip>
+                            <md-chip ng-show="trail.child">kids</md-chip>
+                            <md-chip ng-show="trail.paved">paved</md-chip>
+                            <md-chip ng-show="trail.water">water</md-chip>
+                            <md-chip ng-show="trail.parking">parking available</md-chip>
+                            <md-chip ng-show="trail.parking_free">free parking</md-chip>
+                            <md-chip ng-show="trail.park_pass">park pass</md-chip>
+                            <md-chip ng-show="trail.hiking">hiking</md-chip>
+                            <md-chip ng-show="trail.skiing">skiing</md-chip>
+                            <md-chip ng-show="trail.biking">biking</md-chip>
+                            <md-chip ng-show="trail.horse">horseback</md-chip>
+                            <md-chip ng-show="trail.atv">atv</md-chip>
+                            <md-chip ng-show="trail.snowmobile">snowmobile</md-chip>
+                        </md-chips>
+                        <!-- <md-card-actions layout="column"> -->
+                            <!-- <md-button class="md-icon-button" aria-label="Favorite">
+                                <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="Settings">
+                                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="Share">
+                                <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
+                            </md-button> -->
+                        <!-- </md-card-actions> -->
+                    </md-card-content>
+                </div>
+                <div flex="20" layout-margin>
+                    <div flex class="md-media-xl card-media">
+                        <img class="md-card-image" ng-src="{{trail.photo}}" />
+                    </div>
+                </div>
+            </md-card>
+        </md-content>
+    </div>        
 </section>

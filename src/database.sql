@@ -51,7 +51,7 @@ CREATE TABLE trails (
     atv BOOLEAN NOT NULL DEFAULT false,
     snowmobile BOOLEAN NOT NULL DEFAULT false,
     trail_description TEXT,
-    photo VARCHAR(100), -- not being used
+    photo VARCHAR(200),
     ll INT, --for trail head not used
     gain INT, -- not being used 
     approved BOOLEAN NOT NULL DEFAULT false
