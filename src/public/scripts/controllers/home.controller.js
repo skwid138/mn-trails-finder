@@ -33,26 +33,21 @@ myApp.controller('HomeController', function (TrailService, UserService) {
 
     // get user credentials
     vm.getUser = () => {
-        console.log('in getUSer');
+        console.log('in getUser');
         UserService.getUser();
-    }; // end getUSer
+    }; // end getUser
 
     // users provide a rating to a trail and store it in a junction table
     vm.rateTrailPost = (trails_id, rating_value) => {
         console.log('in rateTrail');
-        console.log('trails_id, user_id, rating_value ', trails_id, user_id, rating_value);
-        
-
         vm.ratingObject = {
             trails_id : trails_id,
             user_id: vm.user.user_id,
             rating_value: rating_value
         }; // end ratingObject
         console.log('vm.ratingObject', vm.ratingObject);
-        
-        
         // POST to DB
-        TrailService.rateTrailPost(vm.ratingObject);
+        vm.message = TrailService.rateTrailPost(vm.ratingObject);
     }; // end rateTrailPost
 
     // users can add trail to their my-trails page

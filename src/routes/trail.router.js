@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-// sends new trail data to DB
+// POST new trail data to DB
 router.post('/', (req, res) => {
     console.log('in trail post route');
 
@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
     }); // end pool connect
 }); // end trail post
 
-// sends new rating data to DB
+// POST new rating data to DB
 router.post('/rating', (req, res) => {
     console.log('in rating post route');
 
@@ -68,7 +68,7 @@ router.post('/rating', (req, res) => {
     let rating_value = req.body.rating_value;
     let user_id = req.body.user_id;
     let trails_id = req.body.trails_id;
-    console.log('rating, user_id, trails_id ', rating, user_id, trails_id);
+    console.log('rating, user_id, trails_id ', rating_value, user_id, trails_id);
 
     pool.connect((err, client, done) => {
         if (err) {
@@ -91,7 +91,7 @@ router.post('/rating', (req, res) => {
     }); // end pool connect
 }); // end rating post
 
-// sends new my_trail data to DB
+// POST new my_trail data to DB
 router.post('/my_trails', (req, res) => {
     console.log('in my_trail post route');
 
@@ -121,32 +121,53 @@ router.post('/my_trails', (req, res) => {
     }); // end pool connect
 }); // end rating post
 
-// GETs all Trails
+// GET all Trails
 router.get('/', (req, res) => {
     console.log('In trail GET route.');
-
     pool.connect((err, client, done) => {
         if (err) {
-            console.log('GET connection error ->', err);
+            console.log('GET trail connection error ->', err);
             res.sendStatus(500);
             done();
         } else {
             let queryString = "SELECT * FROM trails";
-            let values = [];
-            client.query(queryString, values, (queryErr, result) => {
+            client.query(queryString, (queryErr, result) => {
                 if (queryErr) {
                     console.log('Query GET connection Error ->', queryErr);
                     res.sendStatus(500);
                 } else {
-                    res.status(201).send(result);
+                    res.status(200).send(result);
                 } // end else
                 done();
             }); // end query
         } // end else
     }); // end pool connect
-}); // end GET
+}); // end GET trails
 
-// update trail approval status
+// GET all ratings
+router.get('/rating', (req, res) => {
+    console.log('In rating GET route.');
+    pool.connect((err, client, done) => {
+        if (err) {
+            console.log('GET rating connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            let queryString = "SELECT * FROM ratings";
+            client.query(queryString, (queryErr, result) => {
+                if (queryErr) {
+                    console.log('Query GET connection Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.status(200).send(result);
+                } // end else
+                done();
+            }); // end query
+        } // end else
+    }); // end pool connect
+}); // end GET ratings
+
+// UPDATE trail approval status
 router.put('/approve/:trails_id', (req, res) => {
     console.log('In trail PUT route.');
     let trails_id = req.params.trails_id;
@@ -172,10 +193,10 @@ router.put('/approve/:trails_id', (req, res) => {
     }); // end pool connect
 }); // end PUT
 
-// delete my_trail from DB
+// DELETE my_trail from DB
 
 
-// delete trail from DB
+// DELETE trail from DB
 router.delete('/:trails_id', (req, res) => {
     console.log('In trail DELETE route.');
     let trails_id = req.params.trails_id;

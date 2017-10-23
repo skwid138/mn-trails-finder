@@ -82,8 +82,8 @@ myApp.service('TrailService', function($http) {
         $http.get('/trail').then((response) => {
             console.log('self.trails.list', self.trails.list);
             // sort trails based on their approval status
-            // push trails in self.trails.approved or 
-            // self.trails.flagged
+            // push trails to self.trails.approved
+            // or push trails to self.trails.flagged
             self.trailsToApprove(response.data.rows);
         }); // end GET
     }; // end getAllTrails
@@ -112,9 +112,13 @@ myApp.service('TrailService', function($http) {
         $http.post('/trail/rating', ratingObject).then((response) => {
             // if server responds with 'Created'
             if (response.status === 201) {
-                // trail_id of newly created trail
-                console.log(response.data.rows[0].user_id);
-                // can use id to route to the users my-trail's page
+                return self.message = swal({
+                    title: 'Trail Rated!',
+                    text: 'your rating has been applied to the trail',
+                    type: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end vm.message
             } // end if
         }); // end POST
     }; // end rateTrail
