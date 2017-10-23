@@ -8,17 +8,10 @@ myApp.service('TrailService', function($http) {
     self.trails = {
         list: [], // holds all trails
         approved: [], // holds only approved trails
-        flagged: [] // holds only trails that need to be approved
+        flagged: [], // holds only trails that need to be approved
+        allRatings: [],
+        calculatedRatings: [] // holds total rating for each trail object
     }; // end self.trails
-
-    // get all trails from DB
-    self.getAllTrails = () => {
-        console.log('in getAllTrails');
-        $http.get('/trail').then((response) => {
-            console.log('self.trails.list', self.trails.list);
-            self.trailsToApprove(response.data.rows);
-        }); // end GET
-    }; // end getAllTrails
 
     // sort trails.list and push trails flagged true for approved
     // into trails.approved array and all the rest into trails.flagged
@@ -38,6 +31,62 @@ myApp.service('TrailService', function($http) {
             } // end else
         } // end for 
     }; // end trailsToApprove
+
+    // calculate trail rating after GET
+    self.calculateRating = (ratingsArray) => {
+        console.log('in calculateRating');
+        // loop through each rating object in ratings array
+        for (let i = 0; i < ratingsArray.length; i++) {
+             // check if trail_id in self.trails.ratings matches trail_id of ratingsArray
+            for (let j = 0; j < self.trails.ratings.length; j++) {
+                // if the trail is already in the self.trails.ratings 
+                if (self.trails.calculatedRatings[j].trails_id === ratingsArray[i].trails_id) {
+                    // increment how many users have rated the the trail
+                    self.trails.calculatedRatings[j].numberOfRatings++;
+                    // increase the totalRatingsValue by the rating_value
+                    self.trails.calculatedRatings[j].totalRatingsValue += ratingsArray[i].rating_value;
+                } else{
+                    // if the trail_id is not in self.trails.ratings array
+                    // make an object for it and push it into the array
+                    let totalRatingObject = {
+                        // which trail the rating is for
+                        trails_id: ratingsArray[i].trails_id,
+                        // how many users rated a trail, starting with 1
+                        numberOfRatings: 1,
+                        // all rating values for the trail added together, starting with the first occurrence
+                        totalRatingsValue: ratingsArray[i].rating_value
+                    }; // end totalRatingObject  
+                    // push new trail rating object into self.trails.ratings array
+                    self.trails.calculatedRatings.push(totalRatingObject);
+                } // end else
+            } // end for j
+        } // end for i
+    }; // end calculateRating
+
+    /************** $http **************/
+
+    // get trail ratings from DB
+    self.getAllRatings = () => {
+        console.log('in getAllRatings');
+        $http.get('/trail/rating').then((response) => {
+            console.log('self.trails.ratings', self.trails.ratings);
+            // group the ratings by trail_id and
+            // push them into self.trails.ratings array
+            self.calculateRating(response.data.rows);
+        }); // end GET
+    }; // end getAllRatings
+
+    // get all trails from DB
+    self.getAllTrails = () => {
+        console.log('in getAllTrails');
+        $http.get('/trail').then((response) => {
+            console.log('self.trails.list', self.trails.list);
+            // sort trails based on their approval status
+            // push trails in self.trails.approved or 
+            // self.trails.flagged
+            self.trailsToApprove(response.data.rows);
+        }); // end GET
+    }; // end getAllTrails
 
     // after admin has approved a trail update it's status in the DB
     self.approveTrail = (trails_id) => {
