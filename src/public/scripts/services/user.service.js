@@ -6,6 +6,7 @@ myApp.service('UserService', function($http, $location) {
 
     self.userObject = {
         userName: '',
+        user_id:'',
         admin: false // boolean for ng-if
     }; // end userObject
 
@@ -17,8 +18,8 @@ myApp.service('UserService', function($http, $location) {
             if (response.data.username) {
                 // user has a current session on the server
                 self.userObject.userName = response.data.username;
+                self.userObject.user_id = response.data.user_id;
                 self.userObject.admin = response.data.admin;
-                // console.log('response.data.username', response.data.username);
             } else {
                 console.log('getUser failed', response);
             } // end else

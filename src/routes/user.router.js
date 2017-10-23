@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 
         let userInfo = {
             username : req.user.username,
+            user_id : req.user.user_id,
             admin : req.user.admin
         }; // end userInfo
         res.send(userInfo);

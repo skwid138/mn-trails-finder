@@ -56,6 +56,32 @@ myApp.service('TrailService', function($http) {
             self.getAllTrails();
         }); // end PUT
     }; // end deleteTrail
+
+    // users rate a trail 1-5 and store it in a ratings junction table
+    self.rateTrailPost = (ratingObject) => {
+        console.log('in rateTrailPost');
+        $http.post('/trail/rating', ratingObject).then((response) => {
+            // if server responds with 'Created'
+            if (response.status === 201) {
+                // trail_id of newly created trail
+                console.log(response.data.rows[0].user_id);
+                // can use id to route to the users my-trail's page
+            } // end if
+        }); // end POST
+    }; // end rateTrail
+
+    // users add a trail to the my_trails junction table
+    self.myTrailPost = (my_trailsObject) => {
+        console.log('in myTrailPost');
+        $http.post('/trail/my_trails', my_trailsObject).then((response) => {
+            // if server responds with 'Created'
+            if (response.status === 201) {
+                // trail_id of newly created trail
+                console.log(response.data.rows[0].my_trails_id);
+                // can use id to route to the users my-trail's page
+            } // end if
+        }); // end POST
+    }; // end addMyTrailPost
     
     
 }); // end TrailService

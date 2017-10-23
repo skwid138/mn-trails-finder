@@ -62,7 +62,7 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
                 // trail_id of newly created trail
                 console.log(response.data.rows[0].trails_id);
                 // can use id to route to the trail's page
-            }
+            } // end if
         }); // end POST
     }; // end addTrail
 

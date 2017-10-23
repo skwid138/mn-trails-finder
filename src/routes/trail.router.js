@@ -58,7 +58,68 @@ router.post('/', (req, res) => {
             }); // end query
         } // end else
     }); // end pool connect
-}); // end post
+}); // end trail post
+
+// sends new rating data to DB
+router.post('/rating', (req, res) => {
+    console.log('in rating post route');
+
+    // variables from client
+    let rating_value = req.body.rating_value;
+    let user_id = req.body.user_id;
+    let trails_id = req.body.trails_id;
+    console.log('rating, user_id, trails_id ', rating, user_id, trails_id);
+
+    pool.connect((err, client, done) => {
+        if (err) {
+            console.log('POST connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            let queryString = "INSERT INTO ratings (user_id, trails_id, rating_value) VALUES ($1, $2, $3) RETURNING user_id";
+            let values = [user_id, trails_id, rating_value];
+            client.query(queryString, values, (queryErr, result) => {
+                if (queryErr) {
+                    console.log('Query POST connection Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.status(201).send(result);
+                } // end else
+                done();
+            }); // end query
+        } // end else
+    }); // end pool connect
+}); // end rating post
+
+// sends new my_trail data to DB
+router.post('/my_trails', (req, res) => {
+    console.log('in my_trail post route');
+
+    // variables from client
+    let user_id = req.body.user_id;
+    let trails_id = req.body.trails_id;
+    console.log('user_id, trails_id ', user_id, trails_id);
+
+    pool.connect((err, client, done) => {
+        if (err) {
+            console.log('POST connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            let queryString = "INSERT INTO my_trails (user_id, trails_id) VALUES ($1, $2) RETURNING my_trails_id";
+            let values = [user_id, trails_id];
+            client.query(queryString, values, (queryErr, result) => {
+                if (queryErr) {
+                    console.log('Query POST connection Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.status(201).send(result);
+                } // end else
+                done();
+            }); // end query
+        } // end else
+    }); // end pool connect
+}); // end rating post
 
 // GETs all Trails
 router.get('/', (req, res) => {
@@ -110,6 +171,9 @@ router.put('/approve/:trails_id', (req, res) => {
         } // end else
     }); // end pool connect
 }); // end PUT
+
+// delete my_trail from DB
+
 
 // delete trail from DB
 router.delete('/:trails_id', (req, res) => {
