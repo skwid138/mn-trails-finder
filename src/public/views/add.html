@@ -1,6 +1,7 @@
 <section>
     <h1>Add a Trail</h1>
-    <p ng-if="atc.user.username">hidden thing, eventually have trails in here</p>
+    <p ng-if="atc.user.loggedIn">hidden thing, eventually have trails in here, if there isn't a user have the page ng-hide a blurb saying only registered users can add trails</p>
+    <p ng-hide="atc.user.loggedIn">Please Register or Login to add a new trail.</p>
     <md-content layout-padding>
         <div>
             <form name="trailForm">

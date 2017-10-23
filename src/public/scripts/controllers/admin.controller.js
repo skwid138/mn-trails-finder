@@ -19,7 +19,7 @@ myApp.controller('AdminController', function (UserService, TrailService) {
     vm.getUser = () => {
         console.log('in getUSer');
         UserService.getUser();
-    }; // end getUSer
+    }; // end getUser
 
     // gets all trails from service and populates trails array
     vm.getAllTrails = () => {

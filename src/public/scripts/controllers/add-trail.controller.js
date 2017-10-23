@@ -16,6 +16,7 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
     // sets ng-if based on user being logged in
     // must be a user to add a trail
     vm.user = UserService.userObject;
+    vm.user.loggedIn = false;
 
     // Filestack API
     vm.filestackAPI = 'AcP0YKzMkT9GzhibQbZytz';
@@ -51,10 +52,7 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
     // adds a new trail row to DB
     vm.addTrail = () => {
         console.log('in addTrail');
-
         console.log('trail object to post ', vm.trail);
-        
-
         $http.post('/trail', vm.trail).then((response) => {
             //console.log('response', response);
             // if server responds with 'Created'
@@ -65,5 +63,23 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
             } // end if
         }); // end POST
     }; // end addTrail
+
+    // get user credentials
+    vm.getUser = () => {
+        console.log('in getUSer');
+        UserService.getUser();
+        if (UserService.userObject.userName) {
+            vm.user.loggedIn = true;
+        } // end if
+    }; // end getUser
+
+
+
+    /************** on page load **************/
+
+    // get user credentials on page load
+    // confirm admin is true and change ng-if
+    vm.getUser();
+
 
 }); // end AddTrailController
