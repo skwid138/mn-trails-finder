@@ -19,5 +19,13 @@ myApp.controller('MyTrailController', function () {
     // and then join the trails table based on my_trails table
 
     // after that display the trails
+
+    // clicking a trail's card redirects to /trails/trail_name
+    vm.viewTrailDetails = (trail) => {
+        console.log('in viewTrailDetails');
+        let trailName = trail.trail_name;
+        let trailId = trail.trails_id;
+        $location.path('/trails/' + trailName + '/' + trailId);
+    }; // end viewTrailDetails
     
 }); // end MyTrailController controller

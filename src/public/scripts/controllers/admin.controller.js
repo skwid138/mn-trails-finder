@@ -15,6 +15,15 @@ myApp.controller('AdminController', function (UserService, TrailService) {
     // object to hold list of trails
     vm.trails = TrailService.trails;
 
+    // clicking a trail's card redirects to /trails/trail_name
+    vm.viewTrailDetails = (trail) => {
+        console.log('in viewTrailDetails');
+        let trailName = trail.trail_name;
+        let trailId = trail.trails_id;
+        $location.path('/trails/' + trailName + '/' + trailId);
+    }; // end viewTrailDetails
+
+    /************** DB GETs **************/
     // get user credentials
     vm.getUser = () => {
         console.log('in getUSer');
@@ -27,6 +36,7 @@ myApp.controller('AdminController', function (UserService, TrailService) {
         TrailService.getAllTrails();
     }; // end getAllTrails
 
+    /************** DB PUTs/DELETEs **************/
     // updates trail.approved as true
     vm.approveTrail = (trails_id) => {
         console.log('in approveTrail');
