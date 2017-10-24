@@ -4,7 +4,7 @@
 This controller is for the home view.
 - displays trails
 */
-myApp.controller('HomeController', function (TrailService, UserService) {
+myApp.controller('HomeController', function (TrailService, UserService, $location) {
     console.log('in HomeController');
     const vm = this;
 
@@ -21,6 +21,16 @@ myApp.controller('HomeController', function (TrailService, UserService) {
     vm.toggleFour = false;
     vm.toggleFive = false;
 
+    // clicking a trail's card redirects to /trails/trail_name
+    vm.viewTrailDetails = (trail) => {
+        console.log('in viewTrailDetails');
+        let trailName = trail.trail_name;
+        let trailId = trail.trails_id;
+        $location.path('/trails/' + trailName + '/' + trailId);
+    }; // end viewTrailDetails
+
+/************** DB GETs **************/
+
     // gets all trails from service and populates trails array
     vm.getAllTrails = () => {
         console.log('in hc getAllTrails');
@@ -33,6 +43,9 @@ myApp.controller('HomeController', function (TrailService, UserService) {
         console.log('in getUser');
         UserService.getUser();
     }; // end getUser
+
+
+/************** DB POSTs **************/
 
     // users provide a rating to a trail and store it in a junction table
     vm.rateTrailPost = (trails_id, rating_value) => {

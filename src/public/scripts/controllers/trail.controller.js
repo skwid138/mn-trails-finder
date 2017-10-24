@@ -9,7 +9,7 @@ This controller is for a specified trail view
 - will allow users to edit
 - will allow admin to delete
 */
-myApp.controller('TrailController', function (TrailService, UserService) {
+myApp.controller('TrailController', function (TrailService, UserService, $routeParams) {
     console.log('in TrailController');
     const vm = this;
 
@@ -19,6 +19,14 @@ myApp.controller('TrailController', function (TrailService, UserService) {
     // sets user information for rating and my-trails queries
     vm.user = UserService.userObject;
 
+    // captures $routeParams data from URL
+    vm.trail = {
+        trails_id: $routeParams.id,
+        trail_name: $routeParams.name
+    }; // end trail
+
+    console.log('vm.trail ', vm.trail);
+    
 
     // show trail name in the url - like this? from other three controllers
     // $location.path('/trail/{{trail.trail_name}}')

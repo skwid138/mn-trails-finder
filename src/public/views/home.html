@@ -6,7 +6,8 @@
             <md-card ng-repeat="trail in hc.trails.approved" layout="row" ng-value="trail.trails_id">
                 <div flex="80" layout="row">
                     <md-card-title flex="30">
-                        <md-card-title-text layout="column" layout-align="start start">
+                        <!-- added ng-click for redirect using function - needs styling or something -->
+                        <md-card-title-text layout="column" layout-align="start start" ng-click="hc.viewTrailDetails(trail)">
                             <span class="md-headline">{{trail.trail_name}}</span>
                             <span class="md-subhead">{{trail.park_name}}</span>
                             <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
@@ -65,7 +66,9 @@
                 </div>
                 <div flex="20" layout-margin>
                     <div flex class="md-media-xl card-media">
-                        <img class="md-card-image" ng-src="{{trail.photo}}" />
+                        <img class="md-card-image" ng-src="{{trail.photo}}"/>
+                        <!-- added ng-href for redirect (also have ng-click on title) - needs styling or something -->
+                        <a ng-href="/#!/trails/{{trail.trail_name}}/{{trail.trail_id}}">details</a>
                     </div>
                 </div>
             </md-card>
