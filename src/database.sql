@@ -23,7 +23,7 @@ CREATE TABLE ratings (
     rating_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users (user_id),
     trails_id INT REFERENCES trails (trails_id) ON DELETE CASCADE,
-    rating_value NUMERIC(1, 0)
+    rating_value INT
 );
 
 -- houses trails data

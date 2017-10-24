@@ -5,3 +5,7 @@ img {
 .ratingStar:hover {
     background-color: rgb(252, 165, 5) !important;
 }
+
+.ratingIcon {
+    margin-left: 5px;
+}

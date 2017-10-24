@@ -38,25 +38,25 @@
                             <!-- FAB for trail rating -->
                             <div layout="row" layout-align="center center">
                                 <md-button ng-click="hc.rateTrailPost(trail.trails_id, 1)" aria-label="One" class="md-fab md-raised md-mini ratingStar" ng-mouseenter="hc.toggleOne=true" ng-mouseleave="hc.toggleOne=false">
-                                    <md-icon ng-hide="hc.toggleOne" md-svg-src="images/svg/star-empty.svg" aria-label="One"></md-icon>
-                                    <md-icon ng-show="hc.toggleOne" md-svg-src="images/svg/star.svg" aria-label="One"></md-icon>
+                                    <md-icon class="ratingIcon" ng-hide="hc.toggleOne" md-svg-src="images/svg/star-empty.svg" aria-label="One"></md-icon>
+                                    <md-icon class="ratingIcon" ng-show="hc.toggleOne" md-svg-src="images/svg/star.svg" aria-label="One"></md-icon>
                                 </md-button>
                                 <md-button ng-click="hc.rateTrailPost(trail.trails_id, 2)" aria-label="Two" class="md-fab md-raised md-mini ratingStar" ng-value="2" ng-mouseenter="hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleTwo=false; hc.toggleOne=false">
-                                    <md-icon ng-hide="hc.toggleTwo" md-svg-src="images/svg/star-empty.svg" aria-label="Two"></md-icon>
-                                    <md-icon ng-show="hc.toggleTwo" md-svg-src="images/svg/star.svg" aria-label="Two"></md-icon>
+                                    <md-icon class="ratingIcon" ng-hide="hc.toggleTwo" md-svg-src="images/svg/star-empty.svg" aria-label="Two"></md-icon>
+                                    <md-icon class="ratingIcon" ng-show="hc.toggleTwo" md-svg-src="images/svg/star.svg" aria-label="Two"></md-icon>
                                 </md-button>
                                 <md-button ng-click="hc.rateTrailPost(trail.trails_id, 3)" aria-label="Three" class="md-fab md-raised md-mini ratingStar" ng-value="3" ng-mouseenter="hc.toggleThree=true; hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleThree=false; hc.toggleTwo=false; hc.toggleOne=false">
-                                    <md-icon ng-hide="hc.toggleThree" md-svg-src="images/svg/star-empty.svg" aria-label="Three"></md-icon>
-                                    <md-icon ng-show="hc.toggleThree" md-svg-src="images/svg/star.svg" aria-label="Three"></md-icon>
+                                    <md-icon class="ratingIcon" ng-hide="hc.toggleThree" md-svg-src="images/svg/star-empty.svg" aria-label="Three"></md-icon>
+                                    <md-icon class="ratingIcon" ng-show="hc.toggleThree" md-svg-src="images/svg/star.svg" aria-label="Three"></md-icon>
                                 </md-button>
                                 <md-button ng-click="hc.rateTrailPost(trail.trails_id, 4)" aria-label="Four" class="md-fab md-raised md-mini ratingStar" ng-value="4" ng-mouseenter="hc.toggleFour=true; hc.toggleThree=true; hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleFour=false; hc.toggleThree=false; hc.toggleTwo=false; hc.toggleOne=false">
-                                    <md-icon ng-hide="hc.toggleFour" md-svg-src="images/svg/star-empty.svg" aria-label="Four"></md-icon>
-                                    <md-icon ng-show="hc.toggleFour" md-svg-src="images/svg/star.svg" aria-label="Four"></md-icon>
+                                    <md-icon class="ratingIcon" ng-hide="hc.toggleFour" md-svg-src="images/svg/star-empty.svg" aria-label="Four"></md-icon>
+                                    <md-icon class="ratingIcon" ng-show="hc.toggleFour" md-svg-src="images/svg/star.svg" aria-label="Four"></md-icon>
                                 </md-button>
                                 <md-button ng-click="hc.rateTrailPost(trail.trails_id, 5)" aria-label="Five" class="md-fab md-raised md-mini ratingStar" ng-value="5" ng-mouseenter="hc.toggleFive=true; hc.toggleFour=true; hc.toggleThree=true; hc.toggleTwo=true; hc.toggleOne=true" ng-mouseleave="hc.toggleFive=false; hc.toggleFour=false;
                                 hc.toggleThree=false; hc.toggleTwo=false; hc.toggleOne=false">
-                                    <md-icon ng-hide="hc.toggleFive" md-svg-src="images/svg/star-empty.svg" aria-label="Five"></md-icon>
-                                    <md-icon ng-show="hc.toggleFive" md-svg-src="images/svg/star.svg" aria-label="Five"></md-icon>
+                                    <md-icon class="ratingIcon" ng-hide="hc.toggleFive" md-svg-src="images/svg/star-empty.svg" aria-label="Five"></md-icon>
+                                    <md-icon class="ratingIcon" ng-show="hc.toggleFive" md-svg-src="images/svg/star.svg" aria-label="Five"></md-icon>
                                 </md-button>
                             </div>
                         </md-card-actions>

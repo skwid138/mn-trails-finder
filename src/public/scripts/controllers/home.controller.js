@@ -63,6 +63,8 @@ myApp.controller('HomeController', function (TrailService, UserService) {
             // POST to DB
             TrailService.myTrailPost(vm.my_trailsObject);
             // if a user is not logged in then prompt them to register and login first
+            // the page content should dynamically hide using ng-if based on a user being logged in anyway
+            // this is more of a backup
         } else {
             vm.message = swal({
                 title: 'Please Login First',
