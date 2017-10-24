@@ -11,6 +11,7 @@
                             <span class="md-subhead">{{trail.park_name}}</span>
                             <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
                             <span class="md-subhead">{{trail.length}}</span>
+                            <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>

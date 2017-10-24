@@ -9,8 +9,6 @@ myApp.service('TrailService', function($http) {
         list: [], // holds all trails
         approved: [], // holds only approved trails
         flagged: [], // holds only trails that need to be approved
-        // ratings not in use right now
-        ratings: [] // holds total rating for each trail object
     }; // end self.trails
 
     // sort trails.list and push trails flagged true for approved

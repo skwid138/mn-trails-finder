@@ -63,13 +63,11 @@ router.post('/', (req, res) => {
 // POST new rating data to DB
 router.post('/rating', (req, res) => {
     console.log('in rating post route');
-
     // variables from client
     let rating_value = req.body.rating_value;
     let user_id = req.body.user_id;
     let trails_id = req.body.trails_id;
     console.log('rating, user_id, trails_id ', rating_value, user_id, trails_id);
-
     pool.connect((err, client, done) => {
         if (err) {
             console.log('POST connection error ->', err);
