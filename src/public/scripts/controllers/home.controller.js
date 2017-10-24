@@ -25,8 +25,9 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
     vm.viewTrailDetails = (trail) => {
         console.log('in viewTrailDetails');
         let trailName = trail.trail_name;
-        let trailId = trail.trails_id;
-        $location.path('/trails/' + trailName + '/' + trailId);
+        $location.path('/trails/' + trailName);
+        // sets selected trail as value for 
+        // TrailService.trails.trailsView
         TrailService.setTrailsViewObject(trail);
     }; // end viewTrailDetails
 

@@ -19,7 +19,7 @@ myApp.config( function ($routeProvider) {
     }).when('/my-trails', {
             templateUrl: '/views/my-trails.html',
             controller: 'MyTrailController as mtc'
-    }).when('/trails/:name/:id', {
+    }).when('/trails/:name', {
             templateUrl: '/views/trails.html',
             controller: 'TrailController as tc'
     }).otherwise('/'); 
