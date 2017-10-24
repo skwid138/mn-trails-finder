@@ -21,6 +21,7 @@ myApp.controller('AdminController', function (UserService, TrailService) {
         let trailName = trail.trail_name;
         let trailId = trail.trails_id;
         $location.path('/trails/' + trailName + '/' + trailId);
+        TrailService.setTrailsViewObject(trail);
     }; // end viewTrailDetails
 
     /************** DB GETs **************/

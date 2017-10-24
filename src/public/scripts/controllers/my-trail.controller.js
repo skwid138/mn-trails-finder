@@ -4,7 +4,7 @@
 This controller is for my trails view
 - 
 */
-myApp.controller('MyTrailController', function () {
+myApp.controller('MyTrailController', function (TrailService, UserService) {
     console.log('in MyTrailController');
     const vm = this;
 
@@ -26,6 +26,9 @@ myApp.controller('MyTrailController', function () {
         let trailName = trail.trail_name;
         let trailId = trail.trails_id;
         $location.path('/trails/' + trailName + '/' + trailId);
+        // sets selected trail as value for 
+        // TrailService.trails.trailsView
+        TrailService.setTrailsViewObject(trail);
     }; // end viewTrailDetails
     
 }); // end MyTrailController controller

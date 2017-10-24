@@ -25,6 +25,7 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
         trail_name: $routeParams.name
     }; // end trail
 
+    console.log('vm.trails.trailsView', vm.trails.trailsView);
     
 
     // show trail name in the url - like this? from other three controllers

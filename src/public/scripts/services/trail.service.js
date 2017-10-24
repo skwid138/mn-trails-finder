@@ -9,6 +9,7 @@ myApp.service('TrailService', function($http) {
         list: [], // holds all trails
         approved: [], // holds only approved trails
         flagged: [], // holds only trails that need to be approved
+        trailsView: {} // object to hold value of clicked trail from home, admin, or my trails
     }; // end self.trails
 
     // sort trails.list and push trails flagged true for approved
@@ -35,7 +36,6 @@ myApp.service('TrailService', function($http) {
     // calculate trail rating after GET
     self.calculateRating = (ratingsArray) => {
         console.log('in calculateRating');
-
         // loop through all approved trails
         for (var i = 0; i < self.trails.approved.length; i++) {
             // sets how many ratings a trail has
@@ -48,7 +48,6 @@ myApp.service('TrailService', function($http) {
                 // sets average rating a trail has
                 let average = sum / trailSpecificRatings.length;
                 self.trails.approved[i].ratingAverage = average;
-                console.log('trailSpecificRatings.length, sum, average ', trailSpecificRatings.length, sum, average);
             } // end if
         } // end for
     }; // end calculateRating
@@ -56,7 +55,7 @@ myApp.service('TrailService', function($http) {
     // pass in array of ratings for as single trails_id 
     // to get the number of ratings for that trail
     self.ratingsCount = (trails_id, ratingsArray) => {
-        console.log('in ratingsCount');
+        // console.log('in ratingsCount');
         // gets all ratings associated with the trails_id that's passed in
         return ratingsArray.filter((trail) => {
             return trail.trails_id === trails_id;
@@ -66,13 +65,20 @@ myApp.service('TrailService', function($http) {
 
     // adds all ratings together for a specified trail
     self.sumRatings = (trailsRatingsArray) => {
-        console.log('in sumRatings');
+        // console.log('in sumRatings');
         // acc is the accumulated value of all the items and val is where it starts adding
         // I believe this adds all the values in the array together
         return trailsRatingsArray.reduce((acc, val) => {
             return acc + val;
         });
     }; // end sumRatings
+
+    //controller passes a trail object and sets the
+    // value on the service for the trail controller
+    self.setTrailsViewObject = (trailObject) => {
+        console.log('in setTrailsViewObject');
+        self.trails.trailsView = trailObject;
+    }; // end setTrailsViewObject
 
 
 
@@ -93,7 +99,7 @@ myApp.service('TrailService', function($http) {
     self.getAllTrails = () => {
         console.log('in getAllTrails');
         $http.get('/trail').then((response) => {
-            console.log('self.trails.list', self.trails.list);
+            console.log('self.trails.list', response.data.rows);
             // sort trails based on their approval status
             // push trails to self.trails.approved
             // or push trails to self.trails.flagged

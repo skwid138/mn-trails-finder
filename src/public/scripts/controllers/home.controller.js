@@ -27,6 +27,7 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
         let trailName = trail.trail_name;
         let trailId = trail.trails_id;
         $location.path('/trails/' + trailName + '/' + trailId);
+        TrailService.setTrailsViewObject(trail);
     }; // end viewTrailDetails
 
 /************** DB GETs **************/
@@ -35,7 +36,6 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
     vm.getAllTrails = () => {
         console.log('in hc getAllTrails');
         TrailService.getAllTrails();
-        console.log('hc service list', TrailService.trails.list);
     }; // end getAllTrails
 
     // get user credentials
