@@ -2,6 +2,10 @@ img {
     width: 100%
 }
 
+.listImg {
+    width: 100%
+}
+
 .ratingStar:hover {
     background-color: rgb(252, 165, 5) !important;
 }

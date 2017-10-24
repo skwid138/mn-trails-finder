@@ -1,10 +1,8 @@
 <section>
     <md-content>
-        <h1>Trail Name: {{tc.trails.trailsView.trail_name}}</h1>
-        <md-card layout="row">
-            <div flex="80" layout="row">
+        <md-card layout="column">
                 <md-card-title flex="30">
-                    <md-card-title-text layout="column" layout-align="start start">
+                    <md-card-title-text layout="row" layout-align="start start">
                         <span class="md-headline">{{tc.trails.trailsView.trail_name}}</span>
                         <span class="md-subhead">{{tc.trails.trailsView.park_name}}</span>
                         <span class="md-subhead">{{tc.trails.trailsView.city}}, {{trail.state}}</span>
@@ -12,6 +10,11 @@
                         <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{tc.trails.trailsView.ratingAverage}}</span>
                     </md-card-title-text>
                 </md-card-title>
+                <div flex="20" layout-margin>
+                    <div flex class="md-media-xl card-media">
+                        <img class="md-card-image" ng-src="{{tc.trails.trailsView.photo}}" />
+                    </div>
+                </div>
                 <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>
                     <p>{{tc.trails.trailsView.trail_description}}</p>
                     <md-chips>
@@ -67,12 +70,6 @@
                         </div>
                     </md-card-actions>
                 </md-card-content>
-            </div>
-            <div flex="20" layout-margin>
-                <div flex class="md-media-xl card-media">
-                    <img class="md-card-image" ng-src="{{tc.trails.trailsView.photo}}" />
-                </div>
-            </div>
         </md-card>
     </md-content>
 </section>

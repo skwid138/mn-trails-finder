@@ -9,12 +9,14 @@ This controller is for a specified trail view
 - will allow users to edit
 - will allow admin to delete
 */
-myApp.controller('TrailController', function (TrailService, UserService, $routeParams) {
+myApp.controller('TrailController', function (TrailService, UserService, $routeParams, $location) {
     console.log('in TrailController');
     const vm = this;
 
     // object to hold list of trails
     vm.trails = TrailService.trails;
+    console.log('vm.trails.trailsView', vm.trails.trailsView);
+    
 
     // sets user information for rating and my-trails queries
     vm.user = UserService.userObject;
@@ -26,11 +28,21 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
     vm.toggleFour = false;
     vm.toggleFive = false;
 
+    // if the trails data isn't set then redirect home 
+    // ie: page refresh on a trail)
+    vm.checkForTrail = () => {
+        if (vm.trails.trailsView.trails_id === undefined) {
+            $location.path('/');
+        } // end if
+    }; // end checkForTrail
+
+
+
     // if user - have ability to edit which sets approved flag back to false
     // if user - have ability to flag trail for approval again
     // if admin user - can delete or edit trail without resetting approved flag
 
-    
+
 
     /************** DB POSTs **************/
 
@@ -74,6 +86,10 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
     }; // end addMyTrailPost
 
 
+/************** on page load **************/
+
+    // redirect to home if no trail data is set
+    vm.checkForTrail();
 
     
 
