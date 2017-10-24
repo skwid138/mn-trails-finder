@@ -12,6 +12,8 @@ myApp.service('TrailService', function($http) {
         trailsView: {} // object to hold value of clicked trail from home, admin, or my trails
     }; // end self.trails
 
+    /******** make functions private to service by not saying self.funcName *******/
+
     // sort trails.list and push trails flagged true for approved
     // into trails.approved array and all the rest into trails.flagged
     self.trailsToApprove = (trailsArray) => {
