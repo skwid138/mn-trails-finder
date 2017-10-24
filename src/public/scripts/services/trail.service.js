@@ -50,7 +50,7 @@ myApp.service('TrailService', function($http) {
                 self.trails.approved[i].ratingAverage = average;
                 console.log('trailSpecificRatings.length, sum, average ', trailSpecificRatings.length, sum, average);
             } // end if
-        }; // end for
+        } // end for
     }; // end calculateRating
 
     // pass in array of ratings for as single trails_id 
@@ -127,7 +127,7 @@ myApp.service('TrailService', function($http) {
             if (response.status === 201) {
                 // update rating values
                 self.getAllRatings();
-                return self.message = swal({
+                return swal({
                     title: 'Trail Rated!',
                     text: 'your rating has been applied to the trail',
                     type: 'success',

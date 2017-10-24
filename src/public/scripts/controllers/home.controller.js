@@ -14,9 +14,6 @@ myApp.controller('HomeController', function (TrailService, UserService) {
     // sets user information for rating and my-trails queries
     vm.user = UserService.userObject;
 
-    // object to hold list of trails
-    vm.trails = TrailService.trails;
-
     // toggles for rating stars to change color and fill
     vm.toggleOne = false;
     vm.toggleTwo = false;
