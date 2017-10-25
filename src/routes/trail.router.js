@@ -69,60 +69,73 @@ router.post('/', (req, res) => {
 // POST new rating data to DB
 router.post('/rating', (req, res) => {
     console.log('in rating post route');
-    // variables from client
-    let rating_value = req.body.rating_value;
-    let user_id = req.body.user_id;
-    let trails_id = req.body.trails_id;
-    console.log('rating, user_id, trails_id ', rating_value, user_id, trails_id);
-    pool.connect((err, client, done) => {
-        if (err) {
-            console.log('POST connection error ->', err);
-            res.sendStatus(500);
-            done();
-        } else {
-            let queryString = "INSERT INTO ratings (user_id, trails_id, rating_value) VALUES ($1, $2, $3) RETURNING user_id";
-            let values = [user_id, trails_id, rating_value];
-            client.query(queryString, values, (queryErr, result) => {
-                if (queryErr) {
-                    console.log('Query POST connection Error ->', queryErr);
-                    res.sendStatus(500);
-                } else {
-                    res.status(201).send(result);
-                } // end else
+
+    // check if user is logged in
+    if (req.isAuthenticated()) {
+        // variables from client
+        let rating_value = req.body.rating_value;
+        let user_id = req.body.user_id;
+        let trails_id = req.body.trails_id;
+        console.log('rating, user_id, trails_id ', rating_value, user_id, trails_id);
+        pool.connect((err, client, done) => {
+            if (err) {
+                console.log('POST connection error ->', err);
+                res.sendStatus(500);
                 done();
-            }); // end query
-        } // end else
-    }); // end pool connect
+            } else {
+                let queryString = "INSERT INTO ratings (user_id, trails_id, rating_value) VALUES ($1, $2, $3) RETURNING user_id";
+                let values = [user_id, trails_id, rating_value];
+                client.query(queryString, values, (queryErr, result) => {
+                    if (queryErr) {
+                        console.log('Query POST connection Error ->', queryErr);
+                        res.sendStatus(500);
+                    } else {
+                        res.status(201).send(result);
+                    } // end else
+                    done();
+                }); // end query
+            } // end else
+        }); // end pool connect
+    } else {
+        console.log('not logged in');
+        res.sendStatus(403);
+    } // end else
 }); // end rating post
 
 // POST new my_trail data to DB
 router.post('/my_trails', (req, res) => {
     console.log('in my_trail post route');
 
-    // variables from client
-    let user_id = req.body.user_id;
-    let trails_id = req.body.trails_id;
-    console.log('user_id, trails_id ', user_id, trails_id);
+    // check if user is logged in
+    if (req.isAuthenticated()) {
+        // variables from client
+        let user_id = req.body.user_id;
+        let trails_id = req.body.trails_id;
+        console.log('user_id, trails_id ', user_id, trails_id);
 
-    pool.connect((err, client, done) => {
-        if (err) {
-            console.log('POST connection error ->', err);
-            res.sendStatus(500);
-            done();
-        } else {
-            let queryString = "INSERT INTO my_trails (user_id, trails_id) VALUES ($1, $2) RETURNING my_trails_id";
-            let values = [user_id, trails_id];
-            client.query(queryString, values, (queryErr, result) => {
-                if (queryErr) {
-                    console.log('Query POST connection Error ->', queryErr);
-                    res.sendStatus(500);
-                } else {
-                    res.status(201).send(result);
-                } // end else
+        pool.connect((err, client, done) => {
+            if (err) {
+                console.log('POST connection error ->', err);
+                res.sendStatus(500);
                 done();
-            }); // end query
-        } // end else
-    }); // end pool connect
+            } else {
+                let queryString = "INSERT INTO my_trails (user_id, trails_id) VALUES ($1, $2) RETURNING my_trails_id";
+                let values = [user_id, trails_id];
+                client.query(queryString, values, (queryErr, result) => {
+                    if (queryErr) {
+                        console.log('Query POST connection Error ->', queryErr);
+                        res.sendStatus(500);
+                    } else {
+                        res.status(201).send(result);
+                    } // end else
+                    done();
+                }); // end query
+            } // end else
+        }); // end pool connect
+    } else {
+        console.log('not logged in');
+        res.sendStatus(403);
+    } // end else
 }); // end rating post
 
 // GET all Trails
@@ -174,27 +187,34 @@ router.get('/rating', (req, res) => {
 // UPDATE trail approval status
 router.put('/approve/:trails_id', (req, res) => {
     console.log('In trail PUT route.');
-    let trails_id = req.params.trails_id;
 
-    pool.connect((err, client, done) => {
-        if (err) {
-            console.log('PUT connection error ->', err);
-            res.sendStatus(500);
-            done();
-        } else {
-            let queryString = "UPDATE trails SET approved='true' WHERE trails_id=$1";
-            let values = [trails_id];
-            client.query(queryString, values, (queryErr, result) => {
-                if (queryErr) {
-                    console.log('Query PUT connection Error ->', queryErr);
-                    res.sendStatus(500);
-                } else {
-                    res.sendStatus(201);
-                } // end else
+    // check if user is logged in and an admin
+    if (req.isAuthenticated() && req.user.admin) {
+        // trails_id from client
+        let trails_id = req.params.trails_id;
+        pool.connect((err, client, done) => {
+            if (err) {
+                console.log('PUT connection error ->', err);
+                res.sendStatus(500);
                 done();
-            }); // end query
-        } // end else
-    }); // end pool connect
+            } else {
+                let queryString = "UPDATE trails SET approved='true' WHERE trails_id=$1";
+                let values = [trails_id];
+                client.query(queryString, values, (queryErr, result) => {
+                    if (queryErr) {
+                        console.log('Query PUT connection Error ->', queryErr);
+                        res.sendStatus(500);
+                    } else {
+                        res.sendStatus(201);
+                    } // end else
+                    done();
+                }); // end query
+            } // end else
+        }); // end pool connect
+    } else {
+        console.log('not logged in');
+        res.sendStatus(403);
+    } // end else
 }); // end PUT
 
 // DELETE my_trail from DB
@@ -203,27 +223,34 @@ router.put('/approve/:trails_id', (req, res) => {
 // DELETE trail from DB
 router.delete('/:trails_id', (req, res) => {
     console.log('In trail DELETE route.');
-    let trails_id = req.params.trails_id;
 
-    pool.connect((err, client, done) => {
-        if (err) {
-            console.log('DELETE connection error ->', err);
-            res.sendStatus(500);
-            done();
-        } else {
-            let queryString = "DELETE FROM trails WHERE trails_id=$1";
-            let values = [trails_id];
-            client.query(queryString, values, (queryErr, result) => {
-                if (queryErr) {
-                    console.log('Query DELETE connection Error ->', queryErr);
-                    res.sendStatus(500);
-                } else {
-                    res.sendStatus(201);
-                } // end else
+    // check if user is logged in
+    if (req.isAuthenticated() && req.user.admin) {
+        // trails_id from client
+        let trails_id = req.params.trails_id;
+        pool.connect((err, client, done) => {
+            if (err) {
+                console.log('DELETE connection error ->', err);
+                res.sendStatus(500);
                 done();
-            }); // end query
-        } // end else
-    }); // end pool connect
+            } else {
+                let queryString = "DELETE FROM trails WHERE trails_id=$1";
+                let values = [trails_id];
+                client.query(queryString, values, (queryErr, result) => {
+                    if (queryErr) {
+                        console.log('Query DELETE connection Error ->', queryErr);
+                        res.sendStatus(500);
+                    } else {
+                        res.sendStatus(201);
+                    } // end else
+                    done();
+                }); // end query
+            } // end else
+        }); // end pool connect
+    } else {
+        console.log('not logged in');
+        res.sendStatus(403);
+    } // end else
 }); // end DELETE
 
 // export

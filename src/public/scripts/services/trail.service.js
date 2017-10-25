@@ -115,9 +115,18 @@ myApp.service('TrailService', function($http) {
         $http.put('/trail/approve/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
-            if (response.status === 403) {
+            return swal({
+                title: 'Trail Approved!',
+                text: 'the trail will now be searchable on the home page',
+                type: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            }); // end swal
+        }, (error) => {
+            console.log('error ', error);
+            if (error.status === 403) {
                 return swal({
-                    title: 'Must be Logged In',
+                    title: 'Admin must be Logged In',
                     text: 'trails can only be approved by logged in admin users',
                     type: 'error',
                     confirmButtonColor: '#3085d6',
@@ -133,9 +142,11 @@ myApp.service('TrailService', function($http) {
         $http.delete('/trail/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
-            if (response.status === 403) {
+        }, (error) => {
+            console.log('error ', error);
+            if (error.status === 403) {
                 return swal({
-                    title: 'Must be Logged In',
+                    title: 'Admin must be Logged In',
                     text: 'trails can only be deleted by logged in admin users',
                     type: 'error',
                     confirmButtonColor: '#3085d6',
@@ -160,7 +171,10 @@ myApp.service('TrailService', function($http) {
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'
                 }); // end swal
-            } else if (response.status === 403) {
+            } // end if
+        }, (error) => {
+            console.log('error ', error);
+            if (error.status === 403) {
                 return swal({
                     title: 'Must be Logged In',
                     text: 'trails can only be rated by logged in users',
@@ -168,7 +182,7 @@ myApp.service('TrailService', function($http) {
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'
                 }); // end swal
-            } // end else if
+            } // end if
         }); // end POST
     }; // end rateTrail
 
@@ -181,7 +195,17 @@ myApp.service('TrailService', function($http) {
                 // trail_id of newly created trail
                 console.log(response.data.rows[0].my_trails_id);
                 // can use id to route to the users my-trail's page
-            } else if (response.status === 403) {
+                return swal({
+                    title: 'Trail Added!',
+                    text: 'trail will now appear on your My Trails page',
+                    type: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end if
+        }, (error) => {
+            console.log('error ', error);
+            if (error.status === 403) {
                 return swal({
                     title: 'Must be Logged In',
                     text: 'trails can only be added by logged in users',
@@ -189,7 +213,7 @@ myApp.service('TrailService', function($http) {
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'
                 }); // end swal
-            } // end else if
+            } // end if
         }); // end POST
     }; // end addMyTrailPost
     

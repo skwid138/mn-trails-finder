@@ -4,7 +4,7 @@
 This controller is for admin users
 - it will allow users with the admin rights to approve or edit trails
 */
-myApp.controller('AdminController', function (UserService, TrailService) {
+myApp.controller('AdminController', function (UserService, TrailService, $location) {
     console.log('in AdminController');
     const vm = this;
 
