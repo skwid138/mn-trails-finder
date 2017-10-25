@@ -4,7 +4,7 @@
 This controller allows users to add trails to the DB
 - it will allow users to create trail records and write them to the DB
 */
-myApp.controller('AddTrailController', function (TrailService, UserService, $http) {
+myApp.controller('AddTrailController', function (TrailService, UserService, $http, $location) {
     console.log('in AddTrailController');
     const vm = this;
 
@@ -54,13 +54,30 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
         console.log('in addTrail');
         console.log('trail object to post ', vm.trail);
         $http.post('/trail', vm.trail).then((response) => {
-            //console.log('response', response);
             // if server responds with 'Created'
             if (response.status === 201) {
                 // trail_id of newly created trail
                 console.log(response.data.rows[0].trails_id);
-                // can use id to route to the trail's page
+                return swal({
+                    title: 'Trail Added',
+                    text: 'the trail has been submitted for approval',
+                    type: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
             } // end if
+        }, (error) => {
+            console.log('error ', error);
+            if (error.status === 403) {
+                return swal({
+                    title: 'Must be Logged In',
+                    text: 'trails can only be added by logged in users',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                    // redirect to home page
+                }).then($location.path('/'));
+            } // end else if
         }); // end POST
     }; // end addTrail
 

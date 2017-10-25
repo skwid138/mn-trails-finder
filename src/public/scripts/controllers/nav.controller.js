@@ -46,7 +46,7 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                         UserService.isAdmin = true;
                         $location.path('/admin');
                     } else {
-                        $location.path('/home');
+                        $location.path('/');
                     } // end else
                 } else {
                     console.log('login post failure: ', response);

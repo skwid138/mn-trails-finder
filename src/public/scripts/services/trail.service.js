@@ -115,6 +115,15 @@ myApp.service('TrailService', function($http) {
         $http.put('/trail/approve/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
+            if (response.status === 403) {
+                return swal({
+                    title: 'Must be Logged In',
+                    text: 'trails can only be approved by logged in admin users',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end if
         }); // end PUT
     }; // end approveTrail
 
@@ -124,6 +133,15 @@ myApp.service('TrailService', function($http) {
         $http.delete('/trail/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
+            if (response.status === 403) {
+                return swal({
+                    title: 'Must be Logged In',
+                    text: 'trails can only be deleted by logged in admin users',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end if
         }); // end PUT
     }; // end deleteTrail
 
@@ -141,8 +159,16 @@ myApp.service('TrailService', function($http) {
                     type: 'success',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'
-                }); // end vm.message
-            } // end if
+                }); // end swal
+            } else if (response.status === 403) {
+                return swal({
+                    title: 'Must be Logged In',
+                    text: 'trails can only be rated by logged in users',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end else if
         }); // end POST
     }; // end rateTrail
 
@@ -155,7 +181,15 @@ myApp.service('TrailService', function($http) {
                 // trail_id of newly created trail
                 console.log(response.data.rows[0].my_trails_id);
                 // can use id to route to the users my-trail's page
-            } // end if
+            } else if (response.status === 403) {
+                return swal({
+                    title: 'Must be Logged In',
+                    text: 'trails can only be added by logged in users',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end else if
         }); // end POST
     }; // end addMyTrailPost
     
