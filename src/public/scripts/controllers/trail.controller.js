@@ -9,14 +9,12 @@ This controller is for a specified trail view
 - will allow users to edit
 - will allow admin to delete
 */
-myApp.controller('TrailController', function (TrailService, UserService, $routeParams, $location) {
+myApp.controller('TrailController', function (TrailService, UserService, $routeParams, $location, NgMap) {
     console.log('in TrailController');
     const vm = this;
 
     // object to hold list of trails
     vm.trails = TrailService.trails;
-    console.log('vm.trails.trailsView', vm.trails.trailsView);
-    
 
     // sets user information for rating and my-trails queries
     vm.user = UserService.userObject;
@@ -37,12 +35,18 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
     }; // end checkForTrail
 
 
+    // if I put the id back in $routeParams even on page refresh it could do a get with the ID
+
 
     // if user - have ability to edit which sets approved flag back to false
     // if user - have ability to flag trail for approval again
     // if admin user - can delete or edit trail without resetting approved flag
 
-
+    // vm.NgMap.getMap().then((map) => {
+    //     console.log(map.getCenter());
+    //     console.log('markers', map.markers);
+    //     console.log('shapes', map.shapes);
+    // });
 
     /************** DB POSTs **************/
 

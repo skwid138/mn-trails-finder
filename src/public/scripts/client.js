@@ -2,7 +2,7 @@
 console.log('client.js sourced');
 
 // angular and sourced in modules
-var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngMessages']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngMap']);
 
 myApp.config( function ($routeProvider) {
 
