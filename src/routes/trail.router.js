@@ -77,29 +77,74 @@ router.post('/rating', (req, res) => {
         let user_id = req.body.user_id;
         let trails_id = req.body.trails_id;
         console.log('rating, user_id, trails_id ', rating_value, user_id, trails_id);
+
+        // check if user has already rated trail 
         pool.connect((err, client, done) => {
             if (err) {
                 console.log('POST connection error ->', err);
                 res.sendStatus(500);
                 done();
             } else {
-                let queryString = "INSERT INTO ratings (user_id, trails_id, rating_value) VALUES ($1, $2, $3) RETURNING user_id";
-                let values = [user_id, trails_id, rating_value];
-                client.query(queryString, values, (queryErr, result) => {
+                let selectQueryString = "SELECT rating_id FROM ratings WHERE (user_id=$1 AND trails_id=$2)";
+                let selectValues = [user_id, trails_id];
+                client.query(selectQueryString, selectValues, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query POST connection Error ->', queryErr);
                         res.sendStatus(500);
                     } else {
-                        res.status(201).send(result);
-                    } // end else
+                        if (result.rows.length) {
+                            // update existing record
+                            let rating_id = result.rows[0].rating_id;
+                            pool.connect((err, client, done) => {
+                                if (err) {
+                                    console.log('POST connection error ->', err);
+                                    res.sendStatus(500);
+                                    done();
+                                } else {
+                                    let updateQueryString = "UPDATE ratings SET rating_value=$2 WHERE rating_id=$1;";
+                                    let updateValues = [rating_id, rating_value];
+                                    client.query(updateQueryString, updateValues, (queryErr, result) => {
+                                        if (queryErr) {
+                                            console.log('Query POST connection Error ->', queryErr);
+                                            res.sendStatus(500);
+                                        } else {
+                                            res.sendStatus(202);
+                                        } // end else
+                                        done();
+                                    }); // end query
+                                } // end else
+                            }); // end pool connect
+                        } else {
+                            // add new record
+                            pool.connect((err, client, done) => {
+                                if (err) {
+                                    console.log('POST connection error ->', err);
+                                    res.sendStatus(500);
+                                    done();
+                                } else {
+                                    let insertQueryString = "INSERT INTO ratings (user_id, trails_id, rating_value) VALUES ($1, $2, $3) RETURNING user_id";
+                                    let insertValues = [user_id, trails_id, rating_value];
+                                    client.query(insertQueryString, insertValues, (queryErr, result) => {
+                                        if (queryErr) {
+                                            console.log('Query POST connection Error ->', queryErr);
+                                            res.sendStatus(500);
+                                        } else {
+                                            res.status(201).send(result);
+                                        } // end else
+                                        done();
+                                    }); // end query for INSERT
+                                } // end else for INSERT error
+                            }); // end pool connect for INSERT
+                        } // end else for if rating exists
+                    } // end SELECT else
                     done();
-                }); // end query
-            } // end else
+                }); // end SELECT query
+            } // end else for SELECT error
         }); // end pool connect
     } else {
         console.log('not logged in');
         res.sendStatus(403);
-    } // end else
+    } // end else for authentication
 }); // end rating post
 
 // POST new my_trail data to DB
