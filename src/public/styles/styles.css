@@ -2,6 +2,19 @@ img {
     width: 100%
 }
 
+.trailHeader {
+    font-weight: 800 !important;
+    font-size: 3em !important;
+}
+
+.widthCenter {
+    max-width: 70%;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+
 .listImg {
     width: 100%
 }

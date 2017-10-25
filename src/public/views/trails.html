@@ -1,22 +1,68 @@
-<section>
-    <md-content>
+<section class="widthCenter">
+    <md-content layout-align="center start">
         <md-card layout="column">
-            <md-card-title flex="30">
-                <md-card-title-text layout="row" layout-align="start start">
-                    <span class="md-headline">{{tc.trails.trailsView.trail_name}}</span>
-                    <span class="md-subhead">{{tc.trails.trailsView.park_name}}</span>
-                    <span class="md-subhead">{{tc.trails.trailsView.city}}, {{trail.state}}</span>
-                    <span class="md-subhead">{{tc.trails.trailsView.length}}</span>
-                    <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{tc.trails.trailsView.ratingAverage}}</span>
+            <md-card-title>
+                <md-card-title-text layout="column">
+                    <div flex layout="column">
+                        <span class="md-headline trailHeader">{{tc.trails.trailsView.trail_name}}</span>
+                        <span class="md-subhead">{{tc.trails.trailsView.park_name}}</span>
+                    </div>
+                    <div layout="row">
+                        <div flex layout="column">
+                            <h3>Location</h3>
+                            <!-- ng-if to hide comma if no state was specified -->
+                            <span class="md-subhead">{{trail.city}}<p ng-if="trail.state">,</p> {{trail.state}}</span>
+                        </div>
+                        <div flex layout="column">
+                            <h3>Length</h3>
+                            <span class="md-subhead">{{trail.length}}</span>
+                            <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                        </div>
+                        <div flex layout="column">
+                            <h3>Rating</h3>
+                            <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                        </div>
+                    </div>
                 </md-card-title-text>
             </md-card-title>
-            <div flex="20" layout-margin>
-                <div flex class="md-media-xl card-media">
-                    <img class="md-card-image" ng-src="{{tc.trails.trailsView.photo}}" />
+            <md-card-actions layout="row">
+                <!-- button to add trail to current users my_trail page -->
+                <md-button ng-click="tc.myTrailPost(tc.trails.trailsView.trails_id)" class="md-icon-button" aria-label="My-Trails">
+                    <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
+                </md-button>
+                <!-- FAB for trail rating -->
+                <div layout="row" layout-align="center center">
+                    <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 1)" aria-label="One" class="md-fab md-raised md-mini ratingStar"
+                        ng-mouseenter="tc.toggleOne=true" ng-mouseleave="tc.toggleOne=false">
+                        <md-icon class="ratingIcon" ng-hide="tc.toggleOne" md-svg-src="images/svg/star-empty.svg" aria-label="One"></md-icon>
+                        <md-icon class="ratingIcon" ng-show="tc.toggleOne" md-svg-src="images/svg/star.svg" aria-label="One"></md-icon>
+                    </md-button>
+                    <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 2)" aria-label="Two" class="md-fab md-raised md-mini ratingStar"
+                        ng-value="2" ng-mouseenter="tc.toggleTwo=true; tc.toggleOne=true" ng-mouseleave="tc.toggleTwo=false; tc.toggleOne=false">
+                        <md-icon class="ratingIcon" ng-hide="tc.toggleTwo" md-svg-src="images/svg/star-empty.svg" aria-label="Two"></md-icon>
+                        <md-icon class="ratingIcon" ng-show="tc.toggleTwo" md-svg-src="images/svg/star.svg" aria-label="Two"></md-icon>
+                    </md-button>
+                    <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 3)" aria-label="Three" class="md-fab md-raised md-mini ratingStar"
+                        ng-value="3" ng-mouseenter="tc.toggleThree=true; tc.toggleTwo=true; tc.toggleOne=true" ng-mouseleave="tc.toggleThree=false; tc.toggleTwo=false; tc.toggleOne=false">
+                        <md-icon class="ratingIcon" ng-hide="tc.toggleThree" md-svg-src="images/svg/star-empty.svg" aria-label="Three"></md-icon>
+                        <md-icon class="ratingIcon" ng-show="tc.toggleThree" md-svg-src="images/svg/star.svg" aria-label="Three"></md-icon>
+                    </md-button>
+                    <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 4)" aria-label="Four" class="md-fab md-raised md-mini ratingStar"
+                        ng-value="4" ng-mouseenter="tc.toggleFour=true; tc.toggleThree=true; tc.toggleTwo=true; tc.toggleOne=true" ng-mouseleave="tc.toggleFour=false; tc.toggleThree=false; tc.toggleTwo=false; tc.toggleOne=false">
+                        <md-icon class="ratingIcon" ng-hide="tc.toggleFour" md-svg-src="images/svg/star-empty.svg" aria-label="Four"></md-icon>
+                        <md-icon class="ratingIcon" ng-show="tc.toggleFour" md-svg-src="images/svg/star.svg" aria-label="Four"></md-icon>
+                    </md-button>
+                    <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 5)" aria-label="Five" class="md-fab md-raised md-mini ratingStar"
+                        ng-value="5" ng-mouseenter="tc.toggleFive=true; tc.toggleFour=true; tc.toggleThree=true; tc.toggleTwo=true; tc.toggleOne=true"
+                        ng-mouseleave="tc.toggleFive=false; tc.toggleFour=false;
+                                                tc.toggleThree=false; tc.toggleTwo=false; tc.toggleOne=false">
+                        <md-icon class="ratingIcon" ng-hide="tc.toggleFive" md-svg-src="images/svg/star-empty.svg" aria-label="Five"></md-icon>
+                        <md-icon class="ratingIcon" ng-show="tc.toggleFive" md-svg-src="images/svg/star.svg" aria-label="Five"></md-icon>
+                    </md-button>
                 </div>
-            </div>
-            <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>
-                <p>{{tc.trails.trailsView.trail_description}}</p>
+            </md-card-actions>
+            <md-card-content layout-align="space-between">
+                
                 <md-chips>
                     <md-chip ng-show="tc.trails.trailsView.dog">dogs</md-chip>
                     <md-chip ng-show="tc.trails.trailsView.child">kids</md-chip>
@@ -32,45 +78,12 @@
                     <md-chip ng-show="tc.trails.trailsView.atv">atv</md-chip>
                     <md-chip ng-show="tc.trails.trailsView.snowmobile">snowmobile</md-chip>
                 </md-chips>
-                <md-card-actions layout="row">
-                    <!-- button to add trail to current users my_trail page -->
-                    <md-button ng-click="tc.myTrailPost(tc.trails.trailsView.trails_id)" class="md-icon-button" aria-label="My-Trails">
-                        <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
-                    </md-button>
-                    <!-- FAB for trail rating -->
-                    <div layout="row" layout-align="center center">
-                        <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 1)" aria-label="One" class="md-fab md-raised md-mini ratingStar" ng-mouseenter="tc.toggleOne=true"
-                            ng-mouseleave="tc.toggleOne=false">
-                            <md-icon class="ratingIcon" ng-hide="tc.toggleOne" md-svg-src="images/svg/star-empty.svg" aria-label="One"></md-icon>
-                            <md-icon class="ratingIcon" ng-show="tc.toggleOne" md-svg-src="images/svg/star.svg" aria-label="One"></md-icon>
-                        </md-button>
-                        <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 2)" aria-label="Two" class="md-fab md-raised md-mini ratingStar" ng-value="2"
-                            ng-mouseenter="tc.toggleTwo=true; tc.toggleOne=true" ng-mouseleave="tc.toggleTwo=false; tc.toggleOne=false">
-                            <md-icon class="ratingIcon" ng-hide="tc.toggleTwo" md-svg-src="images/svg/star-empty.svg" aria-label="Two"></md-icon>
-                            <md-icon class="ratingIcon" ng-show="tc.toggleTwo" md-svg-src="images/svg/star.svg" aria-label="Two"></md-icon>
-                        </md-button>
-                        <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 3)" aria-label="Three" class="md-fab md-raised md-mini ratingStar"
-                            ng-value="3" ng-mouseenter="tc.toggleThree=true; tc.toggleTwo=true; tc.toggleOne=true" ng-mouseleave="tc.toggleThree=false; tc.toggleTwo=false; tc.toggleOne=false">
-                            <md-icon class="ratingIcon" ng-hide="tc.toggleThree" md-svg-src="images/svg/star-empty.svg" aria-label="Three"></md-icon>
-                            <md-icon class="ratingIcon" ng-show="tc.toggleThree" md-svg-src="images/svg/star.svg" aria-label="Three"></md-icon>
-                        </md-button>
-                        <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 4)" aria-label="Four" class="md-fab md-raised md-mini ratingStar"
-                            ng-value="4" ng-mouseenter="tc.toggleFour=true; tc.toggleThree=true; tc.toggleTwo=true; tc.toggleOne=true"
-                            ng-mouseleave="tc.toggleFour=false; tc.toggleThree=false; tc.toggleTwo=false; tc.toggleOne=false">
-                            <md-icon class="ratingIcon" ng-hide="tc.toggleFour" md-svg-src="images/svg/star-empty.svg" aria-label="Four"></md-icon>
-                            <md-icon class="ratingIcon" ng-show="tc.toggleFour" md-svg-src="images/svg/star.svg" aria-label="Four"></md-icon>
-                        </md-button>
-                        <md-button ng-click="tc.rateTrailPost(tc.trails.trailsView.trails_id, 5)" aria-label="Five" class="md-fab md-raised md-mini ratingStar"
-                            ng-value="5" ng-mouseenter="tc.toggleFive=true; tc.toggleFour=true; tc.toggleThree=true; tc.toggleTwo=true; tc.toggleOne=true"
-                            ng-mouseleave="tc.toggleFive=false; tc.toggleFour=false;
-                                    tc.toggleThree=false; tc.toggleTwo=false; tc.toggleOne=false">
-                            <md-icon class="ratingIcon" ng-hide="tc.toggleFive" md-svg-src="images/svg/star-empty.svg" aria-label="Five"></md-icon>
-                            <md-icon class="ratingIcon" ng-show="tc.toggleFive" md-svg-src="images/svg/star.svg" aria-label="Five"></md-icon>
-                        </md-button>
-                    </div>
-                </md-card-actions>
+                <div class="md-media-xl card-media">
+                    <img class="md-card-image" ng-src="{{tc.trails.trailsView.photo}}" />
+                </div>
+                <p>{{tc.trails.trailsView.trail_description}}</p>
+                <ng-map center="41,-87" zoom="3"></ng-map>
             </md-card-content>
         </md-card>
     </md-content>
 </section>
-<ng-map center="41,-87" zoom="3"></ng-map>
