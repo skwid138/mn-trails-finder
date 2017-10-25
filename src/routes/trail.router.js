@@ -66,7 +66,7 @@ router.post('/', (req, res) => {
     } // end else
 }); // end trail post
 
-// POST new rating data to DB
+// POST new or update existing rating on DB
 router.post('/rating', (req, res) => {
     console.log('in rating post route');
 
@@ -92,8 +92,9 @@ router.post('/rating', (req, res) => {
                         console.log('Query POST connection Error ->', queryErr);
                         res.sendStatus(500);
                     } else {
+                        // if the SELECT finds an existing record
                         if (result.rows.length) {
-                            // update existing record
+                            // update existing record using rating_id
                             let rating_id = result.rows[0].rating_id;
                             pool.connect((err, client, done) => {
                                 if (err) {
@@ -158,25 +159,55 @@ router.post('/my_trails', (req, res) => {
         let trails_id = req.body.trails_id;
         console.log('user_id, trails_id ', user_id, trails_id);
 
+        // check if user has already added trail to my trails
         pool.connect((err, client, done) => {
             if (err) {
                 console.log('POST connection error ->', err);
                 res.sendStatus(500);
                 done();
             } else {
-                let queryString = "INSERT INTO my_trails (user_id, trails_id) VALUES ($1, $2) RETURNING my_trails_id";
-                let values = [user_id, trails_id];
-                client.query(queryString, values, (queryErr, result) => {
+                let selectQueryString = "SELECT my_trails_id FROM my_trails WHERE (user_id=$1 AND trails_id=$2)";
+                let selectValues = [user_id, trails_id];
+                client.query(selectQueryString, selectValues, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query POST connection Error ->', queryErr);
                         res.sendStatus(500);
                     } else {
-                        res.status(201).send(result);
-                    } // end else
+                        // if the SELECT finds an existing record
+                        if (result.rows.length) {
+                            // let client know it's been added and give option to delete existing record using my_trails_id
+                            res.status(302).send(result.rows);
+                        } else {
+                            // add new record
+                            pool.connect((err, client, done) => {
+                                if (err) {
+                                    console.log('POST connection error ->', err);
+                                    res.sendStatus(500);
+                                    done();
+                                } else {
+                                    let insertQueryString = "INSERT INTO my_trails (user_id, trails_id) VALUES ($1, $2) RETURNING my_trails_id";
+                                    let insertValues = [user_id, trails_id];
+                                    client.query(insertQueryString, insertValues, (queryErr, result) => {
+                                        if (queryErr) {
+                                            console.log('Query POST connection Error ->', queryErr);
+                                            res.sendStatus(500);
+                                        } else {
+                                            res.status(201).send(result);
+                                        } // end else
+                                        done();
+                                    }); // end query for INSERT
+                                } // end else for INSERT error
+                            }); // end pool connect for INSERT
+                        } // end else for if rating exists
+                    } // end SELECT else
                     done();
-                }); // end query
-            } // end else
+                }); // end SELECT query
+            } // end else for SELECT error
         }); // end pool connect
+
+
+/********** copied data ******** */
+
     } else {
         console.log('not logged in');
         res.sendStatus(403);

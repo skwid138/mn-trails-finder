@@ -213,7 +213,15 @@ myApp.service('TrailService', function($http) {
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'
                 }); // end swal
-            } // end if
+            } else if (error.status === 302) {
+                return swal({
+                    title: 'Already added!',
+                    text: 'that trail has already been added, if you wish to remove it click remove on trail\'s page',
+                    type: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end else if
         }); // end POST
     }; // end addMyTrailPost
     
