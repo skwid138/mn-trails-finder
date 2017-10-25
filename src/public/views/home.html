@@ -1,10 +1,8 @@
 <section class="widthCenter">
-    <p>home controller</p>
-
-    <div class="md-padding">
+   <div class="md-padding">
         <md-content layout="column">
             <md-card ng-repeat="trail in hc.trails.approved" layout="row" ng-value="trail.trails_id">
-                <div flex="80" layout="row">
+                <div flex="70" layout="row">
                     <md-card-title flex="30">
                         <!-- added ng-click for redirect using function - needs styling or something -->
                         <md-card-title-text layout="column" layout-align="start start" ng-click="hc.viewTrailDetails(trail)">
@@ -13,6 +11,10 @@
                             <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
                             <span class="md-subhead">{{trail.length}}</span>
                             <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                            <!-- button to add trail to current users my_trail page -->
+                            <md-button ng-click="hc.myTrailPost(trail.trails_id)" class="md-icon-button" aria-label="My-Trails">
+                                <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
+                            </md-button>
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>
@@ -33,10 +35,6 @@
                             <md-chip ng-show="trail.snowmobile">snowmobile</md-chip>
                         </md-chips>
                         <md-card-actions layout="row">
-                            <!-- button to add trail to current users my_trail page -->
-                            <md-button ng-click="hc.myTrailPost(trail.trails_id)" class="md-icon-button" aria-label="My-Trails">
-                                <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
-                            </md-button>
                             <!-- FAB for trail rating -->
                             <div layout="row" layout-align="center center">
                                 <md-button ng-click="hc.rateTrailPost(trail.trails_id, 1)" aria-label="One" class="md-fab md-raised md-mini ratingStar" ng-mouseenter="hc.toggleOne=true" ng-mouseleave="hc.toggleOne=false">
@@ -64,11 +62,9 @@
                         </md-card-actions>
                     </md-card-content>
                 </div>
-                <div flex="20" layout-margin>
+                <div flex="30" layout-margin>
                     <div flex class="md-media-xl card-media">
                         <img class="md-card-image listImg" ng-src="{{trail.photo}}"/>
-                        <!-- added ng-href for redirect (also have ng-click on title) - needs styling or something -->
-                        <a ng-href="/#!/trails/{{trail.trail_name}}">details</a>
                     </div>
                 </div>
             </md-card>

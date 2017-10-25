@@ -1,9 +1,8 @@
 <section class="widthCenter">
     <h1>Add a Trail</h1>
-    <p ng-if="atc.user.loggedIn">hidden thing, eventually have trails in here, if there isn't a user have the page ng-hide a blurb saying only registered users can add trails</p>
     <p ng-hide="atc.user.loggedIn">Please Register or Login to add a new trail.</p>
-    <md-content layout-padding>
-        <div>
+    <md-content ng-if="atc.user.loggedIn" layout-padding>
+        <md-card>
             <form name="trailForm">
                 <!-- name inputs are side by side across the container -->
                 <div layout-gt-xs="row">
@@ -109,6 +108,6 @@
                     <md-button class="md-raised md-warn" type="submit" ng-click="atc.addTrail()">Add Trail!</md-button>
                 </div>
             </form>
-        </div>
+        </md-card>
     </md-content>
 </section>
