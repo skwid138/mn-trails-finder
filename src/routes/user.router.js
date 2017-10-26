@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         // send back user object from database
         console.log('logged in req.user ->', req.user);
 
-        let userInfo = {
+        const userInfo = {
             username : req.user.username,
             user_id : req.user.user_id,
             admin : req.user.admin

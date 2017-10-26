@@ -1,12 +1,12 @@
 /*jshint esversion: 6 */
 
 // requires
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
-let publicAPI = {
+const publicAPI = {
     encryptPassword: (password) => {
-        var salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
+        const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
         return bcrypt.hashSync(password, salt);
     },
     comparePassword: (candidatePassword, storedPassword) => {

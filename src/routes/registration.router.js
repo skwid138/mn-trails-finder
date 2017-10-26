@@ -10,7 +10,7 @@ router.post('/', (req,res,next) => {
     console.log('in register user post route');
 
     // variables from client
-    let saveUser = {
+    const saveUser = {
         username: req.body.username,
         password: encryptLib.encryptPassword(req.body.password)
     }; // end saveUser
@@ -22,8 +22,8 @@ router.post('/', (req,res,next) => {
             res.sendStatus(500);
             done();
         } else {
-            let queryString = "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id";
-            let values = [saveUser.username, saveUser.password];
+            const queryString = "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id";
+            const values = [saveUser.username, saveUser.password];
             client.query(queryString, values, (queryErr, result) => {
                 if (queryErr) {
                     console.log('Query POST connection Error ->', queryErr);

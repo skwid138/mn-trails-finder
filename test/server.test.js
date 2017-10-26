@@ -1,7 +1,7 @@
-var expect = require('chai').expect;
-var request = require('request');
+const expect = require('chai').expect;
+const request = require('request');
 
-var url = 'http:///localhost:6660/'
+const url = 'http:///localhost:6660/'
 
 describe('test for server file server.js', function () {
     describe('module route', function () {

@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
     // check if user is logged in
     if (req.isAuthenticated()) {
         // variables from client
-        let trail = {
+        const trail = {
             park_name: req.body.park_name,
             trail_name: req.body.trail_name,
             address1: req.body.address1,
@@ -47,8 +47,8 @@ router.post('/', (req, res) => {
                 res.sendStatus(500);
                 done();
             } else {
-                let queryString = "INSERT INTO trails (park_name, trail_name, address1, address2, city, state, zip, length, dog, child, paved, water, parking, parking_free, park_pass, hiking, biking, skiing, horse, atv, snowmobile, trail_description, photo, ll, gain) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) RETURNING trails_id";
-                let values = [trail.park_name, trail.trail_name, trail.address1, trail.address2, trail.city, trail.state, trail.zip, trail.length, trail.dog, trail.child, trail.paved, trail.water, trail.parking, trail.parking_free, trail.park_pass, trail.hiking, trail.biking, trail.skiing, trail.horse, trail.atv, trail.snowmobile, trail.trail_description, trail.photo, trail.ll, trail.gain];
+                const queryString = "INSERT INTO trails (park_name, trail_name, address1, address2, city, state, zip, length, dog, child, paved, water, parking, parking_free, park_pass, hiking, biking, skiing, horse, atv, snowmobile, trail_description, photo, ll, gain) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) RETURNING trails_id";
+                const values = [trail.park_name, trail.trail_name, trail.address1, trail.address2, trail.city, trail.state, trail.zip, trail.length, trail.dog, trail.child, trail.paved, trail.water, trail.parking, trail.parking_free, trail.park_pass, trail.hiking, trail.biking, trail.skiing, trail.horse, trail.atv, trail.snowmobile, trail.trail_description, trail.photo, trail.ll, trail.gain];
                 client.query(queryString, values, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query POST connection Error ->', queryErr);
@@ -73,9 +73,9 @@ router.post('/rating', (req, res) => {
     // check if user is logged in
     if (req.isAuthenticated()) {
         // variables from client
-        let rating_value = req.body.rating_value;
-        let user_id = req.body.user_id;
-        let trails_id = req.body.trails_id;
+        const rating_value = req.body.rating_value;
+        const user_id = req.body.user_id;
+        const trails_id = req.body.trails_id;
         console.log('rating, user_id, trails_id ', rating_value, user_id, trails_id);
 
         // check if user has already rated trail 
@@ -85,8 +85,8 @@ router.post('/rating', (req, res) => {
                 res.sendStatus(500);
                 done();
             } else {
-                let selectQueryString = "SELECT rating_id FROM ratings WHERE (user_id=$1 AND trails_id=$2)";
-                let selectValues = [user_id, trails_id];
+                const selectQueryString = "SELECT rating_id FROM ratings WHERE (user_id=$1 AND trails_id=$2)";
+                const selectValues = [user_id, trails_id];
                 client.query(selectQueryString, selectValues, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query POST connection Error ->', queryErr);
@@ -95,15 +95,15 @@ router.post('/rating', (req, res) => {
                         // if the SELECT finds an existing record
                         if (result.rows.length) {
                             // update existing record using rating_id
-                            let rating_id = result.rows[0].rating_id;
+                            const rating_id = result.rows[0].rating_id;
                             pool.connect((err, client, done) => {
                                 if (err) {
                                     console.log('POST connection error ->', err);
                                     res.sendStatus(500);
                                     done();
                                 } else {
-                                    let updateQueryString = "UPDATE ratings SET rating_value=$2 WHERE rating_id=$1;";
-                                    let updateValues = [rating_id, rating_value];
+                                    const updateQueryString = "UPDATE ratings SET rating_value=$2 WHERE rating_id=$1;";
+                                    const updateValues = [rating_id, rating_value];
                                     client.query(updateQueryString, updateValues, (queryErr, result) => {
                                         if (queryErr) {
                                             console.log('Query POST connection Error ->', queryErr);
@@ -123,8 +123,8 @@ router.post('/rating', (req, res) => {
                                     res.sendStatus(500);
                                     done();
                                 } else {
-                                    let insertQueryString = "INSERT INTO ratings (user_id, trails_id, rating_value) VALUES ($1, $2, $3) RETURNING user_id";
-                                    let insertValues = [user_id, trails_id, rating_value];
+                                    const insertQueryString = "INSERT INTO ratings (user_id, trails_id, rating_value) VALUES ($1, $2, $3) RETURNING user_id";
+                                    const insertValues = [user_id, trails_id, rating_value];
                                     client.query(insertQueryString, insertValues, (queryErr, result) => {
                                         if (queryErr) {
                                             console.log('Query POST connection Error ->', queryErr);
@@ -155,8 +155,8 @@ router.post('/my_trails', (req, res) => {
     // check if user is logged in
     if (req.isAuthenticated()) {
         // variables from client
-        let user_id = req.body.user_id;
-        let trails_id = req.body.trails_id;
+        const user_id = req.body.user_id;
+        const trails_id = req.body.trails_id;
         console.log('user_id, trails_id ', user_id, trails_id);
 
         // check if user has already added trail to my trails
@@ -166,8 +166,8 @@ router.post('/my_trails', (req, res) => {
                 res.sendStatus(500);
                 done();
             } else {
-                let selectQueryString = "SELECT my_trails_id FROM my_trails WHERE (user_id=$1 AND trails_id=$2)";
-                let selectValues = [user_id, trails_id];
+                const selectQueryString = "SELECT my_trails_id FROM my_trails WHERE (user_id=$1 AND trails_id=$2)";
+                const selectValues = [user_id, trails_id];
                 client.query(selectQueryString, selectValues, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query POST connection Error ->', queryErr);
@@ -185,8 +185,8 @@ router.post('/my_trails', (req, res) => {
                                     res.sendStatus(500);
                                     done();
                                 } else {
-                                    let insertQueryString = "INSERT INTO my_trails (user_id, trails_id) VALUES ($1, $2) RETURNING my_trails_id";
-                                    let insertValues = [user_id, trails_id];
+                                    const insertQueryString = "INSERT INTO my_trails (user_id, trails_id) VALUES ($1, $2) RETURNING my_trails_id";
+                                    const insertValues = [user_id, trails_id];
                                     client.query(insertQueryString, insertValues, (queryErr, result) => {
                                         if (queryErr) {
                                             console.log('Query POST connection Error ->', queryErr);
@@ -204,10 +204,6 @@ router.post('/my_trails', (req, res) => {
                 }); // end SELECT query
             } // end else for SELECT error
         }); // end pool connect
-
-
-/********** copied data ******** */
-
     } else {
         console.log('not logged in');
         res.sendStatus(403);
@@ -223,7 +219,7 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
             done();
         } else {
-            let queryString = "SELECT * FROM trails";
+            const queryString = "SELECT * FROM trails";
             client.query(queryString, (queryErr, result) => {
                 if (queryErr) {
                     console.log('Query GET connection Error ->', queryErr);
@@ -246,7 +242,7 @@ router.get('/rating', (req, res) => {
             res.sendStatus(500);
             done();
         } else {
-            let queryString = "SELECT * FROM ratings";
+            const queryString = "SELECT * FROM ratings";
             client.query(queryString, (queryErr, result) => {
                 if (queryErr) {
                     console.log('Query GET connection Error ->', queryErr);
@@ -267,15 +263,15 @@ router.put('/approve/:trails_id', (req, res) => {
     // check if user is logged in and an admin
     if (req.isAuthenticated() && req.user.admin) {
         // trails_id from client
-        let trails_id = req.params.trails_id;
+        const trails_id = req.params.trails_id;
         pool.connect((err, client, done) => {
             if (err) {
                 console.log('PUT connection error ->', err);
                 res.sendStatus(500);
                 done();
             } else {
-                let queryString = "UPDATE trails SET approved='true' WHERE trails_id=$1";
-                let values = [trails_id];
+                const queryString = "UPDATE trails SET approved='true' WHERE trails_id=$1";
+                const values = [trails_id];
                 client.query(queryString, values, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query PUT connection Error ->', queryErr);
@@ -303,15 +299,15 @@ router.delete('/:trails_id', (req, res) => {
     // check if user is logged in
     if (req.isAuthenticated() && req.user.admin) {
         // trails_id from client
-        let trails_id = req.params.trails_id;
+        const trails_id = req.params.trails_id;
         pool.connect((err, client, done) => {
             if (err) {
                 console.log('DELETE connection error ->', err);
                 res.sendStatus(500);
                 done();
             } else {
-                let queryString = "DELETE FROM trails WHERE trails_id=$1";
-                let values = [trails_id];
+                const queryString = "DELETE FROM trails WHERE trails_id=$1";
+                const values = [trails_id];
                 client.query(queryString, values, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query DELETE connection Error ->', queryErr);

@@ -1,17 +1,17 @@
 /*jshint esversion: 6 */
 
 // require
-var Pool = require('pg').Pool;
-var url = require('url');
+const Pool = require('pg').Pool;
+const url = require('url');
 
 //server config
-var config = {};
+let config = {};
 
 if (process.env.DATABASE_URL) {
     // Heroku gives a url, not a connection object
     // https://github.com/brianc/node-pg-pool
-    var params = url.parse(process.env.DATABASE_URL);
-    var auth = params.auth.split(':');
+    const params = url.parse(process.env.DATABASE_URL);
+    const auth = params.auth.split(':');
 
     config = {
         user: auth[0],

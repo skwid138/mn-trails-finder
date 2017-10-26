@@ -6,14 +6,14 @@ const localStrategy = require('passport-local').Strategy;
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 
-passport.serializeUser( function(user, done) {
+passport.serializeUser((user, done) => {
     done(null, user.user_id);
 }); // end serializeUser
 
-passport.deserializeUser( function(id, done) {
+passport.deserializeUser((id, done) => {
     console.log('in deserializeUser');
     
-    pool.connect( function(err, client, release) {
+    pool.connect((err, client, release) => {
         if (err) {
             console.log('connection err ', err);
             release();
@@ -21,25 +21,23 @@ passport.deserializeUser( function(id, done) {
         } // end if error
 
         let user = {};
-        let queryString = "SELECT * FROM users WHERE user_id = $1";
-        let values = [id];
+        const queryString = "SELECT * FROM users WHERE user_id = $1";
+        const values = [id];
 
-        client.query(queryString, values, function(queryErr, result) {
+        client.query(queryString, values, (queryErr, result) => {
             // Handle Errors
             if (queryErr) {
                 console.log('Query connection error ->', queryErr);
                 done(queryErr);
                 release();
             } // end if error
-
             user = result.rows[0];
             release();
-
+            // if no user is found
             if (!user) {
-                // user not found
                 return done(null, false, { message: 'Incorrect credentials.' });
+            // user found
             } else {
-                // user found
                 console.log('User row ', user);
                 done(null, user);
             } // end else
@@ -51,25 +49,21 @@ passport.deserializeUser( function(id, done) {
 passport.use('local', new localStrategy({
     passReqToCallback: true,
     usernameField: 'username'
-    }, function(req, username, password, done) {
+    },(req, username, password, done) => {
         pool.connect( function(err, client, release) {
             console.log('in local passport use');
-            
             // username will be unique, thus returning 1 or 0 results
-            let queryString = "SELECT * FROM users WHERE username = $1";
-            let values = [username];
-
+            const queryString = "SELECT * FROM users WHERE username = $1";
+            const values = [username];
             client.query(queryString, values, (queryErr, result) => {
                 let user = {};
-
-                // handle errors
+                // if error
                 if (queryErr) {
                     console.log('Query connection error ->', queryErr);
                     done(null, user);
                 } // end if error
-
                 release();
-
+                // if user is found
                 if (result.rows[0] != undefined) {
                     user = result.rows[0];
                     console.log('User obj', user);
