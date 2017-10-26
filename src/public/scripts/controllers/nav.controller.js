@@ -48,9 +48,7 @@ myApp.controller('NavController', function (UserService, $http, $location, Trail
                         vm.isAdmin = true;
                         UserService.isAdmin = true;
                         $location.path('/admin');
-                    } else {
-                        $location.path('/');
-                    } // end else
+                    } // end if
                 } else {
                     console.log('login post failure: ', response);
                     vm.message = swal('Incorrect Credentials!', 'please try again', 'error');

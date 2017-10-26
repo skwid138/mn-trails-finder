@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-myApp.service('TrailService', function ($http, UserService) {
+myApp.service('TrailService', function ($http, UserService, $location) {
     console.log('in TrailService');
     const self = this;
 
@@ -169,11 +169,13 @@ myApp.service('TrailService', function ($http, UserService) {
     }; // end approveTrail
 
     // users can flag approved trails for admin review
-    self.flagTrail = (trail_id) => {
+    self.flagTrail = (trails_id) => {
         console.log('in flagTrail');
         $http.put('/trail/flag/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
+            // on success redirect user back to home view
+            $location.path('/');
             return swal({
                 title: 'Trail Flagged!',
                 text: 'trail will be removed from home and submitted for admin approval',

@@ -288,8 +288,7 @@ router.get('/my_trails', (req, res) => {
 
 // UPDATE trail approval status
 router.put('/approve/:trails_id', (req, res) => {
-    console.log('In trail PUT route.');
-
+    console.log('In approval PUT route.');
     // check if user is logged in and an admin
     if (req.isAuthenticated() && req.user.admin) {
         // trails_id from client
@@ -301,6 +300,38 @@ router.put('/approve/:trails_id', (req, res) => {
                 done();
             } else {
                 const queryString = "UPDATE trails SET approved='true' WHERE trails_id=$1";
+                const values = [trails_id];
+                client.query(queryString, values, (queryErr, result) => {
+                    if (queryErr) {
+                        console.log('Query PUT connection Error ->', queryErr);
+                        res.sendStatus(500);
+                    } else {
+                        res.sendStatus(201);
+                    } // end else
+                    done();
+                }); // end query
+            } // end else
+        }); // end pool connect
+    } else {
+        console.log('not logged in');
+        res.sendStatus(403);
+    } // end else
+}); // end PUT
+
+// UPDATE trail approval status
+router.put('/flag/:trails_id', (req, res) => {
+    console.log('In flag PUT route.');
+    // check if user is logged in
+    if (req.isAuthenticated()) {
+        // trails_id from client
+        const trails_id = req.params.trails_id;
+        pool.connect((err, client, done) => {
+            if (err) {
+                console.log('PUT connection error ->', err);
+                res.sendStatus(500);
+                done();
+            } else {
+                const queryString = "UPDATE trails SET approved='false' WHERE trails_id=$1";
                 const values = [trails_id];
                 client.query(queryString, values, (queryErr, result) => {
                     if (queryErr) {
