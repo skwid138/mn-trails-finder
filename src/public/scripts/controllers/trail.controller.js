@@ -26,6 +26,12 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
     vm.toggleFour = false;
     vm.toggleFive = false;
 
+    vm.map = {
+        ll: '44.906005, -93.198442',
+        zoom: 18
+    }; // end map
+
+
     // if the trails data isn't set then redirect home 
     // ie: page refresh on a trail)
     vm.checkForTrail = () => {

@@ -12,6 +12,12 @@ myApp.controller('MyTrailController', function (TrailService, UserService) {
         
     }; // end my_trails
 
+    // object to hold list of trails
+    vm.trails = TrailService.trails;
+
+    // sets user information for rating and my-trails queries
+    vm.user = UserService.userObject;
+
     // need to either have a query to get users my_trails list
     // and use the trails id along with TrailService.trails list
     // to generate their page

@@ -11,16 +11,15 @@
                         <div flex layout="column">
                             <h3>Location</h3>
                             <!-- ng-if to hide comma if no state was specified -->
-                            <span class="md-subhead">{{trail.city}}<p ng-if="trail.state">,</p> {{trail.state}}</span>
+                            <span class="md-subhead">{{tc.trails.trailsView.city}}<p ng-if="trail.state">,</p> {{trail.state}}</span>
                         </div>
                         <div flex layout="column">
                             <h3>Length</h3>
-                            <span class="md-subhead">{{trail.length}}</span>
-                            <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                            <span class="md-subhead">{{tc.trails.trailsView.length}}</span>
                         </div>
                         <div flex layout="column">
                             <h3>Rating</h3>
-                            <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                            <span ng-if="tc.trails.trailsView.ratingAverage" class="md-subhead">Average Rating: {{tc.trails.trailsView.ratingAverage}}</span>
                         </div>
                     </div>
                 </md-card-title-text>
@@ -61,8 +60,7 @@
                     </md-button>
                 </div>
             </md-card-actions>
-            <md-card-content layout-align="space-between">
-                
+            <md-card-content layout-align="space-between" layout="column">
                 <md-chips>
                     <md-chip ng-show="tc.trails.trailsView.dog">dogs</md-chip>
                     <md-chip ng-show="tc.trails.trailsView.child">kids</md-chip>
@@ -79,10 +77,10 @@
                     <md-chip ng-show="tc.trails.trailsView.snowmobile">snowmobile</md-chip>
                 </md-chips>
                 <div class="md-media-xl card-media">
-                    <img class="md-card-image" ng-src="{{tc.trails.trailsView.photo}}" />
+                    <img ng-src="{{tc.trails.trailsView.photo}}" />
                 </div>
                 <p>{{tc.trails.trailsView.trail_description}}</p>
-                <ng-map center="41,-87" zoom="3"></ng-map>
+                <ng-map center="{{tc.map.ll}}" zoom="{{map.zoom}}"></ng-map>
             </md-card-content>
         </md-card>
     </md-content>

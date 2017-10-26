@@ -15,15 +15,17 @@ CREATE TABLE users (
 CREATE TABLE my_trails (
     my_trails_id SERIAL PRIMARY KEY,
 	user_id INT REFERENCES users (user_id) ON DELETE CASCADE,
-    trails_id INT REFERENCES trails (trails_id) ON DELETE CASCADE
+    trails_id INT REFERENCES trails (trails_id) ON DELETE CASCADE,
+    UNIQUE (user_id, trails_id)
 );
 
--- houses users ratings for trails even if user is deleted
+-- houses users ratings for trails even if user is deleted (1 rating per user per trail)
 CREATE TABLE ratings (
     rating_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users (user_id),
     trails_id INT REFERENCES trails (trails_id) ON DELETE CASCADE,
-    rating_value INT
+    rating_value INT,
+    UNIQUE (user_id, trails_id)
 );
 
 -- houses trails data
