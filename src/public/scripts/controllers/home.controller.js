@@ -73,13 +73,13 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
             // the page content should dynamically hide using ng-if based on a user being logged in anyway
             // this is more of a backup
         } else {
-            vm.message = swal({
+            swal({
                 title: 'Please Login First',
                 text: 'Must register and login to add a trail to My Trails',
                 type: 'error',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK'
-            }); // end vm.message
+            }); // end swal
         } // end else
     }; // end addMyTrailPost
 

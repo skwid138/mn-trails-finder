@@ -22,7 +22,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
     // sort trails.list and push trails flagged true for approved
     // into trails.approved array and all the rest into trails.flagged
     self.trailsToApprove = (trailsArray) => {
-        console.log('in trailsToApprove');
+        //console.log('in trailsToApprove');
         // reset array values
         self.trails.list = trailsArray;
         self.trails.approved = [];
@@ -42,7 +42,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
 
     // calculate trail rating after GET
     self.calculateRating = (ratingsArray) => {
-        console.log('in calculateRating');
+        //console.log('in calculateRating');
         // loop through all approved trails
         for (var i = 0; i < self.trails.approved.length; i++) {
             // sets how many ratings a trail has
@@ -83,14 +83,14 @@ myApp.service('TrailService', function ($http, UserService, $location) {
     //controller passes a trail object and sets the
     // value on the service for the trail controller
     self.setTrailsViewObject = (trailObject) => {
-        console.log('in setTrailsViewObject');
+        //console.log('in setTrailsViewObject');
         self.trails.trailsView = trailObject;
     }; // end setTrailsViewObject
 
     // search for approved trail objects that match 
     // a trails_id passed in from the user's my trails array
     self.findMyTrails = (myTrailObject) => {
-        console.log('in findMyTrails');
+        //console.log('in findMyTrails');
         // return a trail Object if one matches the passed in trail_id
         return self.trails.approved.filter((trail) => {
             return trail.trails_id === myTrailObject.trails_id;
@@ -100,7 +100,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
     // get array of trail objects with trail IDs from user's my trails
     // create an array of trail objects for use on my trails view
     self.buildMyTrailsTrailObjectArray = (my_trailsArrayOfObjects) => {
-        console.log('in buildMyTrailsList');
+        //console.log('in buildMyTrailsList');
         // loop through trails_id's the user has added to my trails
         my_trailsArrayOfObjects.forEach((trail)=>{
             // push the corresponding trail object into an array for my_trails
@@ -111,7 +111,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
     /************** $http **************/
     // get trail IDs from my_trails table on DB
     self.getMyTrails = () => {
-        console.log('in getAllRatings');
+        //console.log('in getAllRatings');
         $http.get('/trail/my_trails').then((response) => {
             console.log('getMyTails response.data.rows ', response.data.rows);
             self.buildMyTrailsTrailObjectArray(response.data.rows);
@@ -120,7 +120,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
 
     // get trail ratings from DB
     self.getAllRatings = () => {
-        console.log('in getAllRatings');
+        //console.log('in getAllRatings');
         $http.get('/trail/rating').then((response) => {
             //console.log('getAllRatings  response.data.rows ', response.data.rows);
             // group the ratings by trail_id and
@@ -131,9 +131,9 @@ myApp.service('TrailService', function ($http, UserService, $location) {
 
     // get all trails and ratings from DB
     self.getAllTrails = () => {
-        console.log('in getAllTrails');
+        //console.log('in getAllTrails');
         $http.get('/trail').then((response) => {
-            console.log('self.trails.list', response.data.rows);
+            console.log('getAllTrails, response', response.data.rows);
             // sort trails based on their approval status
             // push trails to self.trails.approved
             // or push trails to self.trails.flagged
@@ -143,7 +143,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
 
     // after admin has approved a trail update it's status in the DB
     self.approveTrail = (trails_id) => {
-        console.log('in approveTrail');
+        //console.log('in approveTrail');
         $http.put('/trail/approve/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
@@ -170,7 +170,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
 
     // users can flag approved trails for admin review
     self.flagTrail = (trails_id) => {
-        console.log('in flagTrail');
+        //console.log('in flagTrail');
         $http.put('/trail/flag/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
@@ -219,7 +219,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
     
     // admin users can remove a trail from the DB
     self.deleteTrail = (trails_id) => {
-        console.log('in deleteTrail');
+        //console.log('in deleteTrail');
         $http.delete('/trail/' + trails_id).then((response) => {
             // get and sort all trails
             self.getAllTrails();
@@ -239,7 +239,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
 
     // users rate a trail 1-5 and store it in a ratings junction table
     self.rateTrailPost = (ratingObject) => {
-        console.log('in rateTrailPost');
+        //console.log('in rateTrailPost');
         $http.post('/trail/rating', ratingObject).then((response) => {
             // if server responds with 'Created'
             if (response.status === 201) {
@@ -269,7 +269,7 @@ myApp.service('TrailService', function ($http, UserService, $location) {
 
     // users add a trail to the my_trails junction table
     self.myTrailPost = (my_trailsObject) => {
-        console.log('in myTrailPost');
+        //console.log('in myTrailPost');
         $http.post('/trail/my_trails', my_trailsObject).then((response) => {
             // if server responds with 'Created'
             if (response.status === 201) {

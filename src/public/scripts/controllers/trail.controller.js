@@ -56,7 +56,6 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
     vm.flagTrail = (trails_id) => {
         console.log('in flagTrail');
         TrailService.flagTrail(trails_id);
-        ; // swal
     }; // end flagTrail
 
     // users provide a rating to a trail and store it in a junction table
@@ -88,13 +87,13 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
             // the page content should dynamically hide using ng-if based on a user being logged in anyway
             // this is more of a backup
         } else {
-            vm.message = swal({
+            swal({
                 title: 'Please Login First',
                 text: 'Must register and login to add a trail to My Trails',
                 type: 'warning',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK'
-            }); // end vm.message
+            }); // end swal
         } // end else
     }; // end addMyTrailPost
 

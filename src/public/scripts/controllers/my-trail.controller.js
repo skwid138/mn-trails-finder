@@ -50,13 +50,13 @@ myApp.controller('MyTrailController', function (TrailService, UserService) {
     vm.deleteMyTrail = (trails_id) => {
         console.log('in deleteTrail');
         TrailService.deleteMyTrail(trails_id);
-        vm.message = swal({
+        swal({
             title: 'Trail Removed!',
             text: 'trail has been removed from my trails',
             type: 'error',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'OK'
-        }); // end vm.message
+        }); // end swal
     }; // end deleteTrail
 
 
