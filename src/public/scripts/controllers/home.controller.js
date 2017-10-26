@@ -92,6 +92,7 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
 
     vm.getAllTrails(); // get all trails
     vm.getUser(); // set user credentials
+
     
 
 }); // end HomeController

@@ -256,6 +256,36 @@ router.get('/rating', (req, res) => {
     }); // end pool connect
 }); // end GET ratings
 
+router.get('/my_trails', (req, res) => {
+    console.log('In rating my_trails GET route.');
+    // check if user is logged in
+    if (req.isAuthenticated()) {
+        const user_id = req.user.user_id;
+        pool.connect((err, client, done) => {
+            if (err) {
+                console.log('GET my_trails connection error ->', err);
+                res.sendStatus(500);
+                done();
+            } else {
+                const queryString = "SELECT trails_id FROM my_trails WHERE user_id=$1";
+                const values = [user_id];
+                client.query(queryString, values, (queryErr, result) => {
+                    if (queryErr) {
+                        console.log('Query GET connection Error ->', queryErr);
+                        res.sendStatus(500);
+                    } else {
+                        res.status(200).send(result);
+                    } // end else
+                    done();
+                }); // end query
+            } // end else
+        }); // end pool connect
+    } else {
+        console.log('not logged in');
+        res.sendStatus(403);
+    } // end else for authentication
+}); // end my_trails GET
+
 // UPDATE trail approval status
 router.put('/approve/:trails_id', (req, res) => {
     console.log('In trail PUT route.');

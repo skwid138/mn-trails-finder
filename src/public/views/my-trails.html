@@ -1,14 +1,8 @@
 <section>
     <p>my trails controller</p>
 
-    <div ng-repeat="trail in mtc.my_trails.list">{{trail}}</div>
+    <div ng-repeat="trail in mtc.trails.my_trails">{{trail}}</div>
 
-    <ng-map default-style="true" center="current-location" zoom="14">
-        <info-window id="foo" position="current-location">
-            <div ng-non-bindable="">
-                
-            </div>
-        </info-window>
-    </ng-map>
+   
 
 </section>

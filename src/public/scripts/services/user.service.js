@@ -22,6 +22,9 @@ myApp.service('UserService', function($http, $location) {
                 self.userObject.admin = response.data.admin;
             } else {
                 console.log('getUser failed', response);
+                if($location.path() === '/admin' || '/my-trails') {
+                    $location.path('/');
+                } // end if
             } // end else
         }); // end GET
     }; // end getUser

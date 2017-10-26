@@ -31,6 +31,8 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
             console.log(JSON.stringify(result.filesUploaded));
         }); // end filestackClient.pick
     }; // end addPhoto
+
+    // something to collect latitude and longitude string and write to DB if user would like
     
 
     // list of states to display on DOM in drop down menu

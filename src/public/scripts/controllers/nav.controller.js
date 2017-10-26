@@ -7,7 +7,7 @@ This controller is for the nav bar and user login
 - displays username after successful login
 - displays My Trails button
 */
-myApp.controller('NavController', function(UserService, $http, $location) {
+myApp.controller('NavController', function (UserService, $http, $location, TrailService) {
     console.log('in NavController');
     const vm = this;
 
@@ -40,6 +40,8 @@ myApp.controller('NavController', function(UserService, $http, $location) {
                     vm.showInputs = false;
                     // clear input
                     vm.user.password = null;
+                    // generate my trails list
+                    TrailService.getMyTrails();
                     // if the user is an admin redirect to admin view
                     if (response.data.admin) {
                         vm.isAdmin = true;
