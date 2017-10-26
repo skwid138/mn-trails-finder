@@ -87,34 +87,24 @@ myApp.service('TrailService', function ($http, UserService) {
         self.trails.trailsView = trailObject;
     }; // end setTrailsViewObject
 
-    // creates array of trails_id's
-    self.buildMyTrailsArrayOfTrailIds = (my_trailsArrayOfObjects) => {
-        console.log('in setMyTrails');
-        // make an array of objects where the user_id matches
-        return my_trailsArrayOfObjects.map((trail) => {
-            return trail.trail_id;
-        }); // end map
-    }; // end setMyTrailsIds
-
     // search for approved trail objects that match 
     // a trails_id passed in from the user's my trails array
-    self.findMyTrails = (trail_id) => {
+    self.findMyTrails = (myTrailObject) => {
         console.log('in findMyTrails');
         // return a trail Object if one matches the passed in trail_id
         return self.trails.approved.filter((trail) => {
-            return trail.trails_id === trails_id;
+            return trail.trails_id === myTrailObject.trails_id;
         }); // end filter
     }; // end findMyTrails
 
-    // get array of trail IDs from user's my trails
+    // get array of trail objects with trail IDs from user's my trails
     // create an array of trail objects for use on my trails view
     self.buildMyTrailsTrailObjectArray = (my_trailsArrayOfObjects) => {
         console.log('in buildMyTrailsList');
-        const trailsIdArray = buildMyTrailsArrayOfTrailIds(my_trailsArrayOfObjects);
         // loop through trails_id's the user has added to my trails
-        trailsIdArray.forEach((trail)=>{
+        my_trailsArrayOfObjects.forEach((trail)=>{
             // push the corresponding trail object into an array for my_trails
-            self.trails.my_trails.push(self.findMyTrails(trail));
+            self.trails.my_trails.push(self.findMyTrails(trail)[0]);
         }); // end forEach
     }; // end createMyTrailsList
 
