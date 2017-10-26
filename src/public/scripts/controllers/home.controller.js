@@ -31,8 +31,7 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
         TrailService.setTrailsViewObject(trail);
     }; // end viewTrailDetails
 
-/************** DB GETs **************/
-
+/************** $http **************/
     // gets all trails from service and populates trails array
     vm.getAllTrails = () => {
         console.log('in hc getAllTrails');
@@ -45,9 +44,6 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
         UserService.getUser();
     }; // end getUser
 
-
-/************** DB POSTs **************/
-
     // users provide a rating to a trail and store it in a junction table
     vm.rateTrailPost = (trails_id, rating_value) => {
         console.log('in rateTrail');
@@ -58,7 +54,7 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
         }; // end ratingObject
         console.log('vm.ratingObject', vm.ratingObject);
         // POST to DB
-        vm.message = TrailService.rateTrailPost(vm.ratingObject);
+        TrailService.rateTrailPost(vm.ratingObject);
     }; // end rateTrailPost
 
     // users can add trail to their my-trails page

@@ -168,6 +168,33 @@ myApp.service('TrailService', function ($http, UserService) {
         }); // end PUT
     }; // end approveTrail
 
+    // users can flag approved trails for admin review
+    self.flagTrail = (trail_id) => {
+        console.log('in flagTrail');
+        $http.put('/trail/flag/' + trails_id).then((response) => {
+            // get and sort all trails
+            self.getAllTrails();
+            return swal({
+                title: 'Trail Flagged!',
+                text: 'trail will be removed from home and submitted for admin approval',
+                type: 'warning',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            }); // end swal
+        }, (error) => {
+            console.log('error ', error);
+            if (error.status === 403) {
+                return swal({
+                    title: 'Please Login First',
+                    text: 'trails can only be flagged by logged in users',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end if
+        }); // end PUT
+    }; // end flagTrail
+
     // users can remove a trail from their my trails list
     self.deleteMyTrail = (trails_id) => {
         console.log('in deleteMyTrail');

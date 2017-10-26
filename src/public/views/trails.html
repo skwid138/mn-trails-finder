@@ -27,6 +27,7 @@
             <md-card-actions layout="row">
                 <!-- button to add trail to current users my_trail page -->
                 <md-button ng-click="tc.myTrailPost(tc.trails.trailsView.trails_id)" class="md-icon-button" aria-label="My-Trails">
+                    <md-tooltip md-direction="left">Add Trail to My Trails</md-tooltip>
                     <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
                 </md-button>
                 <!-- FAB for trail rating -->
@@ -81,6 +82,12 @@
                 </div>
                 <p>{{tc.trails.trailsView.trail_description}}</p>
                 <ng-map center="{{tc.map.ll}}" zoom="{{map.zoom}}"></ng-map>
+                <div layout="row" layout-align="end end">
+                    <md-button ng-click="tc.flagTrail(tc.trails.trailsView.trails_id)" class="md-icon-button" aria-label="Flag">
+                        <md-tooltip md-direction="left">Flag Trail for Admin Review</md-tooltip>
+                        <md-icon md-svg-icon="images/svg/flag.svg"></md-icon>
+                    </md-button>
+                </div>
             </md-card-content>
         </md-card>
     </md-content>

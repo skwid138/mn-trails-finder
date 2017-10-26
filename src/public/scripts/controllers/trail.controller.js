@@ -51,6 +51,14 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
 
     /************** $http **************/
 
+    // user can flag trail for admin review and 
+    // remove it from showing up in the home view
+    vm.flagTrail = (trails_id) => {
+        console.log('in flagTrail');
+        TrailService.flagTrail(trails_id);
+        ; // swal
+    }; // end flagTrail
+
     // users provide a rating to a trail and store it in a junction table
     vm.rateTrailPost = (trails_id, rating_value) => {
         console.log('in rateTrail');
@@ -61,7 +69,7 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
         }; // end ratingObject
         console.log('vm.ratingObject', vm.ratingObject);
         // POST to DB
-        vm.message = TrailService.rateTrailPost(vm.ratingObject);
+        TrailService.rateTrailPost(vm.ratingObject);
     }; // end rateTrailPost
 
     // users can add trail to their my-trails page
@@ -83,7 +91,7 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
             vm.message = swal({
                 title: 'Please Login First',
                 text: 'Must register and login to add a trail to My Trails',
-                type: 'error',
+                type: 'warning',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK'
             }); // end vm.message
