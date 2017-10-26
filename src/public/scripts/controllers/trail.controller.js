@@ -48,13 +48,8 @@ myApp.controller('TrailController', function (TrailService, UserService, $routeP
     // if user - have ability to flag trail for approval again
     // if admin user - can delete or edit trail without resetting approved flag
 
-    // vm.NgMap.getMap().then((map) => {
-    //     console.log(map.getCenter());
-    //     console.log('markers', map.markers);
-    //     console.log('shapes', map.shapes);
-    // });
 
-    /************** DB POSTs **************/
+    /************** $http **************/
 
     // users provide a rating to a trail and store it in a junction table
     vm.rateTrailPost = (trails_id, rating_value) => {

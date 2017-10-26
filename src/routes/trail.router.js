@@ -320,19 +320,48 @@ router.put('/approve/:trails_id', (req, res) => {
 }); // end PUT
 
 // DELETE my_trail from DB
-
+router.delete('/my_trails/:trails_id', (req, res) => {
+    console.log('In my_trails DELETE route.');
+    // check if user is logged in
+    if (req.isAuthenticated()) {
+        // trails_id and user_id from client
+        const user_id = req.user.user_id;
+        const trails_id = req.params.trails_id;
+        pool.connect((err, client, done) => {
+            if (err) {
+                console.log('DELETE my_trails connection error ->', err);
+                res.sendStatus(500);
+                done();
+            } else {
+                const queryString = "DELETE FROM my_trails WHERE (user_id=$1 AND trails_id=$2)";
+                const values = [user_id, trails_id];
+                client.query(queryString, values, (queryErr, result) => {
+                    if (queryErr) {
+                        console.log('Query DELETE connection Error ->', queryErr);
+                        res.sendStatus(500);
+                    } else {
+                        res.sendStatus(201);
+                    } // end else
+                    done();
+                }); // end query
+            } // end else
+        }); // end pool connect
+    } else {
+        console.log('not logged in');
+        res.sendStatus(403);
+    } // end else
+}); // end DELETE
 
 // DELETE trail from DB
 router.delete('/:trails_id', (req, res) => {
     console.log('In trail DELETE route.');
-
-    // check if user is logged in
+    // check if user is logged in and is an admin
     if (req.isAuthenticated() && req.user.admin) {
         // trails_id from client
         const trails_id = req.params.trails_id;
         pool.connect((err, client, done) => {
             if (err) {
-                console.log('DELETE connection error ->', err);
+                console.log('DELETE trail connection error ->', err);
                 res.sendStatus(500);
                 done();
             } else {
@@ -353,7 +382,7 @@ router.delete('/:trails_id', (req, res) => {
         console.log('not logged in');
         res.sendStatus(403);
     } // end else
-}); // end DELETE
+}); // end DELETE trail
 
 // export
 module.exports = router;

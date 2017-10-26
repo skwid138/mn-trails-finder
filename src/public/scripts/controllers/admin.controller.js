@@ -25,7 +25,7 @@ myApp.controller('AdminController', function (UserService, TrailService, $locati
         TrailService.setTrailsViewObject(trail);
     }; // end viewTrailDetails
 
-    /************** DB GETs **************/
+    /************** $http **************/
     // get user credentials
     vm.getUser = () => {
         console.log('in getUSer');
@@ -38,7 +38,6 @@ myApp.controller('AdminController', function (UserService, TrailService, $locati
         TrailService.getAllTrails();
     }; // end getAllTrails
 
-    /************** DB PUTs/DELETEs **************/
     // updates trail.approved as true
     vm.approveTrail = (trails_id) => {
         console.log('in approveTrail');

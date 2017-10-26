@@ -108,9 +108,7 @@ myApp.service('TrailService', function ($http, UserService) {
         }); // end forEach
     }; // end createMyTrailsList
 
-
     /************** $http **************/
-
     // get trail IDs from my_trails table on DB
     self.getMyTrails = () => {
         console.log('in getAllRatings');
@@ -170,6 +168,26 @@ myApp.service('TrailService', function ($http, UserService) {
         }); // end PUT
     }; // end approveTrail
 
+    // users can remove a trail from their my trails list
+    self.deleteMyTrail = (trails_id) => {
+        console.log('in deleteMyTrail');
+        $http.delete('/trail/my_trails' + trails_id).then((response) => {
+            // get my_trails
+            self.getMyTrails();
+        }, (error) => {
+            console.log('error ', error);
+            if (error.status === 403) {
+                return swal({
+                    title: 'Must be Logged In',
+                    text: 'trails can only be removed from my trails by a user',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }); // end swal
+            } // end if
+        }); // end PUT
+    }; // end deleteMyTrail
+    
     // admin users can remove a trail from the DB
     self.deleteTrail = (trails_id) => {
         console.log('in deleteTrail');

@@ -15,7 +15,12 @@ myApp.controller('MyTrailController', function (TrailService, UserService) {
     // object to hold list of trails
     vm.trails = TrailService.trails;
 
-
+    // toggles for rating stars to change color and fill
+    vm.toggleOne = false;
+    vm.toggleTwo = false;
+    vm.toggleThree = false;
+    vm.toggleFour = false;
+    vm.toggleFive = false;
 
     // clicking a trail's card redirects to /trails/trail_name
     vm.viewTrailDetails = (trail) => {
@@ -28,7 +33,7 @@ myApp.controller('MyTrailController', function (TrailService, UserService) {
     }; // end viewTrailDetails
 
 
-    /************** DB GETs **************/
+    /************** $http **************/
     // get user credentials
     vm.getUser = () => {
         console.log('in getUSer');
@@ -40,6 +45,19 @@ myApp.controller('MyTrailController', function (TrailService, UserService) {
         console.log('in hc getAllTrails');
         TrailService.getAllTrails();
     }; // end getAllTrails
+
+    // remove trail from my trails
+    vm.deleteMyTrail = (trails_id) => {
+        console.log('in deleteTrail');
+        TrailService.deleteMyTrail(trails_id);
+        vm.message = swal({
+            title: 'Trail Removed!',
+            text: 'trail has been removed from my trails',
+            type: 'error',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        }); // end vm.message
+    }; // end deleteTrail
 
 
     

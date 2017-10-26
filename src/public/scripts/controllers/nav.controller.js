@@ -15,7 +15,7 @@ myApp.controller('NavController', function (UserService, $http, $location, Trail
     vm.user = {
         username: '',
         password: ''
-    };
+    }; // end user object
 
     // boolean for ng-show: true displays inputs
     vm.showInputs = true;
@@ -24,6 +24,7 @@ myApp.controller('NavController', function (UserService, $http, $location, Trail
     vm.isAdmin = false;
 
     // message string for user login
+    // not being used now with sweetalert2
     vm.message = '';
 
     // handles user login and authentication
