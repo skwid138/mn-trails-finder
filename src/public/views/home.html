@@ -58,15 +58,18 @@
             <md-card ng-repeat="trail in hc.trails.approved" layout="row" ng-value="trail.trails_id">
                 <div flex="30" layout="column">
                     <md-card-title >
-                        <md-card-title-text layout="column" layout-align="start start" ng-click="hc.viewTrailDetails(trail)">
-                            <span class="md-headline">{{trail.trail_name}}</span>
-                            <span class="md-subhead">{{trail.park_name}}</span>
-                            <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
-                            <span class="md-subhead">{{trail.length}}</span>
-                            <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                        <md-card-title-text layout="column" layout-align="start start">
+                            <div ng-click="hc.viewTrailDetails(trail)" layout="column" layout-align="start start">
+                                <span class="md-headline">{{trail.trail_name}}</span>
+                                <span class="md-subhead">{{trail.park_name}}</span>
+                                <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
+                                <span class="md-subhead">{{trail.length}}</span>
+                                <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                            </div>
                             <!-- button to add trail to current users my_trail page -->
                             <!-- ng-if="hc.user.userName" -->
-                            <md-button style="background-color: rgb(253, 109, 5);" ng-click="hc.myTrailPost(trail.trails_id)" class="md-fab md-mini" aria-label="My-Trails">
+                            <md-button style="background-color: rgb(253, 109, 5);" ng-click="hc.myTrailPost(trail.trails_id)" class="md-fab md-mini"
+                                aria-label="My-Trails">
                                 <md-tooltip md-direction="left">Add Trail to My Trails</md-tooltip>
                                 <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
                             </md-button>
@@ -110,7 +113,7 @@
                         </div>
                     </md-card-actions>
                 </div>
-                <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>
+                <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding ng-click="hc.viewTrailDetails(trail)"> 
                     <div flex layout="row">
                         <p layout-padding flex="60">{{trail.trail_description}}</p>
                         <div flex="40" class="md-media-xl card-media">
