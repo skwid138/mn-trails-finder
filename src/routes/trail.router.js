@@ -37,7 +37,8 @@ router.post('/', (req, res) => {
             trail_description : req.body.trail_description,
             photo : req.body.photo, // not being used
             ll : req.body.ll, // not being used
-            gain : req.body.gain // not being used
+            gain : req.body.gain, // not being used
+            approved : req.user.admin // if admin user submits trail then automatically approve it
         }; // end trail
         console.log('new trail: ', trail);
 
@@ -47,8 +48,8 @@ router.post('/', (req, res) => {
                 res.sendStatus(500);
                 done();
             } else {
-                const queryString = "INSERT INTO trails (park_name, trail_name, address1, address2, city, state, zip, length, dog, child, paved, water, parking, parking_free, park_pass, hiking, biking, skiing, horse, atv, snowmobile, trail_description, photo, ll, gain) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) RETURNING trails_id";
-                const values = [trail.park_name, trail.trail_name, trail.address1, trail.address2, trail.city, trail.state, trail.zip, trail.length, trail.dog, trail.child, trail.paved, trail.water, trail.parking, trail.parking_free, trail.park_pass, trail.hiking, trail.biking, trail.skiing, trail.horse, trail.atv, trail.snowmobile, trail.trail_description, trail.photo, trail.ll, trail.gain];
+                const queryString = "INSERT INTO trails (park_name, trail_name, address1, address2, city, state, zip, length, dog, child, paved, water, parking, parking_free, park_pass, hiking, biking, skiing, horse, atv, snowmobile, trail_description, photo, ll, gain, approved) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26) RETURNING trails_id";
+                const values = [trail.park_name, trail.trail_name, trail.address1, trail.address2, trail.city, trail.state, trail.zip, trail.length, trail.dog, trail.child, trail.paved, trail.water, trail.parking, trail.parking_free, trail.park_pass, trail.hiking, trail.biking, trail.skiing, trail.horse, trail.atv, trail.snowmobile, trail.trail_description, trail.photo, trail.ll, trail.gain, trail.approved];
                 client.query(queryString, values, (queryErr, result) => {
                     if (queryErr) {
                         console.log('Query POST connection Error ->', queryErr);

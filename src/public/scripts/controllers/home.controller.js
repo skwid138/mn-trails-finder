@@ -21,6 +21,9 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
     vm.toggleFour = false;
     vm.toggleFive = false;
 
+    vm.search = {};
+
+
     // clicking a trail's card redirects to /trails/trail_name
     vm.viewTrailDetails = (trail) => {
         console.log('in viewTrailDetails');

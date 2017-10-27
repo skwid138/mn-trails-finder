@@ -13,10 +13,6 @@ myApp.service('TrailService', function ($http, UserService, $location) {
         my_trails: [] // based on the logged in user this contains all trails a user has added to their my-trails list
     }; // end self.trails
 
-    // variable to hold user data for generating my-trails list
-    const user = UserService.userObject;
-
-
     /******** make functions private to service by not saying self.funcName *******/
 
     // sort trails.list and push trails flagged true for approved

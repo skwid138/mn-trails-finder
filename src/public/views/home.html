@@ -1,6 +1,60 @@
 <section class="widthCenter">
    <div class="md-padding">
         <md-content layout="column">
+            <!-- Search Filter -->
+            <div layout="row">
+                <md-menu flex="10">
+                    <md-button aria-label="filter" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                        <md-icon md-menu-origin md-svg-icon="images/svg/search.svg"></md-icon>
+                        <md-tooltip md-direction="down">Filter Trails</md-tooltip>
+                    </md-button>
+                    <md-menu-content layout="column">
+                        <div layout="row" flex="85">
+                            <md-menu-item layout="column">
+                                <h3>Info</h3>
+                                <md-switch ng-model="hc.search.dog">Dogs Allowed</md-switch>
+                                <md-switch ng-model="hc.search.child">ChildAccessible</md-switch>
+                                <md-switch ng-model="hc.search.paved">Paved Trails</md-switch>
+                                <md-switch ng-model="hc.search.water">Bodies of Water</md-switch>
+                            </md-menu-item>
+                            <md-menu-item layout="column">
+                                <h3>Parking</h3>
+                                <md-switch ng-model="hc.search.parking">Parking Available</md-switch>
+                                <md-switch ng-model="hc.search.parking_free">Free Parking</md-switch>
+                                <md-switch ng-model="hc.search.park_pass">Park Pass Required</md-switch>
+                            </md-menu-item>
+                            <md-menu-item layout="column">
+                                <h3>Trail Types</h3>
+                                <md-switch ng-model="hc.search.hiking">Hiking</md-switch>
+                                <md-switch ng-model="hc.search.skiing">Skiing </md-switch>
+                                <md-switch ng-model="hc.search.biking">Biking</md-switch>
+                            </md-menu-item>
+                            <md-menu-item layout="column">
+                                <h3>Mounts and Vehicles</h3>
+                                <md-switch ng-model="hc.search.horse">Horseback Riding</md-switch>
+                                <md-switch ng-model="hc.search.atv">ATV</md-switch>
+                                <md-switch ng-model="hc.search.snowmobile">Snowmobile</md-switch>
+                            </md-menu-item>
+                        </div>
+                        <div flex="5">
+                            <md-menu-item>
+                                <md-input-container class="md-block">
+                                    <md-checkbox name="lengthOne" ng-model="hc.search.lengthOne">0-3 miles</md-checkbox>
+                                    <md-checkbox name="lengthFive" ng-model="hc.search.lengthFive">3-5 miles</md-checkbox>
+                                    <md-checkbox name="lengthSeven" ng-model="hc.search.lengthSeven">5-7 miles</md-checkbox>
+                                    <md-checkbox name="lengthTen" ng-model="hc.search.lengthTen">7-10 miles</md-checkbox>
+                                    <md-checkbox name="lengthFifteen" ng-model="hc.search.lengthFifteen">10-15 miles</md-checkbox>
+                                    <md-checkbox name="lengthLong" ng-model="hc.search.lengthLong">&#62;15 miles</md-checkbox>
+                                </md-input-container>
+                            </md-menu-item>
+                        </div>
+                    </md-menu-content>
+                </md-menu>
+                <md-input-container flex="80" class="md-block" flex-gt-xs>
+                    <label>Search</label>
+                    <input name="search" ng-model="hc.search.search">
+                </md-input-container>
+            </div>
             <md-card ng-repeat="trail in hc.trails.approved" layout="row" ng-value="trail.trails_id">
                 <div flex="70" layout="row">
                     <md-card-title flex="30">

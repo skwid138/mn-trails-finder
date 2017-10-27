@@ -8,15 +8,15 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
     console.log('in AddTrailController');
     const vm = this;
 
-    // object for POST
-    vm.trail = {
-        state: 'MN', // default MN
-    }; // end trail
-
     // sets ng-if based on user being logged in
     // must be a user to add a trail
     vm.user = UserService.userObject;
     vm.user.loggedIn = false;
+
+    // object for POST
+    vm.trail = {
+        state: 'MN', // default MN
+    }; // end trail
 
     // Filestack API
     vm.filestackAPI = 'AcP0YKzMkT9GzhibQbZytz';
@@ -60,13 +60,24 @@ myApp.controller('AddTrailController', function (TrailService, UserService, $htt
             if (response.status === 201) {
                 // trail_id of newly created trail
                 console.log(response.data.rows[0].trails_id);
-                return swal({
-                    title: 'Trail Added',
-                    text: 'the trail has been submitted for approval',
-                    type: 'success',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }); // end swal
+                $location.path('/');
+                if (UserService.userObject.admin) {
+                    return swal({
+                        title: 'Trail Added',
+                        text: 'the trail is now available on the home page',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }); // end swal
+                } else {
+                    return swal({
+                        title: 'Trail Added',
+                        text: 'the trail has been submitted for approval',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }); // end swal
+                } // end else
             } // end if
         }, (error) => {
             console.log('error ', error);
