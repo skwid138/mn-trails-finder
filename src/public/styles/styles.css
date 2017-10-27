@@ -39,3 +39,7 @@ md-nav-bar .md-button._md-nav-button.md-unselected {
 md-menu-content {
     height: 30vh;
 }
+
+.md-chips {
+    box-shadow: 0 0px !important;
+}
