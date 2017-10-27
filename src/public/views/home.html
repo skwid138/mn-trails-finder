@@ -5,7 +5,7 @@
             <div layout="row">
                 <md-menu flex="10">
                     <md-button aria-label="filter" class="md-icon-button" ng-click="$mdMenu.open($event)">
-                        <md-icon md-menu-origin md-svg-icon="images/svg/search.svg"></md-icon>
+                        <md-icon md-menu-origin md-svg-icon="images/svg/sliders.svg"></md-icon>
                         <md-tooltip md-direction="down">Filter Trails</md-tooltip>
                     </md-button>
                     <md-menu-content layout="column">
@@ -51,7 +51,7 @@
                     </md-menu-content>
                 </md-menu>
                 <md-input-container flex="80" class="md-block" flex-gt-xs>
-                    <label>Search</label>
+                    <label>search by names and keywords</label>
                     <input name="search" ng-model="hc.search.search">
                 </md-input-container>
             </div>
@@ -68,8 +68,7 @@
                             </div>
                             <!-- button to add trail to current users my_trail page -->
                             <!-- ng-if="hc.user.userName" -->
-                            <md-button style="background-color: rgb(253, 109, 5);" ng-click="hc.myTrailPost(trail.trails_id)" class="md-fab md-mini"
-                                aria-label="My-Trails">
+                            <md-button style="background-color: rgb(253, 109, 5);" ng-click="hc.myTrailPost(trail.trails_id)" class="md-fab md-mini" aria-label="My-Trails">
                                 <md-tooltip md-direction="left">Add Trail to My Trails</md-tooltip>
                                 <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
                             </md-button>

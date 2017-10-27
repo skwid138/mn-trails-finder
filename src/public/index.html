@@ -67,6 +67,11 @@
                 <md-nav-item ng-if="nc.isAdmin" md-nav-href="/#!/admin" name="admin-tools">Admin Tools</md-nav-item>
                 <!-- these fields will need to be hidden by ng-if after a user is logged in -->
                 <div flex layout="row" layout-align="end start" ng-show="nc.showInputs">
+                    <!-- for logo and name -->
+                    <div flex layout="row" layout-align="center start">
+                        <img class="logoImg" ng-src="images/logo.png" />
+                        <h2>MN Trails Finder</h2>
+                    </div>
                     <md-input-container>
                         <input type="text" placeholder="username" ng-model="nc.user.username">
                     </md-input-container>
@@ -80,8 +85,13 @@
                     </div>
                 </div>
                 <div flex layout="row" layout-align="end start" ng-hide="nc.showInputs">
+                    <!-- for logo and name -->
+                    <div flex layout="row" layout-align="center start">
+                        <img class="logoImg" ng-src="images/logo.png" />
+                        <h2>MN Trails Finder</h2>
+                    </div>
                     <div flex="15">
-                        <h3>Hello, {{nc.user.username}} !</h3>
+                        <h3 flex>Welcome, &nbsp; {{nc.user.username}} !</h3>
                     </div>
                     <div flex="15">
                         <!-- not routing - maybe removed md-nav-href and use href? -->

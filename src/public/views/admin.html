@@ -5,7 +5,7 @@
                 <div flex="80" layout="row">
                     <md-card-title flex="30">
                         <!-- added ng-click for redirect using function - needs styling or something -->
-                        <md-card-title-text layout="column" layout-align="start start" ng-click="hc.viewTrailDetails(trail)">
+                        <md-card-title-text layout="column" layout-align="start start" ng-click="ac.viewTrailDetails(trail)">
                             <span class="md-headline">{{trail.trail_name}}</span>
                             <span class="md-subhead">{{trail.park_name}}</span>
                             <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
@@ -13,22 +13,24 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding>
-                        <p>{{trail.trail_description}}</p>
-                        <md-chips>
-                            <md-chip ng-show="trail.dog">dogs</md-chip>
-                            <md-chip ng-show="trail.child">kids</md-chip>
-                            <md-chip ng-show="trail.paved">paved</md-chip>
-                            <md-chip ng-show="trail.water">water</md-chip>
-                            <md-chip ng-show="trail.parking">parking available</md-chip>
-                            <md-chip ng-show="trail.parking_free">free parking</md-chip>
-                            <md-chip ng-show="trail.park_pass">park pass</md-chip>
-                            <md-chip ng-show="trail.hiking">hiking</md-chip>
-                            <md-chip ng-show="trail.skiing">skiing</md-chip>
-                            <md-chip ng-show="trail.biking">biking</md-chip>
-                            <md-chip ng-show="trail.horse">horseback</md-chip>
-                            <md-chip ng-show="trail.atv">atv</md-chip>
-                            <md-chip ng-show="trail.snowmobile">snowmobile</md-chip>
-                        </md-chips>
+                        <div layout="column" ng-click="ac.viewTrailDetails(trail)">
+                            <p>{{trail.trail_description}}</p>
+                            <md-chips>
+                                <md-chip ng-show="trail.dog">dogs</md-chip>
+                                <md-chip ng-show="trail.child">kids</md-chip>
+                                <md-chip ng-show="trail.paved">paved</md-chip>
+                                <md-chip ng-show="trail.water">water</md-chip>
+                                <md-chip ng-show="trail.parking">parking available</md-chip>
+                                <md-chip ng-show="trail.parking_free">free parking</md-chip>
+                                <md-chip ng-show="trail.park_pass">park pass</md-chip>
+                                <md-chip ng-show="trail.hiking">hiking</md-chip>
+                                <md-chip ng-show="trail.skiing">skiing</md-chip>
+                                <md-chip ng-show="trail.biking">biking</md-chip>
+                                <md-chip ng-show="trail.horse">horseback</md-chip>
+                                <md-chip ng-show="trail.atv">atv</md-chip>
+                                <md-chip ng-show="trail.snowmobile">snowmobile</md-chip>
+                            </md-chips>
+                        </div>
                         <md-card-actions layout="row">
                             <md-button ng-click="ac.approveTrail(trail.trails_id)" flex="85" class="md-raised" style="background: rgb(58, 221, 142);" aria-label="Approve">Approve</md-button>
                             <md-button ng-click="ac.deleteTrail(trail.trails_id)" flex="15" class="md-icon-button" aria-label="Delete">

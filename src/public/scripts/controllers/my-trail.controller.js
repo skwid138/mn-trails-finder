@@ -4,7 +4,7 @@
 This controller is for my trails view
 - shows trails a user has added to their My Trails list
 */
-myApp.controller('MyTrailController', function (TrailService, UserService) {
+myApp.controller('MyTrailController', function (TrailService, UserService, $location) {
     console.log('in MyTrailController');
     const vm = this;
 
