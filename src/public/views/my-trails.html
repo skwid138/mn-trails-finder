@@ -1,6 +1,92 @@
-<section>
+<section class="widthCenter">
     <h1>My Trails</h1>
+    <md-content>
+        <md-card ng-repeat="trail in mtc.trails.my_trails" layout="row" ng-value="trail.trails_id">
+            <div flex="30" layout="column">
+                <md-card-title>
+                    <md-card-title-text layout="column" layout-align="start start">
+                        <div ng-click="mtc.viewTrailDetails(trail)" layout="column" layout-align="start start">
+                            <span class="md-headline">{{trail.trail_name}}</span>
+                            <span class="md-subhead">{{trail.park_name}}</span>
+                            <span class="md-subhead">{{trail.city}}, {{trail.state}}</span>
+                            <span class="md-subhead">{{trail.length}}</span>
+                            <span ng-if="trail.ratingAverage" class="md-subhead">Average Rating: {{trail.ratingAverage}}</span>
+                        </div>
+                        <!-- button to add trail to current users my_trail page -->
+                        <!-- ng-if="mtc.user.userName" -->
+                        <md-button style="background-color: rgb(253, 109, 5);" ng-click="mtc.myTrailPost(trail.trails_id)" class="md-fab md-mini"
+                            aria-label="My-Trails">
+                            <md-tooltip md-direction="left">Add Trail to My Trails</md-tooltip>
+                            <md-icon md-svg-icon="images/svg/compass.svg"></md-icon>
+                        </md-button>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-actions layout="row">
+                    <!-- FAB for trail rating -->
+                    <div layout="row" layout-align="center center">
+                        <md-button ng-click="mtc.rateTrailPost(trail.trails_id, 1)" aria-label="One" class="md-fab md-raised md-mini ratingStar" ng-mouseenter="trail.toggleOne=true"
+                            ng-mouseleave="trail.toggleOne=false">
+                            <md-tooltip md-direction="down">not that great</md-tooltip>
+                            <md-icon class="ratingIcon" ng-hide="trail.toggleOne" md-svg-src="images/svg/star-empty.svg" aria-label="One"></md-icon>
+                            <md-icon class="ratingIcon" ng-show="trail.toggleOne" md-svg-src="images/svg/star.svg" aria-label="One"></md-icon>
+                        </md-button>
+                        <md-button ng-click="mtc.rateTrailPost(trail.trails_id, 2)" aria-label="Two" class="md-fab md-raised md-mini ratingStar" ng-value="2"
+                            ng-mouseenter="trail.toggleTwo=true; trail.toggleOne=true" ng-mouseleave="trail.toggleTwo=false; trail.toggleOne=false">
+                            <md-tooltip md-direction="down">could be better</md-tooltip>
+                            <md-icon class="ratingIcon" ng-hide="trail.toggleTwo" md-svg-src="images/svg/star-empty.svg" aria-label="Two"></md-icon>
+                            <md-icon class="ratingIcon" ng-show="trail.toggleTwo" md-svg-src="images/svg/star.svg" aria-label="Two"></md-icon>
+                        </md-button>
+                        <md-button ng-click="mtc.rateTrailPost(trail.trails_id, 3)" aria-label="Three" class="md-fab md-raised md-mini ratingStar"
+                            ng-value="3" ng-mouseenter="trail.toggleThree=true; trail.toggleTwo=true; trail.toggleOne=true" ng-mouseleave="trail.toggleThree=false; trail.toggleTwo=false; trail.toggleOne=false">
+                            <md-tooltip md-direction="down">average</md-tooltip>
+                            <md-icon class="ratingIcon" ng-hide="trail.toggleThree" md-svg-src="images/svg/star-empty.svg" aria-label="Three"></md-icon>
+                            <md-icon class="ratingIcon" ng-show="trail.toggleThree" md-svg-src="images/svg/star.svg" aria-label="Three"></md-icon>
+                        </md-button>
+                        <md-button ng-click="mtc.rateTrailPost(trail.trails_id, 4)" aria-label="Four" class="md-fab md-raised md-mini ratingStar"
+                            ng-value="4" ng-mouseenter="trail.toggleFour=true; trail.toggleThree=true; trail.toggleTwo=true; trail.toggleOne=true"
+                            ng-mouseleave="trail.toggleFour=false; trail.toggleThree=false; trail.toggleTwo=false; trail.toggleOne=false">
+                            <md-tooltip md-direction="down">great</md-tooltip>
+                            <md-icon class="ratingIcon" ng-hide="trail.toggleFour" md-svg-src="images/svg/star-empty.svg" aria-label="Four"></md-icon>
+                            <md-icon class="ratingIcon" ng-show="trail.toggleFour" md-svg-src="images/svg/star.svg" aria-label="Four"></md-icon>
+                        </md-button>
+                        <md-button ng-click="mtc.rateTrailPost(trail.trails_id, 5)" aria-label="Five" class="md-fab md-raised md-mini ratingStar"
+                            ng-value="5" ng-mouseenter="trail.toggleFive=true; trail.toggleFour=true; trail.toggleThree=true; trail.toggleTwo=true; trail.toggleOne=true"
+                            ng-mouseleave="trail.toggleFive=false; trail.toggleFour=false;
+                                                                                    trail.toggleThree=false; trail.toggleTwo=false; trail.toggleOne=false">
+                            <md-tooltip md-direction="down">Everyone should Go Here!</md-tooltip>
+                            <md-icon class="ratingIcon" ng-hide="trail.toggleFive" md-svg-src="images/svg/star-empty.svg" aria-label="Five"></md-icon>
+                            <md-icon class="ratingIcon" ng-show="trail.toggleFive" md-svg-src="images/svg/star.svg" aria-label="Five"></md-icon>
+                        </md-button>
+                    </div>
+                </md-card-actions>
+            </div>
+            <md-card-content layout="column" layout-align="space-between" flex="70" layout-padding ng-click="mtc.viewTrailDetails(trail)">
+                <div flex layout="row">
+                    <p layout-padding flex="60">{{trail.trail_description}}</p>
+                    <div flex="40" class="md-media-xl card-media">
+                        <img class="md-card-image listImg" ng-src="{{trail.photo}}" />
+                    </div>
+                </div>
+                <md-chips flex="25" layout="row" layout-alig="end start">
+                    <md-chip ng-show="trail.dog">dogs</md-chip>
+                    <md-chip ng-show="trail.child">kids</md-chip>
+                    <md-chip ng-show="trail.paved">paved</md-chip>
+                    <md-chip ng-show="trail.water">water</md-chip>
+                    <md-chip ng-show="trail.parking">parking available</md-chip>
+                    <md-chip ng-show="trail.parking_free">free parking</md-chip>
+                    <md-chip ng-show="trail.park_pass">park pass</md-chip>
+                    <md-chip ng-show="trail.hiking">hiking</md-chip>
+                    <md-chip ng-show="trail.skiing">skiing</md-chip>
+                    <md-chip ng-show="trail.biking">biking</md-chip>
+                    <md-chip ng-show="trail.horse">horseback</md-chip>
+                    <md-chip ng-show="trail.atv">atv</md-chip>
+                    <md-chip ng-show="trail.snowmobile">snowmobile</md-chip>
+                </md-chips>
+            </md-card-content>
+        </md-card>
+        </md-content>
+    </md-content>
 
-    <div ng-repeat="trail in mtc.trails.my_trails">{{trail}}</div>
+    <div >{{trail}}</div>
 
 </section>
