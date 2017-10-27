@@ -77,8 +77,8 @@
                     <md-chip ng-show="tc.trails.trailsView.atv">atv</md-chip>
                     <md-chip ng-show="tc.trails.trailsView.snowmobile">snowmobile</md-chip>
                 </md-chips>
-                <div class="md-media-xl card-media">
-                    <img ng-src="{{tc.trails.trailsView.photo}}" />
+                <div class="md-media-xl card-media trailImgDiv" layout-align="center center">
+                    <img class="trailImg" ng-src="{{tc.trails.trailsView.photo}}" />
                 </div>
                 <p>{{tc.trails.trailsView.trail_description}}</p>
                 <ng-map center="{{tc.map.ll}}" zoom="{{map.zoom}}"></ng-map>
