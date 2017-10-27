@@ -13,6 +13,8 @@ myApp.service('TrailService', function ($http, UserService, $location) {
         my_trails: [] // based on the logged in user this contains all trails a user has added to their my-trails list
     }; // end self.trails
 
+
+
     /******** make functions private to service by not saying self.funcName *******/
 
     // sort trails.list and push trails flagged true for approved
@@ -50,7 +52,8 @@ myApp.service('TrailService', function ($http, UserService, $location) {
                 self.trails.approved[i].ratingSum = sum;
                 // sets average rating a trail has
                 let average = sum / trailSpecificRatings.length;
-                self.trails.approved[i].ratingAverage = average;
+                // round number to the nearest tenth
+                self.trails.approved[i].ratingAverage = average.toPrecision(2);
             } // end if
         } // end for
     }; // end calculateRating
