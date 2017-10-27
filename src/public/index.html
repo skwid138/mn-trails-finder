@@ -102,12 +102,21 @@
             </md-nav-bar>
         </div>
     </header>
-    <!-- child elements in main will be at the top center of the page -->
     <main>
         <ng-view></ng-view>
     </main>
     <footer>
-        <!-- add copyright Hunter Rancourt with links to contact me -->
+        <div layout="row" layout-align="end center" layout-padding>
+            <p>&copy; Hunter Rancourt</p>
+            <md-button ng-href="https://www.linkedin.com/in/hunter-rancourt/" class="md-icon-button"  aria-label="LinkedIn">
+                <md-tooltip md-direction="top">Check Me Out on LinkedIn</md-tooltip>
+                <md-icon md-svg-icon="images/svg/linked_in.svg"></md-icon>
+            </md-button>
+            <md-button ng-href="https://github.com/skwid138/mn-trails-finder" class="md-icon-button" aria-label="GitHub">
+                <md-tooltip md-direction="top">See this site on GitHub</md-tooltip>
+                <md-icon md-svg-icon="images/svg/github.svg"></md-icon>
+            </md-button>
+        </div>
     </footer>
 </body>
 </html>
