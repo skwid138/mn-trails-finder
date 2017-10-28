@@ -80,7 +80,6 @@
                     </md-input-container>
                     <div layout="column">
                         <md-button class="md-raised md-primary" ng-click="nc.login()">Login</md-button>
-                        <!-- style="background: purple; color: white" -->
                         <md-button ng-click="nc.register()">Register</md-button>
                     </div>
                 </div>
@@ -90,11 +89,10 @@
                         <img class="logoImg" ng-src="images/logo.png" />
                         <h2>MN Trails Finder</h2>
                     </div>
-                    <div flex="15">
-                        <h3 flex>Welcome, &nbsp; {{nc.user.username}} !</h3>
+                    <div layout="row">
+                        <h3 flex>Welcome, &nbsp; {{nc.user.username}} ! &nbsp; </h3>
                     </div>
-                    <div flex="15">
-                        <!-- not routing - maybe removed md-nav-href and use href? -->
+                    <div layout="column">
                         <md-button class="md-raised md-warn" name="my-trails" href="/#!/my-trails">My Trails!</md-button>
                         <md-button ng-click="nc.logout()">Logout</md-button>
                     </div>

@@ -89,4 +89,5 @@ myApp.controller('NavController', function (UserService, $http, $location, Trail
         vm.user.username = null;
     }; // end logout
 
+
 }); // end NavController

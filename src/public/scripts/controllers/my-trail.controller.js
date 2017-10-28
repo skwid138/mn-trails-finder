@@ -15,13 +15,6 @@ myApp.controller('MyTrailController', function (TrailService, UserService, $loca
     // object to hold list of trails
     vm.trails = TrailService.trails;
 
-    // toggles for rating stars to change color and fill
-    vm.toggleOne = false;
-    vm.toggleTwo = false;
-    vm.toggleThree = false;
-    vm.toggleFour = false;
-    vm.toggleFive = false;
-
     // clicking a trail's card redirects to /trails/trail_name
     vm.viewTrailDetails = (trail) => {
         console.log('in viewTrailDetails');

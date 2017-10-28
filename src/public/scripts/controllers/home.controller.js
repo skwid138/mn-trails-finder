@@ -3,6 +3,8 @@
 /*
 This controller is for the home view.
 - displays trails
+- filter trails using many different search parameters
+- filter trails by keywords
 */
 myApp.controller('HomeController', function (TrailService, UserService, $location) {
     console.log('in HomeController');
@@ -14,13 +16,7 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
     // sets user information for rating and my-trails queries
     vm.user = UserService.userObject;
 
-    // toggles for rating stars to change color and fill
-    vm.toggleOne = false;
-    vm.toggleTwo = false;
-    vm.toggleThree = false;
-    vm.toggleFour = false;
-    vm.toggleFive = false;
-
+    // object to hold filter parameters
     vm.search = {};
 
 
