@@ -12,7 +12,7 @@
                         <div layout="row" flex="75">
                             <md-menu-item layout="column">
                                 <h3>Info</h3>
-                                <md-switch ng-model="hc.search.dog">Dogs Allowed</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.dog">Dogs Allowed</md-switch>
                                 <md-switch ng-model="hc.search.child">ChildAccessible</md-switch>
                                 <md-switch ng-model="hc.search.paved">Paved Trails</md-switch>
                                 <md-switch ng-model="hc.search.water">Bodies of Water</md-switch>
@@ -33,7 +33,7 @@
                                 <h3>Mounts and Vehicles</h3>
                                 <md-switch ng-model="hc.search.horse">Horseback Riding</md-switch>
                                 <md-switch ng-model="hc.search.atv">ATV</md-switch>
-                                <md-switch ng-model="hc.search.snowmobile">Snowmobile</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.snowmobile">Snowmobile</md-switch>
                             </md-menu-item>
                         </div>
                         <div layout-align="center end">

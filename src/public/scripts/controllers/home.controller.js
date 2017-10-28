@@ -19,6 +19,31 @@ myApp.controller('HomeController', function (TrailService, UserService, $locatio
     // object to hold filter parameters
     vm.search = {};
 
+    /***** currently not setup to handle name/description or lengths *****/
+    // filters trails list using 
+    // ng-change as a trigger on filter menu
+    vm.filterTrailsLoop = () => {
+        console.log('in filterTrailsLoop');
+        let key;
+        // loop through search object for each parameter that is set
+        // set return equal to trails being displayed on DOM
+        // repeat for each parameter
+        for (key in vm.search) {
+            vm.trails.approved = vm.filterTrails(key);
+        } // end for
+    }; // end filterTrailsLoop
+
+    vm.filterTrails = (key, arrayToFilter) => {
+        console.log('in filterTrails');
+        // look through currently displayed trails
+        // return any trails with matching parameters
+        // set return equal to trails being displayed on DOM
+        return vm.trails.approved.filter((trail) => {
+            return trail[key] === vm.search[key];
+        });
+    }; // end filterTrails
+
+
 
     // clicking a trail's card redirects to /trails/trail_name
     vm.viewTrailDetails = (trail) => {
