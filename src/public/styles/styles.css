@@ -34,7 +34,7 @@ max-height: 60px;
 }
 
 .ratingStar:hover {
-    background-color: rgb(252, 165, 5) !important;
+    background-color: rgba(252, 161, 5, 0.041) !important;
 }
 
 .ratingIcon {
@@ -51,7 +51,7 @@ md-nav-bar .md-button._md-nav-button.md-unselected {
 }
 
 md-menu-content {
-    height: 30vh;
+    min-height: 225px;
 }
 
 .md-chips {
