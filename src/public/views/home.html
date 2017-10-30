@@ -13,15 +13,15 @@
                             <md-menu-item layout="column">
                                 <h3>Info</h3>
                                 <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.dog">Dogs Allowed</md-switch>
-                                <md-switch ng-model="hc.search.child">ChildAccessible</md-switch>
-                                <md-switch ng-model="hc.search.paved">Paved Trails</md-switch>
-                                <md-switch ng-model="hc.search.water">Bodies of Water</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.child">ChildAccessible</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.paved">Paved Trails</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.water">Bodies of Water</md-switch>
                             </md-menu-item>
                             <md-menu-item layout="column">
                                 <h3>Parking</h3>
-                                <md-switch ng-model="hc.search.parking">Parking Available</md-switch>
-                                <md-switch ng-model="hc.search.parking_free">Free Parking</md-switch>
-                                <md-switch ng-model="hc.search.park_pass">Park Pass Required</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.parking">Parking Available</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.parking_free">Free Parking</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.park_pass">Park Pass Required</md-switch>
                             </md-menu-item>
                             <md-menu-item layout="column">
                                 <h3>Trail Types</h3>
@@ -31,14 +31,15 @@
                             </md-menu-item>
                             <md-menu-item layout="column">
                                 <h3>Mounts and Vehicles</h3>
-                                <md-switch ng-model="hc.search.horse">Horseback Riding</md-switch>
-                                <md-switch ng-model="hc.search.atv">ATV</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.horse">Horseback Riding</md-switch>
+                                <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.atv">ATV</md-switch>
                                 <md-switch ng-change="hc.filterTrailsLoop()" ng-model="hc.search.snowmobile">Snowmobile</md-switch>
                             </md-menu-item>
                         </div>
                         <div layout-align="center end">
                             <md-menu-item>
                                 <md-input-container class="md-block">
+                                    <!-- Search is not setup on these -->
                                     <md-checkbox name="lengthOne" ng-model="hc.search.lengthOne">0-3 miles</md-checkbox>
                                     <md-checkbox name="lengthFive" ng-model="hc.search.lengthFive">3-5 miles</md-checkbox>
                                     <md-checkbox name="lengthSeven" ng-model="hc.search.lengthSeven">5-7 miles</md-checkbox>
