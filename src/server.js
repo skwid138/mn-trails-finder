@@ -3,11 +3,13 @@
 // requires
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const passport = require('./strategies/local.strategy');
 const sessionConfig = require('./modules/session.config');
+const ip = require('ip');
 
-const port = process.env.PORT || 6660;
+const port = process.env.PORT || 6680;
 
 // use body-parser
 app.use(bodyParser.json());
@@ -38,5 +40,5 @@ app.use('/', indexRouter);
 
 // server listening
 app.listen(port, () => {
-    console.log('Server listening on port: ', port);
+    console.log('Server listening on: http://' + ip.address() + ':' + port);
 }); // end listen
